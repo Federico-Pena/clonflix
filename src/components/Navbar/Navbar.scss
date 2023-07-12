@@ -1,0 +1,65 @@
+header {
+	position: absolute;
+	width: 100%;
+	padding: 0.5rem;
+	z-index: 3;
+	.NavBar {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 0.5rem;
+		width: 100%;
+
+		.divNavbar {
+			display: flex;
+			justify-content: space-between;
+			gap: 0.5rem;
+			width: 100%;
+			.ImgNavbar {
+				object-fit: cover;
+				width: 120px;
+				height: 34px;
+				align-self: flex-start;
+			}
+			.ulNavbarIcons {
+				cursor: pointer;
+				display: flex;
+				justify-content: flex-end;
+				align-items: center;
+				flex: auto;
+				.liNavbar {
+					.liSearchIcon,
+					.liHomeIcon {
+						width: 1.5rem;
+						height: 1.5rem;
+						margin-right: 1rem;
+					}
+				}
+			}
+		}
+		.ulNavbarLinks {
+			display: flex;
+			justify-content: space-evenly;
+			width: 100%;
+			cursor: pointer;
+		}
+	}
+}
+
+.hidden {
+	opacity: 0;
+	z-index: -1;
+	position: fixed;
+	top: -100%;
+}
+
+@media (min-width: 768px) {
+	.liSearchIcon,
+	.liHomeIcon {
+		transform: scale(1.2);
+	}
+
+	.ulNavbarLinks {
+		font-size: 18px;
+	}
+}

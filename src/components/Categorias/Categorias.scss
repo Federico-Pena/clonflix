@@ -1,0 +1,31 @@
+.asideHeader {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-evenly;
+	background-color: #000000d2;
+	padding: 2rem 0;
+	transition: all 0.5s ease;
+	li {
+		text-align: center;
+		width: 100%;
+		cursor: pointer;
+		.iconAside {
+			width: 3rem;
+			height: 3rem;
+			position: absolute;
+			left: 50%;
+			bottom: 0.5rem;
+			transform: translate(-50%);
+			transition: color 0.3s ease;
+			&:hover {
+				color: #b9b9b9d2;
+			}
+		}
+	}
+}
