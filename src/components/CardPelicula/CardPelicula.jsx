@@ -9,7 +9,9 @@ function CardPelicula({ pelicula }) {
 			<div>
 				<img
 					className='imgPelicula'
-					src={`${apiconfig.baseUrlImageW500}${pelicula.backdrop_path}`}
+					src={`${
+						apiconfig.baseUrlImageW500 || apiconfig.baseUrlImageOriginal
+					}${pelicula?.backdrop_path || pelicula?.poster_path}`}
 					alt={`Portada de la pelicula ${pelicula.title}`}
 				/>
 				<p className='peliculaId'>{pelicula.id}</p>

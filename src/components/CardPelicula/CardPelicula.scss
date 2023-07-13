@@ -27,3 +27,12 @@
 		width: 100px;
 	}
 }
+
+@media (min-width: 768px) {
+	.cardPelicula {
+		.imgPelicula {
+			aspect-ratio: 16/9;
+			width: 200px;
+		}
+	}
+}

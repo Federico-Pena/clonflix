@@ -7,16 +7,65 @@
 	.divHero {
 		display: flex;
 		width: 100%;
-		.imgInicio {
+		height: 70vh;
+		overflow: hidden;
+		position: relative;
+		background-position: top center;
+		background-size: 100% 100%;
+		background-repeat: no-repeat;
+		aspect-ratio: 16/9;
+
+		.titleHero {
 			width: 100%;
-			height: auto;
+			text-align: center;
+			flex: auto;
+			align-self: flex-end;
+			padding-bottom: 3rem;
+			font-size: 24px;
+		}
+
+		.fechaHero {
+			position: absolute;
+			bottom: 0;
+			display: flex;
+			flex-direction: column;
+			font-size: 16px;
+			align-items: center;
+			padding: 0.5rem;
+		}
+		.valoracionesHero {
+			bottom: 0;
+			position: absolute;
+			right: 0;
+			display: flex;
+			flex-direction: column;
+			font-size: 16px;
+			padding: 0.5rem;
 		}
 	}
 
 	.h2Slider {
-		position: sticky;
-		top: 1rem;
-		left: 1rem;
+		padding-top: 0.5rem;
+		margin-left: 1rem;
 		font-size: 18px;
+	}
+}
+
+@media (max-width: 768px) {
+	.mainIndex {
+		.divHero {
+			background-position: center;
+			height: 50vh;
+			background-size: 150% 100%;
+			.titleHero {
+				font-size: 16px;
+			}
+			.fechaHero {
+				font-size: 14px;
+			}
+			.valoracionesHero {
+				font-size: 14px;
+			}
+		}
 	}
 }
