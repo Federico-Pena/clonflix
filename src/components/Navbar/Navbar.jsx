@@ -3,16 +3,16 @@ import { FiSearch } from 'react-icons/fi'
 import { GoHome } from 'react-icons/go'
 import Categorias from '../Categorias/Categorias'
 import { useState } from 'react'
-
+import { Link, useLocation } from 'react-router-dom'
 function Navbar() {
-	const [classAside, setClassAside] = useState(false)
-
-	const abrirAside = (e) => {
-		setClassAside(true)
+	const [classCategorias, setClassCategorias] = useState(false)
+	const locationReact = useLocation()
+	const abrirCategorias = (e) => {
+		setClassCategorias(true)
 	}
 
-	const cerrarAside = (e) => {
-		setClassAside(false)
+	const cerrarCategorias = (e) => {
+		setClassCategorias(false)
 	}
 	return (
 		<header>
@@ -24,24 +24,50 @@ function Navbar() {
 						className='ImgNavbar'
 					/>
 					<ul className='ulNavbarIcons'>
-						<li className='liNavbar'>
-							<GoHome className='liHomeIcon' />
-						</li>
-						<li className='liNavbar'>
-							<FiSearch className='liSearchIcon' />
-						</li>
+						<Link to={'/'} className='liNavbar'>
+							<GoHome
+								className={
+									locationReact.pathname === '/'
+										? 'liLinksActive'
+										: 'liHomeIcon'
+								}
+							/>
+						</Link>
+						<Link to={'/buscar'} className='liNavbar'>
+							<FiSearch
+								className={
+									locationReact.pathname === '/buscar'
+										? 'liLinksActive'
+										: 'liSearchIcon'
+								}
+							/>
+						</Link>
 					</ul>
 				</div>
 
 				<ul className='ulNavbarLinks'>
-					<li>Series</li>
-					<li>Peliculas</li>
-					<li onClick={abrirAside}>Categorias</li>
+					<Link
+						className={
+							locationReact.pathname === '/series' ? 'liLinksActive' : 'liLinks'
+						}
+						to={'/series'}>
+						Series
+					</Link>
+					<Link
+						className={
+							locationReact.pathname === '/peliculas'
+								? 'liLinksActive'
+								: 'liLinks'
+						}
+						to={'/peliculas'}>
+						Peliculas
+					</Link>
+					<li onClick={abrirCategorias}>Categorias</li>
 				</ul>
 			</nav>
 			<Categorias
-				cerrarAside={cerrarAside}
-				clase={classAside ? '' : 'hidden'}
+				cerrarCategorias={cerrarCategorias}
+				clase={classCategorias ? '' : 'hidden'}
 			/>
 		</header>
 	)

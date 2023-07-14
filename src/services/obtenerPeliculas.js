@@ -48,9 +48,7 @@ export const proximamentePelicula = async () => {
 			`${apiconfig.baseUrl}/movie/upcoming?api_key=${apiKey}&language=es-MX`
 		)
 		const data = await response.json()
-		if (data.results) {
-			return data.results[Math.floor(Math.random() * 21)]
-		}
+		return data.results
 	} catch (error) {
 		return error
 	}

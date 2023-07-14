@@ -33,6 +33,13 @@ header {
 						width: 1.5rem;
 						height: 1.5rem;
 						margin-right: 1rem;
+						color: white;
+					}
+					.liLinksActive {
+						color: rgb(243, 72, 72);
+						width: 1.5rem;
+						height: 1.5rem;
+						margin-right: 1rem;
 					}
 				}
 			}
@@ -42,6 +49,14 @@ header {
 			justify-content: space-evenly;
 			width: 100%;
 			cursor: pointer;
+			.liLinks {
+				color: white;
+				text-decoration: none;
+			}
+			.liLinksActive {
+				color: rgb(243, 72, 72);
+				text-decoration: none;
+			}
 		}
 	}
 }

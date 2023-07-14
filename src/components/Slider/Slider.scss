@@ -3,6 +3,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: flex-start;
+	gap: 0.5rem;
 	overflow: auto;
 	padding-top: 1rem;
 	position: relative;
@@ -22,5 +23,12 @@
 
 	&::-webkit-scrollbar-thumb:hover {
 		background: #555;
+	}
+}
+@media (max-width: 768px) {
+	.sliderDiv {
+		&::-webkit-scrollbar {
+			height: 0rem;
+		}
 	}
 }

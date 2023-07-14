@@ -1,0 +1,34 @@
+.divFullInfo {
+	overflow: auto;
+	position: absolute;
+	min-height: 100vh;
+	width: 100%;
+	z-index: 9;
+	background-color: #000;
+	animation: InInfo 0.5s ease-in-out;
+	.FullInfoImg {
+		width: 100%;
+		height: auto;
+	}
+}
+
+.fullInfoAnimation {
+	animation: outInfo 0.5s ease-in-out;
+}
+
+@keyframes InInfo {
+	from {
+		transform: translate(200%);
+	}
+	to {
+		transform: translate(0%);
+	}
+}
+@keyframes outInfo {
+	from {
+		transform: translate(0);
+	}
+	to {
+		transform: translate(200%);
+	}
+}
