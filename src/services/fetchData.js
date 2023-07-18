@@ -9,10 +9,8 @@ import { apiconfig } from '../config/apiConfig'
  * @returns
  * Data Fetch
  */
-
 export const fetchData = async ({ pagina, tipo }) => {
 	let data
-
 	const urlStatic = `?api_key=${apiKey}&language=es-MX&page=${pagina}`
 	let url
 	if (tipo === 'pPopular') {

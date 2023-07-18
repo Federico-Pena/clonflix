@@ -63,7 +63,7 @@ function FullInfo({ pelicula, cerrarFullInfo }) {
 					<p>{pelicula.vote_average.toFixed(1)}</p>
 				</li>
 			</ul>
-			<p className='overview'>{pelicula.overview}</p>
+			{pelicula.overview && <p className='overview'>{pelicula.overview}</p>}
 
 			{pelicula.production_companies[0]?.logo_path ? (
 				<ul className='productionFullInfo'>
@@ -90,34 +90,33 @@ function FullInfo({ pelicula, cerrarFullInfo }) {
 				</ul>
 			)}
 
-			{pelicula.created_by?.length && (
-				<ul>
-					<li>Creador</li>
+			{pelicula.created_by?.length && pelicula.created_by[0].profile_path && (
+				<ul className='created_byFullInfo'>
 					<li>{pelicula.created_by[0].name}</li>
-					{pelicula.created_by[0].profile_path && (
-						<li>
-							<img
-								src={
-									apiconfig.baseUrlImageW92 +
-									pelicula.created_by[0].profile_path
-								}
-								alt={`Foto de perfil del creador de ${pelicula.created_by[0].name}`}
-							/>
-						</li>
-					)}
+					<li>
+						<img
+							className='imgCreador'
+							src={
+								apiconfig.baseUrlImageW92 + pelicula.created_by[0].profile_path
+							}
+							alt={`Foto de perfil del creador de ${pelicula.created_by[0].name}`}
+						/>
+					</li>
 				</ul>
 			)}
 			{pelicula.seasons?.length &&
 				pelicula.seasons.map((season) => {
 					return (
-						<ul key={season.id}>
-							<li> {season.name}</li>
-							<li>Estreno {season.air_date}</li>
+						<ul key={season.id} className='seasonsFullInfo'>
+							<li>
+								<strong>{season.name}</strong>
+							</li>
+							<li>{season.air_date}</li>
 							<li>{season.overview}</li>
 							{season.poster_path && (
 								<li>
 									<img
-										src={apiconfig.baseUrlImageW92 + season.poster_path}
+										src={apiconfig.baseUrlImageW300 + season.poster_path}
 										alt={`Portada de la temporada ${season.name}`}
 									/>
 								</li>

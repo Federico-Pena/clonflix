@@ -1,4 +1,5 @@
 .divFullInfo {
+	color: #000;
 	text-align: center;
 	overflow: auto;
 	position: fixed;
@@ -21,23 +22,29 @@
 		top: 0.5rem;
 		border: none;
 		background-color: transparent;
+		transition: transform 0.3s ease-in-out;
+		cursor: pointer;
 		svg {
 			color: white;
 			width: 2rem;
 			height: 2rem;
 		}
+		&:hover {
+			transform: scale(1.1);
+		}
 	}
 	.overview {
+		color: white;
+		line-height: 1.5rem;
 		width: 100%;
 		max-width: 900px;
 		margin: auto;
 		text-align: justify;
 		padding: 0.5rem;
 		letter-spacing: 1px;
-		border-top: 1px solid #eeeeee4d;
 	}
 	.FullInfoImg {
-		margin: 1rem auto;
+		margin: 2rem auto;
 		max-width: 900px;
 		width: 100%;
 		max-height: 50vh;
@@ -66,6 +73,7 @@
 		display: flex;
 		flex-direction: column;
 		gap: 1rem;
+		color: white;
 		padding: 0.5rem;
 		h4 {
 			width: 100%;
@@ -81,6 +89,7 @@
 		align-items: center;
 		padding: 0.5rem;
 		border-top: 1px solid #eeeeee4d;
+		color: white;
 		margin: 0.5rem auto;
 
 		li {
@@ -117,6 +126,7 @@
 			display: flex;
 			flex-direction: column;
 			justify-content: center;
+			color: white;
 			align-items: center;
 			gap: 1rem;
 			iframe {
@@ -128,6 +138,60 @@
 			}
 		}
 	}
+	.created_byFullInfo {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+		color: white;
+		border-bottom: 1px solid #eee;
+		padding-bottom: 2rem;
+		li {
+			width: 100%;
+			font-size: 20px;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			.imgCreador {
+				border-radius: 100%;
+				width: 5rem;
+				height: 5rem;
+				object-fit: cover;
+			}
+		}
+	}
+	.seasonsFullInfo {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		color: white;
+		gap: 1rem;
+		border-bottom: 1px solid #eee;
+		padding: 2rem 0;
+		li {
+			width: 100%;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			padding: 0.5rem;
+			max-width: 900px;
+			margin: auto;
+			line-height: 1.5rem;
+			text-align: justify;
+			letter-spacing: 1px;
+			img {
+				border: none;
+				width: 100%;
+				height: 50vh;
+				max-width: 300px;
+				border-radius: 0.3rem;
+			}
+			strong {
+				font-size: 18px;
+			}
+		}
+	}
 }
 
 .fullInfoAnimation {
@@ -136,17 +200,23 @@
 
 @keyframes InInfo {
 	from {
-		transform: translate(200%);
+		transform: translateX(100%);
+		opacity: 0;
 	}
 	to {
-		transform: translate(0%);
+		opacity: 1;
+		transform: translateX(0%);
 	}
 }
 @keyframes outInfo {
 	from {
-		transform: translate(0);
+		opacity: 1;
+
+		transform: translateX(0);
 	}
 	to {
-		transform: translate(200%);
+		opacity: 0;
+
+		transform: translateX(-100%);
 	}
 }

@@ -7,7 +7,7 @@ function CardPelicula({ pelicula, obtenerPelicula }) {
 	const { current } = refCardPelicula
 	useEffect(() => {
 		const opciones = {
-			rootMargin: '0px 200px 0px 0px',
+			rootMargin: '200px',
 			threshold: 0,
 		}
 		const observer = new IntersectionObserver((entries) => {
