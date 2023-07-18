@@ -14,19 +14,36 @@
 		background-size: 100% 100%;
 		background-repeat: no-repeat;
 		aspect-ratio: 16/9;
+		font-family: Netflix Sans;
 
+		button {
+			cursor: pointer;
+			position: absolute;
+			bottom: 1rem;
+			right: 50%;
+			transform: translate(50%);
+			padding: 0.3rem 0.8rem;
+			border-radius: 0.3rem;
+			border: none;
+			background-color: #f0f8ff;
+			font-weight: bold;
+			transition: background-color 0.3s ease;
+			&:hover {
+				background-color: #f0f8ff81;
+			}
+		}
 		.titleHero {
 			width: 100%;
 			text-align: center;
 			flex: auto;
 			align-self: flex-end;
-			padding-bottom: 3rem;
+			padding-bottom: 4rem;
 			font-size: 24px;
 		}
 
 		.fechaHero {
 			position: absolute;
-			bottom: 0;
+			bottom: 0.5rem;
 			display: flex;
 			flex-direction: column;
 			font-size: 16px;
@@ -34,7 +51,7 @@
 			padding: 0.5rem;
 		}
 		.valoracionesHero {
-			bottom: 0;
+			bottom: 0.5rem;
 			position: absolute;
 			right: 0;
 			display: flex;

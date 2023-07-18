@@ -13,7 +13,12 @@ html {
 	font-family: Netflix Sans, Helvetica Neue, Segoe UI, Roboto, Ubuntu,
 		sans-serif;
 	font-size: 16px;
+	&::-webkit-scrollbar {
+		height: 0rem;
+		width: 0rem;
+	}
 }
+
 #root {
 	display: flex;
 	position: relative;
