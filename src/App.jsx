@@ -5,6 +5,7 @@ import { Route, Routes } from 'react-router-dom'
 import Peliculas from './pages/Peliculas/Peliculas'
 import Series from './pages/Series/Series'
 import Buscar from './pages/Buscar/Buscar'
+import FullInfo from './components/FullInfo/FullInfo'
 function App() {
 	return (
 		<>
@@ -14,6 +15,10 @@ function App() {
 				<Route path='/peliculas' element={<Peliculas />} />
 				<Route path='/series' element={<Series />} />
 				<Route path='/buscar' element={<Buscar />} />
+				<Route path='/:id' element={<FullInfo />} />
+				<Route path='/peliculas/:id' element={<FullInfo />} />
+				<Route path='/series/:id' element={<FullInfo />} />
+				<Route path='/buscar/:id' element={<FullInfo />} />
 			</Routes>
 		</>
 	)

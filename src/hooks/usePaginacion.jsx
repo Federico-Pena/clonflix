@@ -7,14 +7,18 @@ function usePaginacion() {
 	const [pageSVList, setpageSVList] = useState(1)
 	const [pageTendenciaP, setpageTendenciaP] = useState(1)
 	const [pageTendenciaS, setpageTendenciaS] = useState(1)
+	const [pageSAccion, setpageSAccion] = useState(1)
+	const [pagePAccion, setpagePAccion] = useState(1)
+
+	const [pageMulti, setpageMulti] = useState(1)
 
 	const setPagPPlist = () => {
 		setpagePPList((prev) => prev + 1)
 	}
-	const setpagPVList = () => {
+	const setPagPVList = () => {
 		setpagePVList((prev) => prev + 1)
 	}
-	const sePagSPList = () => {
+	const setPagSPList = () => {
 		setpageSPList((prev) => prev + 1)
 	}
 	const setPagSVList = () => {
@@ -26,6 +30,15 @@ function usePaginacion() {
 	const setPagTendenciaS = () => {
 		setpageTendenciaS((prev) => prev + 1)
 	}
+	const setPagSAccion = () => {
+		setpageSAccion((prev) => prev + 1)
+	}
+	const setPagPAccion = () => {
+		setpagePAccion((prev) => prev + 1)
+	}
+	const setPagMulti = () => {
+		setpageMulti((prev) => prev + 1)
+	}
 	return {
 		pagePPList,
 		pagePVList,
@@ -33,12 +46,18 @@ function usePaginacion() {
 		pageSPList,
 		pageTendenciaP,
 		pageTendenciaS,
+		pageSAccion,
+		pagePAccion,
+		pageMulti,
 		setPagTendenciaP,
 		setPagPPlist,
-		setpagPVList,
-		sePagSPList,
+		setPagPVList,
+		setPagSPList,
 		setPagSVList,
 		setPagTendenciaS,
+		setPagSAccion,
+		setPagPAccion,
+		setPagMulti,
 	}
 }
 

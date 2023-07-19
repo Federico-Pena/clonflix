@@ -2,8 +2,8 @@ import { useEffect, useRef } from 'react'
 
 function Videos({ video }) {
 	const liVideoRef = useRef()
-	const { current } = liVideoRef
 	useEffect(() => {
+		const { current } = liVideoRef
 		const opciones = {
 			rootMargin: '0px',
 			threshold: 0,
@@ -22,7 +22,7 @@ function Videos({ video }) {
 		return () => {
 			current && observer.unobserve(current)
 		}
-	}, [])
+	}, [video])
 	return (
 		<li key={video.key} ref={liVideoRef}>
 			{video.name}

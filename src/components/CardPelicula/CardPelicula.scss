@@ -9,6 +9,8 @@
 	transition: transform 0.2s ease-in-out;
 	font-family: Netflix Sans, Helvetica Neue, Segoe UI, Roboto, Ubuntu,
 		sans-serif;
+	color: #fff;
+	text-decoration: none;
 	&:hover {
 		transform: scale(0.95);
 	}

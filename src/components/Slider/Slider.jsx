@@ -14,11 +14,12 @@ function Slider({ children, setPage, obtenerSeriesYpeliculas, tipo }) {
 		const observer = new IntersectionObserver((entries) => {
 			entries.forEach((entry) => {
 				if (entry.isIntersecting) {
-					setPage({
-						enPantalla: entry.isIntersecting,
-						slider: divSlider.current,
-						tipo: tipo,
-					})
+					setPage &&
+						setPage({
+							enPantalla: entry.isIntersecting,
+							slider: divSlider.current,
+							tipo: tipo,
+						})
 					obtenerSeriesYpeliculas(tipo)
 				}
 			})
@@ -33,7 +34,7 @@ function Slider({ children, setPage, obtenerSeriesYpeliculas, tipo }) {
 
 	return (
 		<div className='sliderDiv' ref={divSlider}>
-			{children} <span ref={spanSlider}></span>
+			{children} <div className='divsliderDiv' ref={spanSlider}></div>
 		</div>
 	)
 }

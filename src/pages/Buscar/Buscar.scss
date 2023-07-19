@@ -3,7 +3,7 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	min-height: 50vh;
+	min-height: 100vh;
 	width: 100%;
 	.divSugerencias {
 		width: 100%;
@@ -13,6 +13,7 @@
 		gap: 0.5rem;
 		overflow: auto;
 		height: 80vh;
+
 		&::-webkit-scrollbar {
 			width: 0;
 			height: 0;
@@ -24,6 +25,9 @@
 			display: flex;
 			height: 4rem;
 			padding: 0rem 0.5rem;
+			color: white;
+			text-decoration: none;
+
 			.divImg {
 				height: 100%;
 				img {

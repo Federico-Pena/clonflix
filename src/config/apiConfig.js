@@ -10,12 +10,10 @@ export const apiconfig = {
 	sPopular: '/tv/popular',
 	sValorada: '/tv/top_rated',
 	buscarPelicula: '/search/movie',
-	tendenciaPelicula: '/trending/movie/week',
+	tendenciasPelicula: '/trending/movie/week',
 	tendenciasSeries: '/trending/tv/week',
-	tendenciasTodas: '/trending/all/day',
-	buscarTodo: 'search/multi',
-	/* 
-	asi seri este
-	"search/multi?query=${}"
-	 */
+	tendenciasTodas: '/trending/all/week',
+	sAccion: '/search/tv?query=',
+	pAccion: '/search/movie?query=',
+	buscarTodo: '/search/multi?query=',
 }

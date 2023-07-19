@@ -1,8 +1,9 @@
 import { useEffect, useRef } from 'react'
 import { apiconfig } from '../../config/apiConfig'
 import './CardPelicula.scss'
+import { Link } from 'react-router-dom'
 
-function CardPelicula({ pelicula, obtenerPelicula }) {
+function CardPelicula({ pelicula, tipo }) {
 	const refCardPelicula = useRef()
 	const { current } = refCardPelicula
 	useEffect(() => {
@@ -31,10 +32,10 @@ function CardPelicula({ pelicula, obtenerPelicula }) {
 	return (
 		pelicula &&
 		pelicula?.poster_path && (
-			<div
+			<Link
+				to={`&${pelicula.id}?${tipo.split('.')[1]}`}
 				className='cardPelicula'
-				ref={refCardPelicula}
-				onClick={() => obtenerPelicula(pelicula.id)}>
+				ref={refCardPelicula}>
 				<div className='divImgPelicula'>
 					<img
 						className='imgPelicula'
@@ -46,7 +47,7 @@ function CardPelicula({ pelicula, obtenerPelicula }) {
 				<div>
 					<p className='peliculaTitulo'>{pelicula.title || pelicula.name}</p>
 				</div>
-			</div>
+			</Link>
 		)
 	)
 }

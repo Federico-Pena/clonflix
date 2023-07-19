@@ -4,6 +4,8 @@
 	flex-direction: column;
 	position: relative;
 	width: 100%;
+	min-height: 100vh;
+
 	.divHero {
 		display: flex;
 		width: 100%;
@@ -15,7 +17,8 @@
 		background-repeat: no-repeat;
 		aspect-ratio: 16/9;
 		font-family: Netflix Sans;
-
+		color: #fff;
+		text-decoration: none;
 		button {
 			cursor: pointer;
 			position: absolute;

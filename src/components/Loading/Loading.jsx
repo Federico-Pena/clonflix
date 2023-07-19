@@ -1,7 +1,11 @@
 import './Loading.scss'
 
 function Loading() {
-	return <div id='loader' className='nfLoader'></div>
+	return (
+		<div className='divNfLoader'>
+			<div id='loader' className='nfLoader'></div>
+		</div>
+	)
 }
 
 export default Loading

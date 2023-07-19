@@ -1,46 +1,97 @@
-import { useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { apiconfig } from '../../config/apiConfig'
 import { IoArrowBack } from 'react-icons/io5'
+const apiKey = import.meta.env.VITE_TMDB_API_KEY
+
 import './FullInfo.scss'
 import Videos from './Videos'
-function FullInfo({ pelicula, cerrarFullInfo }) {
+import { Link, useLocation } from 'react-router-dom'
+import Loading from '../Loading/Loading'
+function FullInfo() {
+	const locationR = useLocation()
 	const divFullInfoRef = useRef(null)
+	const [fullInfo, setFullInfo] = useState([])
+	const [loading, setLoading] = useState(false)
+	const [urlAnterior, setUrlAnterior] = useState('')
+	const saberQueEs = (query) => {
+		if (
+			query === 'pProximamente' ||
+			query === 'pPolular' ||
+			query === 'pValorada' ||
+			query === 'tendenciasPelicula'
+		) {
+			return 'pelicula'
+		}
+	}
+	useEffect(() => {
+		const id = locationR.pathname.split('&')[1]
+		const UrlAnterior = locationR.pathname.split('&')[0]
+		const query = locationR.search.split('?')[1]
+		let url
+		const obtenerfullInfo = async () => {
+			window.scrollTo(0, 0)
+			setLoading(true)
+			setUrlAnterior(UrlAnterior)
+			const busqueda = saberQueEs(query)
+			if (busqueda === 'pelicula') {
+				url = `${apiconfig.baseUrl}/movie/${id}?append_to_response=cast%2Cvideos%2Ctype%2Ccreated_by&api_key=${apiKey}&language=es-MX`
+			} else {
+				url = `${apiconfig.baseUrl}/tv/${id}?append_to_response=cast%2Cvideos%2Ctype%2Ccreated_by&api_key=${apiKey}&language=es-MX`
+			}
+			try {
+				const res = await fetch(url)
+				const data = await res.json()
+				setFullInfo(data)
+				setTimeout(() => {
+					setLoading(false)
+				}, 800)
+			} catch (error) {
+				throw new Error(error)
+			}
+		}
+		obtenerfullInfo()
+	}, [locationR])
+
 	return (
 		<div className='divFullInfo' ref={divFullInfoRef}>
-			<button
-				className='btnCerrar'
-				onClick={() => cerrarFullInfo(divFullInfoRef.current)}>
+			{loading ? <Loading /> : null}
+			<Link to={urlAnterior} className='btnCerrar'>
 				<IoArrowBack />
-			</button>
-			{pelicula.videos.results.length ? (
+			</Link>
+			{fullInfo && fullInfo.videos?.results.length ? (
 				<ul className='ulVideo'>
 					<li>
 						<iframe
-							title={pelicula.videos.results[0].name}
-							src={`https://www.youtube.com/embed/${pelicula.videos.results[0].key}?autoplay=1&mute=true`}
+							title={fullInfo.videos?.results[0].name}
+							src={`https://www.youtube.com/embed/${fullInfo.videos.results[0]?.key}?autoplay=1&mute=true`}
 							allow='autoplay'
 							allowFullScreen={true}></iframe>
 					</li>
 				</ul>
 			) : (
-				<img
-					className='FullInfoImg'
-					src={apiconfig.baseUrlImageOriginal + pelicula.backdrop_path}
-					alt={`Portada de la Pelicula ${pelicula.title}`}
-				/>
+				fullInfo &&
+				fullInfo.backdrop_path && (
+					<img
+						className='FullInfoImg'
+						src={apiconfig.baseUrlImageOriginal + fullInfo.backdrop_path}
+						alt={`Portada de la fullInfo ${fullInfo.title}`}
+					/>
+				)
 			)}
-			<div className='titulosFullInfo'>
-				<h3>{pelicula.title}</h3>
-				<h4>{pelicula.tagline}</h4>
-				{pelicula.release_date && (
-					<h4>
-						Estreno {new Date(pelicula.release_date).toLocaleDateString()}
-					</h4>
-				)}
-			</div>
-			{pelicula.genres?.length && (
+			{fullInfo && (
+				<div className='titulosFullInfo'>
+					<h3>{fullInfo.title}</h3>
+					<h4>{fullInfo.tagline}</h4>
+					{fullInfo.release_date && (
+						<h4>
+							Estreno {new Date(fullInfo.release_date).toLocaleDateString()}
+						</h4>
+					)}
+				</div>
+			)}
+			{fullInfo && fullInfo.genres?.length && (
 				<ul className='generosFullInfo'>
-					{pelicula.genres?.map((genre) => {
+					{fullInfo.genres?.map((genre) => {
 						return (
 							<li key={genre.id}>
 								<p>{genre.name}</p>
@@ -49,25 +100,30 @@ function FullInfo({ pelicula, cerrarFullInfo }) {
 					})}
 				</ul>
 			)}
-			<ul className='votosFullInfo'>
-				<li>
-					<p>Votacion</p>
-					<p>{pelicula.vote_count}</p>
-				</li>
-				<li>
-					<p>Popularidad</p>
-					<p> {pelicula.popularity}</p>
-				</li>
-				<li>
-					<p>Promedio</p>
-					<p>{pelicula.vote_average.toFixed(1)}</p>
-				</li>
-			</ul>
-			{pelicula.overview && <p className='overview'>{pelicula.overview}</p>}
+			{fullInfo && (
+				<ul className='votosFullInfo'>
+					<li>
+						<p>Votacion</p>
+						<p>{fullInfo.vote_count}</p>
+					</li>
+					<li>
+						<p>Popularidad</p>
+						<p> {fullInfo.popularity}</p>
+					</li>
+					<li>
+						<p>Promedio</p>
+						<p>{fullInfo.vote_average?.toFixed(1)}</p>
+					</li>
+				</ul>
+			)}
 
-			{pelicula.production_companies[0]?.logo_path ? (
+			{fullInfo && fullInfo.overview && (
+				<p className='overview'>{fullInfo.overview}</p>
+			)}
+
+			{fullInfo && fullInfo.production_companies && (
 				<ul className='productionFullInfo'>
-					{pelicula.production_companies?.map((company) => {
+					{fullInfo.production_companies?.map((company) => {
 						return (
 							company.logo_path && (
 								<li key={company.id}>
@@ -80,32 +136,36 @@ function FullInfo({ pelicula, cerrarFullInfo }) {
 						)
 					})}
 				</ul>
-			) : null}
+			)}
 
-			{pelicula.videos.results.length && (
+			{fullInfo && fullInfo.videos?.results.length && (
 				<ul className='videosFullInfo'>
-					{pelicula.videos.results?.splice(1, 5).map((video, i) => {
+					{fullInfo.videos.results?.splice(1, 5).map((video, i) => {
 						return video.key && <Videos key={i} video={video} />
 					})}
 				</ul>
 			)}
 
-			{pelicula.created_by?.length && pelicula.created_by[0].profile_path && (
-				<ul className='created_byFullInfo'>
-					<li>{pelicula.created_by[0].name}</li>
-					<li>
-						<img
-							className='imgCreador'
-							src={
-								apiconfig.baseUrlImageW92 + pelicula.created_by[0].profile_path
-							}
-							alt={`Foto de perfil del creador de ${pelicula.created_by[0].name}`}
-						/>
-					</li>
-				</ul>
-			)}
-			{pelicula.seasons?.length &&
-				pelicula.seasons.map((season) => {
+			{fullInfo &&
+				fullInfo.created_by?.length &&
+				fullInfo.created_by[0].profile_path && (
+					<ul className='created_byFullInfo'>
+						<li>{fullInfo.created_by[0].name}</li>
+						<li>
+							<img
+								className='imgCreador'
+								src={
+									apiconfig.baseUrlImageW92 +
+									fullInfo.created_by[0].profile_path
+								}
+								alt={`Foto de perfil del creador de ${fullInfo.created_by[0].name}`}
+							/>
+						</li>
+					</ul>
+				)}
+			{fullInfo &&
+				fullInfo.seasons?.length &&
+				fullInfo.seasons.map((season) => {
 					return (
 						<ul key={season.id} className='seasonsFullInfo'>
 							<li>
