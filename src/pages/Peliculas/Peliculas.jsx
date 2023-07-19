@@ -1,29 +1,21 @@
 import './Peliculas.scss'
 import '../Inicio/Inicio.scss'
-
 import { useEffect, useState } from 'react'
 import Hero from '../../components/Hero/Hero'
-import { fetchData } from '../../services/fetchData'
 import { apiconfig } from '../../config/apiConfig'
+import useFetch from '../../hooks/useFetch'
+import ContainerWrap from '../../components/ContainerWrap/ContainerWrap'
+import usePaginacion from '../../hooks/usePaginacion'
+import CardPelicula from '../../components/CardPelicula/CardPelicula'
+import Loading from '../../components/Loading/Loading'
 const apiKey = import.meta.env.VITE_TMDB_API_KEY
-
 function Peliculas() {
-	const [proximamenteP, setProximamenteP] = useState(null)
 	const [fullInfo, setFullInfo] = useState()
-	const [loading, setLoading] = useState(false)
+	const { loading, datapPolular, trendingP, fetchDataUse } = useFetch()
+	const { pageTendenciaP, setPagTendenciaP } = usePaginacion()
+
 	useEffect(() => {
-		const obtenerUltimaPelicula = async () => {
-			setLoading(true)
-			const response = await fetchData({
-				pagina: 1,
-				tipo: 'pPopular',
-			})
-			setProximamenteP(
-				response.results[Math.floor(Math.random() * response.results.length)]
-			)
-			setLoading(false)
-		}
-		obtenerUltimaPelicula()
+		fetchDataUse(1, apiconfig.pPolular)
 	}, [])
 
 	const obtenerPelicula = (e) => {
@@ -34,16 +26,37 @@ function Peliculas() {
 				setFullInfo(data)
 			})
 	}
+	const setearPag = (e) => {
+		if (e.enPantalla === true) {
+			if (e.tipo === apiconfig.tendenciaPelicula) {
+				setPagTendenciaP()
+			}
+		}
+	}
+	const obtenerPeliculas = (tipo) => {
+		if (tipo === apiconfig.tendenciaPelicula) {
+			fetchDataUse(pageTendenciaP, apiconfig.tendenciaPelicula)
+		}
+	}
+
 	return (
 		<main className='mainIndex'>
-			<>
-				{proximamenteP && (
-					<Hero
-						obtenerPelicula={obtenerPelicula}
-						proximamenteP={proximamenteP}
-					/>
-				)}
-			</>
+			{datapPolular && (
+				<Hero
+					obtenerPelicula={obtenerPelicula}
+					heroElement={
+						datapPolular[Math.floor(Math.random() * datapPolular.length)]
+					}
+				/>
+			)}
+			<ContainerWrap
+				obtenerPeliculas={obtenerPeliculas}
+				tipo={apiconfig.tendenciaPelicula}
+				setPages={setearPag}>
+				{trendingP.map((pelicula) => {
+					return <CardPelicula pelicula={pelicula} key={pelicula.id} />
+				})}
+			</ContainerWrap>
 		</main>
 	)
 }

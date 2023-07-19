@@ -26,7 +26,9 @@ function Videos({ video }) {
 	return (
 		<li key={video.key} ref={liVideoRef}>
 			{video.name}
-			<iframe title={video.name}></iframe>
+			<iframe
+				title={video.name}
+				src='https://placehold.co/1920x1080.mp4?text=Cargando'></iframe>
 		</li>
 	)
 }

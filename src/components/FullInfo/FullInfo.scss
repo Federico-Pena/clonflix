@@ -11,7 +11,8 @@
 	animation: InInfo 0.5s ease-in-out;
 	display: flex;
 	flex-direction: column;
-	font-family: Netflix Sans;
+	font-family: Netflix Sans, Helvetica Neue, Segoe UI, Roboto, Ubuntu,
+		sans-serif;
 	&::-webkit-scrollbar {
 		height: 0rem;
 		width: 0rem;

@@ -21,7 +21,7 @@ function CardPelicula({ pelicula, obtenerPelicula }) {
 			})
 		}, opciones)
 
-		observer.observe(refCardPelicula.current)
+		refCardPelicula.current && observer.observe(refCardPelicula.current)
 
 		return () => {
 			current && observer.unobserve(current)
@@ -29,16 +29,17 @@ function CardPelicula({ pelicula, obtenerPelicula }) {
 	}, [current, pelicula])
 
 	return (
-		pelicula && (
+		pelicula &&
+		pelicula?.poster_path && (
 			<div
 				className='cardPelicula'
 				ref={refCardPelicula}
 				onClick={() => obtenerPelicula(pelicula.id)}>
-				<div>
+				<div className='divImgPelicula'>
 					<img
 						className='imgPelicula'
 						alt={`Portada de la pelicula ${pelicula.title}`}
-						src='https://placehold.co/500/000000/FFF?text=Cargando'
+						src='https://placehold.co/300x400/000000/FFF?text=Cargando'
 					/>
 					<p className='peliculaId'>{pelicula.id}</p>
 				</div>

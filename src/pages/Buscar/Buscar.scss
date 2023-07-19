@@ -1,0 +1,86 @@
+.divPageBuscar {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	min-height: 50vh;
+	width: 100%;
+	.divSugerencias {
+		width: 100%;
+		max-width: 400px;
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+		overflow: auto;
+		height: 80vh;
+		&::-webkit-scrollbar {
+			width: 0;
+			height: 0;
+		}
+		h1 {
+			font-size: 16px;
+		}
+		.cardSugerencia {
+			display: flex;
+			height: 4rem;
+			padding: 0rem 0.5rem;
+			.divImg {
+				height: 100%;
+				img {
+					width: 120px;
+					height: 100%;
+					border-radius: 0.2rem;
+				}
+			}
+			.divP {
+				width: 100%;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: flex-start;
+				padding-left: 0.5rem;
+			}
+			.divIcon {
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				.IconVer {
+					color: white;
+					height: 1.5rem;
+					width: 1.5rem;
+				}
+			}
+		}
+	}
+	.formBuscar {
+		display: flex;
+		justify-content: center;
+		align-items: flex-end;
+		width: 100%;
+		max-width: 400px;
+		min-height: 20vh;
+		.iconBuscar {
+			height: 2.5rem;
+			width: 2.5rem;
+			padding: 0.5rem;
+			color: rgb(141, 141, 141);
+			background-color: rgb(54, 53, 53);
+		}
+		.buscador {
+			padding: 0.5rem;
+			height: 2.5rem;
+			width: 100%;
+			color: rgb(141, 141, 141);
+			font-size: 16px;
+			font-family: Netflix Sans, Helvetica Neue, Segoe UI, Roboto, Ubuntu,
+				sans-serif;
+			background-color: rgb(54, 53, 53);
+			border: none;
+			outline: none;
+			&::placeholder {
+				font-size: 14px;
+			}
+		}
+	}
+}

@@ -1,16 +1,18 @@
-import { useState } from 'react'
 import CardPelicula from '../CardPelicula/CardPelicula'
 import Slider from '../Slider/Slider'
 import { apiconfig } from '../../config/apiConfig'
-import { fetchData } from '../../services/fetchData'
 import usePaginacion from '../../hooks/usePaginacion'
+import useFetch from '../../hooks/useFetch'
 const apiKey = import.meta.env.VITE_TMDB_API_KEY
 
 function MainInicio({ setFullInfo, obtenerPelicula }) {
-	const [PPList, setPPList] = useState([])
-	const [PVList, setPVList] = useState([])
-	const [SPList, setSPList] = useState([])
-	const [SVList, setSVList] = useState([])
+	const {
+		datapPolular,
+		datapValorada,
+		datasPopular,
+		datasValorada,
+		fetchDataUse,
+	} = useFetch()
 	const {
 		pagePPList,
 		pagePVList,
@@ -24,16 +26,16 @@ function MainInicio({ setFullInfo, obtenerPelicula }) {
 
 	const setPage = (e) => {
 		if (e.enPantalla === true) {
-			if (e.tipo === 'pPopular') {
+			if (e.tipo === apiconfig.pPolular) {
 				setPagPPlist()
 			}
-			if (e.tipo === 'pValorada') {
+			if (e.tipo === apiconfig.pValorada) {
 				setpagPVList()
 			}
-			if (e.tipo === 'sPopular') {
+			if (e.tipo === apiconfig.sPopular) {
 				sePagSPList()
 			}
-			if (e.tipo === 'sValorada') {
+			if (e.tipo === apiconfig.sValorada) {
 				setPagSVList()
 			}
 		}
@@ -46,34 +48,18 @@ function MainInicio({ setFullInfo, obtenerPelicula }) {
 				setFullInfo(data)
 			})
 	}
-	const obtenerSeriesYpeliculas = async (tipo) => {
-		if (tipo === 'pPopular') {
-			const peliculasPopularesResponse = await fetchData({
-				pagina: pagePPList,
-				tipo: 'pPopular',
-			})
-			setPPList((prev) => prev.concat(peliculasPopularesResponse.results))
+	const obtenerSeriesYpeliculas = (tipo) => {
+		if (tipo === apiconfig.pPolular) {
+			fetchDataUse(pagePPList, apiconfig.pPolular)
 		}
-		if (tipo === 'pValorada') {
-			const peliculasValoradasResponse = await fetchData({
-				pagina: pagePVList,
-				tipo: 'pValorada',
-			})
-			setPVList((prev) => prev.concat(peliculasValoradasResponse.results))
+		if (tipo === apiconfig.pValorada) {
+			fetchDataUse(pagePVList, apiconfig.pValorada)
 		}
-		if (tipo === 'sPopular') {
-			const seriesPopularesResponse = await fetchData({
-				pagina: pageSPList,
-				tipo: 'sPopular',
-			})
-			setSPList((prev) => prev.concat(seriesPopularesResponse.results))
+		if (tipo === apiconfig.sPopular) {
+			fetchDataUse(pageSPList, apiconfig.sPopular)
 		}
-		if (tipo === 'sValorada') {
-			const seriesValoradasResponse = await fetchData({
-				pagina: pageSVList,
-				tipo: 'sValorada',
-			})
-			setSVList((prev) => prev.concat(seriesValoradasResponse.results))
+		if (tipo === apiconfig.sValorada) {
+			fetchDataUse(pageSVList, apiconfig.sValorada)
 		}
 	}
 
@@ -81,10 +67,10 @@ function MainInicio({ setFullInfo, obtenerPelicula }) {
 		<>
 			<h2 className='h2Slider'>Peliculas Populares</h2>
 			<Slider
-				tipo={'pPopular'}
+				tipo={apiconfig.pPolular}
 				obtenerSeriesYpeliculas={obtenerSeriesYpeliculas}
 				setPage={setPage}>
-				{PPList.map((popular) => (
+				{datapPolular.map((popular) => (
 					<CardPelicula
 						pelicula={popular}
 						key={popular.id}
@@ -95,10 +81,10 @@ function MainInicio({ setFullInfo, obtenerPelicula }) {
 
 			<h2 className='h2Slider'>Peliculas Mejor Valoradas</h2>
 			<Slider
-				tipo={'pValorada'}
+				tipo={apiconfig.pValorada}
 				setPage={setPage}
 				obtenerSeriesYpeliculas={obtenerSeriesYpeliculas}>
-				{PVList.map((popular) => (
+				{datapValorada.map((popular) => (
 					<CardPelicula
 						pelicula={popular}
 						key={popular.id}
@@ -109,10 +95,10 @@ function MainInicio({ setFullInfo, obtenerPelicula }) {
 
 			<h2 className='h2Slider'>Series Populares</h2>
 			<Slider
-				tipo={'sPopular'}
+				tipo={apiconfig.sPopular}
 				setPage={setPage}
 				obtenerSeriesYpeliculas={obtenerSeriesYpeliculas}>
-				{SPList.map((popular) => (
+				{datasPopular.map((popular) => (
 					<CardPelicula
 						pelicula={popular}
 						key={popular.id}
@@ -123,10 +109,10 @@ function MainInicio({ setFullInfo, obtenerPelicula }) {
 
 			<h2 className='h2Slider'>Series Mejor Valoradas</h2>
 			<Slider
-				tipo={'sValorada'}
+				tipo={apiconfig.sValorada}
 				setPage={setPage}
 				obtenerSeriesYpeliculas={obtenerSeriesYpeliculas}>
-				{SVList.map((popular) => (
+				{datasValorada.map((popular) => (
 					<CardPelicula
 						pelicula={popular}
 						key={popular.id}

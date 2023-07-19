@@ -1,31 +1,20 @@
 import './Inicio.scss'
 import { useEffect, useState } from 'react'
-import { fetchData } from '../../services/fetchData'
 import { apiconfig } from '../../config/apiConfig'
 import FullInfo from '../../components/FullInfo/FullInfo'
 import Hero from '../../components/Hero/Hero'
 import MainInicio from '../../components/Main/MainInicio'
+import useFetch from '../../hooks/useFetch'
+import Loading from '../../components/Loading/Loading'
+
 const apiKey = import.meta.env.VITE_TMDB_API_KEY
 
 function Inicio() {
 	const [fullInfo, setFullInfo] = useState()
-	const [loading, setLoading] = useState(false)
-
-	const [proximamenteP, setProximamenteP] = useState(null)
+	const { datapProximamente, fetchDataUse, loading } = useFetch()
 
 	useEffect(() => {
-		const obtenerUltimaPelicula = async () => {
-			setLoading(true)
-			const response = await fetchData({
-				pagina: 1,
-				tipo: 'pProximamente',
-			})
-			setProximamenteP(
-				response.results[Math.floor(Math.random() * response.results.length)]
-			)
-			setLoading(false)
-		}
-		obtenerUltimaPelicula()
+		fetchDataUse(1, apiconfig.pProximamente)
 	}, [])
 
 	const obtenerPelicula = (e) => {
@@ -46,27 +35,27 @@ function Inicio() {
 	const setFullInfoState = (e) => {
 		setFullInfo(e)
 	}
-	return (
+	return loading ? (
+		<Loading />
+	) : (
 		<main className='mainIndex'>
-			{loading ? (
-				'Cargando'
-			) : (
-				<>
-					{fullInfo ? (
-						<FullInfo pelicula={fullInfo} cerrarFullInfo={cerrarFullInfo} />
-					) : null}
-					{proximamenteP && (
-						<Hero
-							obtenerPelicula={obtenerPelicula}
-							proximamenteP={proximamenteP}
-						/>
-					)}
-					<MainInicio
-						obtenerPelicula={obtenerPelicula}
-						setFullInfo={setFullInfoState}
-					/>
-				</>
+			{fullInfo ? (
+				<FullInfo pelicula={fullInfo} cerrarFullInfo={cerrarFullInfo} />
+			) : null}
+			{datapProximamente && (
+				<Hero
+					obtenerPelicula={obtenerPelicula}
+					heroElement={
+						datapProximamente[
+							Math.floor(Math.random() * datapProximamente.length)
+						]
+					}
+				/>
 			)}
+			<MainInicio
+				obtenerPelicula={obtenerPelicula}
+				setFullInfo={setFullInfoState}
+			/>
 		</main>
 	)
 }

@@ -1,29 +1,20 @@
 import '../Inicio/Inicio.scss'
-
 import { useEffect, useState } from 'react'
 import Hero from '../../components/Hero/Hero'
-import { fetchData } from '../../services/fetchData'
 import { apiconfig } from '../../config/apiConfig'
+import useFetch from '../../hooks/useFetch'
+import ContainerWrap from '../../components/ContainerWrap/ContainerWrap'
+import CardPelicula from '../../components/CardPelicula/CardPelicula'
+import usePaginacion from '../../hooks/usePaginacion'
+import Loading from '../../components/Loading/Loading'
 const apiKey = import.meta.env.VITE_TMDB_API_KEY
 
 function Series() {
-	const [proximamenteS, setProximamenteS] = useState(null)
 	const [fullInfo, setFullInfo] = useState()
-	const [loading, setLoading] = useState(false)
+	const { loading, datasPopular, trendingS, fetchDataUse } = useFetch()
+	const { setPagTendenciaS, pageTendenciaS } = usePaginacion()
 	useEffect(() => {
-		const obtenerUltimaPelicula = async () => {
-			setLoading(true)
-			const response = await fetchData({
-				pagina: 1,
-				tipo: 'sPopular',
-			})
-			console.log(response)
-			setProximamenteS(
-				response.results[Math.floor(Math.random() * response.results.length)]
-			)
-			setLoading(false)
-		}
-		obtenerUltimaPelicula()
+		fetchDataUse(1, apiconfig.sPopular)
 	}, [])
 
 	const obtenerSerie = (e) => {
@@ -34,13 +25,36 @@ function Series() {
 				setFullInfo(data)
 			})
 	}
+	const setearPag = (e) => {
+		if (e.enPantalla === true) {
+			if (e.tipo === apiconfig.tendenciasSeries) {
+				setPagTendenciaS()
+			}
+		}
+	}
+	const obtenerPeliculas = (tipo) => {
+		if (tipo === apiconfig.tendenciasSeries) {
+			fetchDataUse(pageTendenciaS, apiconfig.tendenciasSeries)
+		}
+	}
 	return (
 		<main className='mainIndex'>
-			<>
-				{proximamenteS && (
-					<Hero obtenerPelicula={obtenerSerie} proximamenteP={proximamenteS} />
-				)}
-			</>
+			{datasPopular && (
+				<Hero
+					obtenerPelicula={obtenerSerie}
+					heroElement={
+						datasPopular[Math.floor(Math.random() * datasPopular.length)]
+					}
+				/>
+			)}
+			<ContainerWrap
+				obtenerPeliculas={obtenerPeliculas}
+				tipo={apiconfig.tendenciasSeries}
+				setPages={setearPag}>
+				{trendingS.map((pelicula) => {
+					return <CardPelicula pelicula={pelicula} key={pelicula.id} />
+				})}
+			</ContainerWrap>
 		</main>
 	)
 }

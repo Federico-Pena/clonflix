@@ -7,6 +7,8 @@
 	position: relative;
 	cursor: pointer;
 	transition: transform 0.2s ease-in-out;
+	font-family: Netflix Sans, Helvetica Neue, Segoe UI, Roboto, Ubuntu,
+		sans-serif;
 	&:hover {
 		transform: scale(0.95);
 	}
@@ -23,13 +25,16 @@
 	.peliculaId {
 		display: none;
 	}
-
-	.imgPelicula {
-		object-fit: cover;
-		aspect-ratio: 9/16;
-		border-radius: 0.2rem;
-		width: 100px;
-		height: auto;
+	.divImgPelicula {
+		min-width: 100px;
+		max-width: 300px;
+		.imgPelicula {
+			object-fit: cover;
+			aspect-ratio: 9/16;
+			border-radius: 0.2rem;
+			width: 100%;
+			height: auto;
+		}
 	}
 }
 
@@ -38,10 +43,12 @@
 		.peliculaTitulo {
 			font-size: 0px;
 		}
-		.imgPelicula {
-			aspect-ratio: 16/9;
-			width: 200px;
-			height: 400px;
+		.divImgPelicula {
+			.imgPelicula {
+				aspect-ratio: 16/9;
+				width: 200px;
+				height: 400px;
+			}
 		}
 	}
 }

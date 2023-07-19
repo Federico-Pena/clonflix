@@ -9,4 +9,13 @@ export const apiconfig = {
 	pProximamente: '/movie/upcoming',
 	sPopular: '/tv/popular',
 	sValorada: '/tv/top_rated',
+	buscarPelicula: '/search/movie',
+	tendenciaPelicula: '/trending/movie/week',
+	tendenciasSeries: '/trending/tv/week',
+	tendenciasTodas: '/trending/all/day',
+	buscarTodo: 'search/multi',
+	/* 
+	asi seri este
+	"search/multi?query=${}"
+	 */
 }
