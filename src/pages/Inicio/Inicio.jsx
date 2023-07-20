@@ -1,30 +1,33 @@
 import './Inicio.scss'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { apiconfig } from '../../config/apiConfig'
-import FullInfo from '../../components/FullInfo/FullInfo'
 import Hero from '../../components/Hero/Hero'
 import MainInicio from '../../components/Main/MainInicio'
-import useFetch from '../../hooks/useFetch'
 import Loading from '../../components/Loading/Loading'
+import usePelicula from '../../hooks/usePelicula'
 
 function Inicio() {
-	const { datapProximamente, fetchDataUse, loading } = useFetch()
+	const { datapProximamente, fetchDataPeli, loading } = usePelicula()
 
 	useEffect(() => {
-		fetchDataUse(1, apiconfig.pProximamente)
+		fetchDataPeli(1, apiconfig.pProximamente)
 	}, [])
 
 	return (
 		<main className='mainIndex'>
-			{loading ? <Loading /> : null}
-
-			{datapProximamente && (
-				<Hero
-					heroElement={datapProximamente[0]}
-					tipo={'apiconfig.pProximamente'}
-				/>
+			{loading ? (
+				<Loading />
+			) : (
+				<>
+					{datapProximamente && (
+						<Hero
+							heroElement={datapProximamente[0]}
+							tipo={'apiconfig.pProximamente'}
+						/>
+					)}
+					<MainInicio />
+				</>
 			)}
-			<MainInicio />
 		</main>
 	)
 }

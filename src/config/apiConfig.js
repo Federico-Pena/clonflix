@@ -13,7 +13,21 @@ export const apiconfig = {
 	tendenciasPelicula: '/trending/movie/week',
 	tendenciasSeries: '/trending/tv/week',
 	tendenciasTodas: '/trending/all/week',
-	sAccion: '/search/tv?query=',
-	pAccion: '/search/movie?query=',
 	buscarTodo: '/search/multi?query=',
+	generosP: {
+		accion: '/discover/movie?with_genres=28',
+		animacion: '/discover/movie?with_genres=16',
+		aventura: '/discover/movie?with_genres=12',
+		comedia: '/discover/movie?with_genres=35',
+		familia: '/discover/movie?with_genres=10751',
+		misterio: '/discover/movie?with_genres=9648',
+	},
+
+	generosS: {
+		accion: '/discover/tv?with_genres=10759',
+		animacion: '/discover/tv?with_genres=16',
+		comedia: '/discover/tv?with_genres=35',
+		familia: '/discover/tv?with_genres=10751',
+		misterio: '/discover/tv?with_genres=9648',
+	},
 }

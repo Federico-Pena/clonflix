@@ -1,27 +1,17 @@
 import CardPelicula from '../CardPelicula/CardPelicula'
 import Slider from '../Slider/Slider'
 import { apiconfig } from '../../config/apiConfig'
-import usePaginacion from '../../hooks/usePaginacion'
-import useFetch from '../../hooks/useFetch'
+import usePaginacion from '../../hooks/usePagePeli'
+import usePelicula from '../../hooks/usePelicula'
+import useSerie from '../../hooks/useSerie'
+import usePagePeli from '../../hooks/usePagePeli'
+import usePageSerie from '../../hooks/usePageSerie'
 
 function MainInicio() {
-	const {
-		datapPolular,
-		datapValorada,
-		datasPopular,
-		datasValorada,
-		fetchDataUse,
-	} = useFetch()
-	const {
-		pagePPList,
-		pagePVList,
-		pageSVList,
-		pageSPList,
-		setPagPPlist,
-		setPagPVList,
-		setPagSPList,
-		setPagSVList,
-	} = usePaginacion()
+	const { datapPolular, datapValorada, fetchDataPeli } = usePelicula()
+	const { datasPopular, datasValorada, fetchDataSerie } = useSerie()
+	const { pageSVList, pageSPList, setPagSPList, setPagSVList } = usePageSerie()
+	const { pagePPList, pagePVList, setPagPPlist, setPagPVList } = usePagePeli()
 
 	const setPage = (e) => {
 		if (e.enPantalla === true) {
@@ -42,41 +32,36 @@ function MainInicio() {
 
 	const obtenerSeriesYpeliculas = (tipo) => {
 		if (tipo === apiconfig.pPolular) {
-			fetchDataUse(pagePPList, apiconfig.pPolular)
+			fetchDataPeli(pagePPList, apiconfig.pPolular)
 		}
 		if (tipo === apiconfig.pValorada) {
-			fetchDataUse(pagePVList, apiconfig.pValorada)
+			fetchDataPeli(pagePVList, apiconfig.pValorada)
 		}
 		if (tipo === apiconfig.sPopular) {
-			fetchDataUse(pageSPList, apiconfig.sPopular)
+			fetchDataSerie(pageSPList, apiconfig.sPopular)
 		}
 		if (tipo === apiconfig.sValorada) {
-			fetchDataUse(pageSVList, apiconfig.sValorada)
+			fetchDataSerie(pageSVList, apiconfig.sValorada)
 		}
 	}
 
 	return (
 		<>
-			{datapPolular ? (
-				<>
-					<h2 className='h2Slider'>Peliculas Populares</h2>
-					<Slider
-						tipo={apiconfig.pPolular}
-						obtenerSeriesYpeliculas={obtenerSeriesYpeliculas}
-						setPage={setPage}>
-						{datapPolular.map((popular, i) => (
-							<CardPelicula
-								tipo={'apiconfig.pPolular'}
-								pelicula={popular}
-								key={`${popular.id} ${i}`}
-							/>
-						))}
-					</Slider>
-				</>
-			) : null}
-
-			<h2 className='h2Slider'>Peliculas Mejor Valoradas</h2>
 			<Slider
+				titulo={'Peliculas Populares'}
+				tipo={apiconfig.pPolular}
+				obtenerSeriesYpeliculas={obtenerSeriesYpeliculas}
+				setPage={setPage}>
+				{datapPolular.map((popular, i) => (
+					<CardPelicula
+						tipo={'apiconfig.pPolular'}
+						pelicula={popular}
+						key={`${popular.id} ${i}`}
+					/>
+				))}
+			</Slider>
+			<Slider
+				titulo={'Peliculas Mejor Valoradas'}
 				tipo={apiconfig.pValorada}
 				setPage={setPage}
 				obtenerSeriesYpeliculas={obtenerSeriesYpeliculas}>
@@ -88,9 +73,8 @@ function MainInicio() {
 					/>
 				))}
 			</Slider>
-
-			<h2 className='h2Slider'>Series Populares</h2>
 			<Slider
+				titulo={'Series Populares'}
 				tipo={apiconfig.sPopular}
 				setPage={setPage}
 				obtenerSeriesYpeliculas={obtenerSeriesYpeliculas}>
@@ -102,9 +86,8 @@ function MainInicio() {
 					/>
 				))}
 			</Slider>
-
-			<h2 className='h2Slider'>Series Mejor Valoradas</h2>
 			<Slider
+				titulo={'Series Mejor Valoradas'}
 				tipo={apiconfig.sValorada}
 				setPage={setPage}
 				obtenerSeriesYpeliculas={obtenerSeriesYpeliculas}>

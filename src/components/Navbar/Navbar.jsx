@@ -4,14 +4,15 @@ import { GoHome } from 'react-icons/go'
 import Categorias from '../Categorias/Categorias'
 import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import { IoArrowBack } from 'react-icons/io5'
 function Navbar() {
 	const [classCategorias, setClassCategorias] = useState(false)
 	const locationReact = useLocation()
-	const abrirCategorias = (e) => {
+	const abrirCategorias = () => {
 		setClassCategorias(true)
 	}
 
-	const cerrarCategorias = (e) => {
+	const cerrarCategorias = () => {
 		setClassCategorias(false)
 	}
 	return (
@@ -46,23 +47,52 @@ function Navbar() {
 				</div>
 
 				<ul className='ulNavbarLinks'>
-					<Link
-						className={
-							locationReact.pathname === '/series' ? 'liLinksActive' : 'liLinks'
-						}
-						to={'/series'}>
-						Series
-					</Link>
-					<Link
-						className={
-							locationReact.pathname === '/peliculas'
-								? 'liLinksActive'
-								: 'liLinks'
-						}
-						to={'/peliculas'}>
-						Peliculas
-					</Link>
-					<li onClick={abrirCategorias}>Categorias</li>
+					{locationReact.pathname === '/series' ||
+					locationReact.pathname === '/' ? (
+						<>
+							{locationReact.pathname !== '/' && (
+								<Link to={'/'} className='btnCerrar'>
+									<IoArrowBack />
+								</Link>
+							)}
+							<Link
+								className={
+									locationReact.pathname === '/series' &&
+									locationReact.pathname !== '/peliculas'
+										? 'liLinksActive'
+										: 'liLinks linkSerie'
+								}
+								to={'/series'}>
+								Series
+							</Link>
+						</>
+					) : null}
+
+					{locationReact.pathname === '/peliculas' ||
+					locationReact.pathname === '/' ? (
+						<>
+							{locationReact.pathname !== '/' && (
+								<Link to={'/'} className='btnCerrar'>
+									<IoArrowBack />
+								</Link>
+							)}
+							<Link
+								className={
+									locationReact.pathname === '/peliculas' &&
+									locationReact.pathname !== '/series'
+										? 'liLinksActive'
+										: 'liLinks linkPeli'
+								}
+								to={'/peliculas'}>
+								Peliculas
+							</Link>
+						</>
+					) : null}
+					{locationReact.pathname !== '/' ? null : (
+						<li className={'liLinksCategorias'} onClick={abrirCategorias}>
+							Categorias
+						</li>
+					)}
 				</ul>
 			</nav>
 			<Categorias

@@ -22,7 +22,6 @@ header {
 				align-self: flex-start;
 			}
 			.ulNavbarIcons {
-				cursor: pointer;
 				display: flex;
 				justify-content: flex-end;
 				align-items: center;
@@ -33,29 +32,68 @@ header {
 						width: 1.5rem;
 						height: 1.5rem;
 						margin-right: 1rem;
+						cursor: pointer;
 						color: white;
 					}
 					.liLinksActive {
+						cursor: pointer;
 						color: rgb(243, 72, 72);
 						width: 1.5rem;
 						height: 1.5rem;
+						transition: all 1s ease-in-out;
 						margin-right: 1rem;
 					}
 				}
 			}
 		}
 		.ulNavbarLinks {
-			display: flex;
-			justify-content: space-evenly;
+			height: 2rem;
 			width: 100%;
-			cursor: pointer;
-			.liLinks {
+			position: relative;
+			.liLinks,
+			.liLinksCategorias {
+				font-size: 16px;
 				color: white;
 				text-decoration: none;
+				transition: all 0.5s ease-in-out;
+				cursor: pointer;
 			}
 			.liLinksActive {
-				color: rgb(243, 72, 72);
+				position: absolute;
+				color: white;
+				left: 3.5rem;
+				font-size: 18px;
 				text-decoration: none;
+				transition: all 0.5s ease-in-out;
+				cursor: pointer;
+				animation: opacityLink 1s ease-in-out;
+			}
+			.linkSerie {
+				position: absolute;
+				transform: translateX(-75%);
+				left: 25%;
+			}
+			.linkPeli {
+				position: absolute;
+				transform: translateX(-50%);
+				left: 50%;
+			}
+			.liLinksCategorias {
+				position: absolute;
+				transform: translateX(-25%);
+				left: 75%;
+			}
+			.btnCerrar {
+				position: absolute;
+				left: 1rem;
+				top: 0;
+				cursor: pointer;
+				color: #fff;
+				z-index: 3;
+				svg {
+					width: 1.5rem;
+					height: 1.5rem;
+				}
 			}
 		}
 	}
@@ -67,7 +105,11 @@ header {
 	position: fixed;
 	top: -100%;
 }
-
+@keyframes opacityLink {
+	from {
+		opacity: 0.3;
+	}
+}
 @media (min-width: 768px) {
 	.liSearchIcon,
 	.liHomeIcon {

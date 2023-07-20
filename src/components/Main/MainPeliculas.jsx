@@ -1,78 +1,85 @@
 import CardPelicula from '../CardPelicula/CardPelicula'
 import Slider from '../Slider/Slider'
 import { apiconfig } from '../../config/apiConfig'
-import usePaginacion from '../../hooks/usePaginacion'
-import useFetch from '../../hooks/useFetch'
-import useFetchQuerys from '../../hooks/useFetchQuerys'
+import usePelicula from '../../hooks/usePelicula'
+import usePagePeli from '../../hooks/usePagePeli'
+import useGenereosPeli from '../../hooks/useGenereosPeli'
 
 function MainPeliculas() {
-	const { datapPolular, datapValorada, trendingP, fetchDataUse } = useFetch()
-	const { loading, peliculasAccion, fetchDataUseQuery } = useFetchQuerys()
+	const { trendingPeli, fetchDataPeli } = usePelicula()
 	const {
-		pagePPList,
-		pagePVList,
+		loading,
+		animatPeli,
+		actionPeli,
+		aventPeli,
+		comediaPeli,
+		familiaPeli,
+		misterioPeli,
+		fetchGeneros,
+	} = useGenereosPeli()
+	const {
 		pageTendenciaP,
-		pagePAccion,
-		setPagPPlist,
-		setPagPVList,
+		pageActionP,
+		pageAnimatP,
+		pageAventuraP,
+		pageComediaP,
+		pageFamiliaP,
+		pageMisterioP,
+		setPageComediaP,
+		setPageFamiliaP,
+		setPageMisterioP,
+		setPageAventuraP,
+		setPageAnimatP,
+		setPageActionP,
 		setPagTendenciaP,
-		setPagPAccion,
-	} = usePaginacion()
+	} = usePagePeli()
 
 	const setPage = (e) => {
 		if (e.enPantalla === true) {
-			if (e.tipo === apiconfig.pPolular) {
-				setPagPPlist()
-			}
-			if (e.tipo === apiconfig.pValorada) {
-				setPagPVList()
-			}
 			if (e.tipo === apiconfig.tendenciasPelicula) {
 				setPagTendenciaP()
-			}
-			if (e.tipo === apiconfig.pAccion) {
-				setPagPAccion()
+			} else if (e.tipo === apiconfig.generosP.accion) {
+				setPageActionP()
+			} else if (e.tipo === apiconfig.generosP.animacion) {
+				setPageAnimatP()
+			} else if (e.tipo === apiconfig.generosP.aventura) {
+				setPageAventuraP()
+			} else if (e.tipo === apiconfig.generosP.comedia) {
+				setPageComediaP()
+			} else if (e.tipo === apiconfig.generosP.familia) {
+				setPageFamiliaP()
+			} else if (e.tipo === apiconfig.generosP.misterio) {
+				setPageMisterioP()
 			}
 		}
 	}
 
 	const obtenerSeriesYpeliculas = (tipo) => {
-		if (tipo === apiconfig.pPolular) {
-			fetchDataUse(pagePPList, apiconfig.pPolular)
-		}
-		if (tipo === apiconfig.pValorada) {
-			fetchDataUse(pagePVList, apiconfig.pValorada)
-		}
 		if (tipo === apiconfig.tendenciasPelicula) {
-			fetchDataUse(pageTendenciaP, apiconfig.tendenciasPelicula)
-		}
-		if (tipo === apiconfig.pAccion) {
-			fetchDataUseQuery(pagePAccion, apiconfig.pAccion, 'Aventura')
+			fetchDataPeli(pageTendenciaP, apiconfig.tendenciasPelicula)
+		} else if (tipo === apiconfig.generosP.accion) {
+			fetchGeneros(pageActionP, apiconfig.generosP.accion)
+		} else if (tipo === apiconfig.generosP.animacion) {
+			fetchGeneros(pageAnimatP, apiconfig.generosP.animacion)
+		} else if (tipo === apiconfig.generosP.aventura) {
+			fetchGeneros(pageAventuraP, apiconfig.generosP.aventura)
+		} else if (tipo === apiconfig.generosP.comedia) {
+			fetchGeneros(pageComediaP, apiconfig.generosP.comedia)
+		} else if (tipo === apiconfig.generosP.familia) {
+			fetchGeneros(pageFamiliaP, apiconfig.generosP.familia)
+		} else if (tipo === apiconfig.generosP.misterio) {
+			fetchGeneros(pageMisterioP, apiconfig.generosP.misterio)
 		}
 	}
 
 	return (
 		<>
-			<h2 className='h2Slider'>Aventura</h2>
-			<Slider
-				tipo={apiconfig.pAccion}
-				setPage={setPage}
-				obtenerSeriesYpeliculas={obtenerSeriesYpeliculas}>
-				{peliculasAccion.map((popular, i) => (
-					<CardPelicula
-						tipo={'apiconfig.pAccion'}
-						pelicula={popular}
-						key={`${popular.id} ${i}`}
-					/>
-				))}
-			</Slider>
-
 			<h2 className='h2Slider'>Tendencias</h2>
 			<Slider
 				tipo={apiconfig.tendenciasPelicula}
 				setPage={setPage}
 				obtenerSeriesYpeliculas={obtenerSeriesYpeliculas}>
-				{trendingP.map((popular, i) => (
+				{trendingPeli.map((popular, i) => (
 					<CardPelicula
 						tipo={'apiconfig.tendenciasPelicula'}
 						pelicula={popular}
@@ -80,28 +87,80 @@ function MainPeliculas() {
 					/>
 				))}
 			</Slider>
-
-			<h2 className='h2Slider'>Peliculas Populares</h2>
+			<h2 className='h2Slider'>Accion</h2>
 			<Slider
-				tipo={apiconfig.pPolular}
-				obtenerSeriesYpeliculas={obtenerSeriesYpeliculas}
-				setPage={setPage}>
-				{datapPolular.map((popular, i) => (
+				tipo={apiconfig.generosP.accion}
+				setPage={setPage}
+				obtenerSeriesYpeliculas={obtenerSeriesYpeliculas}>
+				{actionPeli.map((popular, i) => (
 					<CardPelicula
-						tipo={'apiconfig.pPolular'}
+						tipo={'apiconfig.generosP.accion'}
 						pelicula={popular}
 						key={`${popular.id} ${i}`}
 					/>
 				))}
 			</Slider>
-			<h2 className='h2Slider'>Peliculas Mejor Valoradas</h2>
+			<h2 className='h2Slider'>Misterio</h2>
 			<Slider
-				tipo={apiconfig.pValorada}
-				obtenerSeriesYpeliculas={obtenerSeriesYpeliculas}
-				setPage={setPage}>
-				{datapValorada.map((popular, i) => (
+				tipo={apiconfig.generosP.misterio}
+				setPage={setPage}
+				obtenerSeriesYpeliculas={obtenerSeriesYpeliculas}>
+				{misterioPeli.map((popular, i) => (
 					<CardPelicula
-						tipo={'apiconfig.pValorada'}
+						tipo={'apiconfig.generosP.misterio'}
+						pelicula={popular}
+						key={`${popular.id} ${i}`}
+					/>
+				))}
+			</Slider>
+			<h2 className='h2Slider'>Familia</h2>
+			<Slider
+				tipo={apiconfig.generosP.familia}
+				setPage={setPage}
+				obtenerSeriesYpeliculas={obtenerSeriesYpeliculas}>
+				{familiaPeli.map((popular, i) => (
+					<CardPelicula
+						tipo={'apiconfig.generosP.familia'}
+						pelicula={popular}
+						key={`${popular.id} ${i}`}
+					/>
+				))}
+			</Slider>
+			<h2 className='h2Slider'>Comedia</h2>
+			<Slider
+				tipo={apiconfig.generosP.comedia}
+				setPage={setPage}
+				obtenerSeriesYpeliculas={obtenerSeriesYpeliculas}>
+				{comediaPeli.map((popular, i) => (
+					<CardPelicula
+						tipo={'apiconfig.generosP.comedia'}
+						pelicula={popular}
+						key={`${popular.id} ${i}`}
+					/>
+				))}
+			</Slider>
+			<h2 className='h2Slider'>Aventura</h2>
+			<Slider
+				tipo={apiconfig.generosP.aventura}
+				setPage={setPage}
+				obtenerSeriesYpeliculas={obtenerSeriesYpeliculas}>
+				{aventPeli.map((popular, i) => (
+					<CardPelicula
+						tipo={'apiconfig.generosP.aventura'}
+						pelicula={popular}
+						key={`${popular.id} ${i}`}
+					/>
+				))}
+			</Slider>
+
+			<h2 className='h2Slider'>Animacion</h2>
+			<Slider
+				tipo={apiconfig.generosP.animacion}
+				setPage={setPage}
+				obtenerSeriesYpeliculas={obtenerSeriesYpeliculas}>
+				{animatPeli.map((popular, i) => (
+					<CardPelicula
+						tipo={'apiconfig.generosP.animacion'}
 						pelicula={popular}
 						key={`${popular.id} ${i}`}
 					/>

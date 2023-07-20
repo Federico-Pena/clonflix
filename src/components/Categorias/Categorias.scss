@@ -1,32 +1,49 @@
-.categorias {
+.divCategorias {
 	position: fixed;
+	overflow: auto;
 	top: 0;
-	bottom: 0;
 	left: 0;
-	right: 0;
+	width: 100%;
+	min-height: 100vh;
 	display: flex;
-	flex-direction: column;
 	align-items: center;
 	justify-content: space-evenly;
 	background-color: #000000d2;
-	padding: 2rem 0;
 	transition: all 0.5s ease;
 	font-family: Netflix Sans, Helvetica Neue, Segoe UI, Roboto, Ubuntu,
 		sans-serif;
-	li {
-		text-align: center;
-		width: 100%;
-		cursor: pointer;
-		.iconCategorias {
-			width: 3rem;
-			height: 3rem;
-			position: absolute;
-			left: 50%;
-			bottom: 0.5rem;
-			transform: translate(-50%);
-			transition: color 0.3s ease;
+	.iconCategorias {
+		width: 3rem;
+		height: 3rem;
+		position: absolute;
+		left: 50%;
+		bottom: 0.5rem;
+		transform: translate(-50%);
+		transition: color 0.3s ease;
+		&:hover {
+			color: #b9b9b9d2;
+		}
+	}
+	.categoriasP,
+	.categoriasS {
+		flex: auto;
+		height: 100vh;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-evenly;
+		padding: 2rem 0;
+		li {
+			text-align: center;
+			width: 100%;
+			cursor: pointer;
+			transition: transform 0.3s ease;
 			&:hover {
-				color: #b9b9b9d2;
+				transform: scale(1.1);
+			}
+			strong {
+				text-decoration: underline;
+				font-size: 18px;
+				letter-spacing: 1px;
 			}
 		}
 	}

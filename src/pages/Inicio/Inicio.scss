@@ -5,6 +5,7 @@
 	position: relative;
 	width: 100%;
 	min-height: 100vh;
+	animation: mainIndex 0.8s ease-in-out;
 
 	.divHero {
 		display: flex;
@@ -70,7 +71,12 @@
 		font-size: 18px;
 	}
 }
-
+@keyframes mainIndex {
+	from {
+		opacity: 0;
+		transform: translateY(-200px);
+	}
+}
 @media (max-width: 768px) {
 	.mainIndex {
 		.divHero {

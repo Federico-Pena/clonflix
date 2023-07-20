@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 import './Slider.scss'
-function Slider({ children, setPage, obtenerSeriesYpeliculas, tipo }) {
+function Slider({ children, setPage, obtenerSeriesYpeliculas, tipo, titulo }) {
 	const divSlider = useRef()
 	const spanSlider = useRef()
 
@@ -8,7 +8,7 @@ function Slider({ children, setPage, obtenerSeriesYpeliculas, tipo }) {
 		const { current } = spanSlider
 		const opciones = {
 			root: divSlider.current,
-			rootMargin: '0px 200px 0px 0px',
+			rootMargin: '0px ',
 			threshold: 0,
 		}
 		const observer = new IntersectionObserver((entries) => {
@@ -33,9 +33,12 @@ function Slider({ children, setPage, obtenerSeriesYpeliculas, tipo }) {
 	}, [setPage, obtenerSeriesYpeliculas, tipo])
 
 	return (
-		<div className='sliderDiv' ref={divSlider}>
-			{children} <div className='divsliderDiv' ref={spanSlider}></div>
-		</div>
+		<>
+			<h2 className='h2Slider'>{titulo}</h2>
+			<div className='sliderDiv' ref={divSlider}>
+				{children} <div className='divsliderDiv' ref={spanSlider}></div>
+			</div>
+		</>
 	)
 }
 

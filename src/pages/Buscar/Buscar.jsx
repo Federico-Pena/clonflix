@@ -1,40 +1,17 @@
-import { useEffect, useState } from 'react'
-import useFetch from '../../hooks/useFetch'
+import { useEffect } from 'react'
 import './Buscar.scss'
 import { IoSearch } from 'react-icons/io5'
 import { GoPlay } from 'react-icons/go'
 import { apiconfig } from '../../config/apiConfig'
 import { Link } from 'react-router-dom'
-import FullInfo from '../../components/FullInfo/FullInfo'
-const apiKey = import.meta.env.VITE_TMDB_API_KEY
+import usePelicula from '../../hooks/usePelicula'
 
 function Buscar() {
-	const { loading, trendingTodas, fetchDataUse } = useFetch()
-	const [fullInfo, setFullInfo] = useState()
+	const { loading, trendingTodas, fetchDataPeli } = usePelicula()
 	useEffect(() => {
-		fetchDataUse(1, apiconfig.tendenciasTodas)
+		fetchDataPeli(1, apiconfig.tendenciasTodas)
 	}, [])
 
-	const obtenerfullInfo = async (id, title) => {
-		let url
-		window.scrollTo(0, 0)
-		if (title) {
-			url = `${apiconfig.baseUrl}/movie/${id}?append_to_response=cast%2Cvideos%2Ctype%2Ccreated_by&api_key=${apiKey}&language=es-MX`
-		} else {
-			url = `${apiconfig.baseUrl}/tv/${id}?append_to_response=cast%2Cvideos%2Ctype%2Ccreated_by&api_key=${apiKey}&language=es-MX`
-		}
-		try {
-			const res = await fetch(url)
-			const data = await res.json()
-			setFullInfo(data)
-			console.log(data)
-			/* setTimeout(() => {
-				 	setLoading(false) 
-			}, 800) */
-		} catch (error) {
-			throw new Error(error)
-		}
-	}
 	return (
 		<div className='divPageBuscar'>
 			<form className='formBuscar'>
@@ -52,9 +29,9 @@ function Buscar() {
 					{trendingTodas.slice(0, 20).map((tendencia, i) => {
 						return (
 							<Link
-								key={`${tendencia.id} `}
-								className='cardSugerencia'
-								onClick={() => obtenerfullInfo(tendencia.id, tendencia.title)}>
+								to={`&${tendencia.id}?${tendencia.title ? true : false}`}
+								key={`${tendencia.id} ${i}`}
+								className='cardSugerencia'>
 								<div className='divImg'>
 									<img
 										src={`${apiconfig.baseUrlImageW300}${tendencia?.backdrop_path}`}

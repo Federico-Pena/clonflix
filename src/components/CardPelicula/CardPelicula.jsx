@@ -8,7 +8,7 @@ function CardPelicula({ pelicula, tipo }) {
 	const { current } = refCardPelicula
 	useEffect(() => {
 		const opciones = {
-			rootMargin: '200px',
+			rootMargin: '0px',
 			threshold: 0,
 		}
 		const observer = new IntersectionObserver((entries) => {
@@ -40,7 +40,7 @@ function CardPelicula({ pelicula, tipo }) {
 					<img
 						className='imgPelicula'
 						alt={`Portada de la pelicula ${pelicula.title}`}
-						src='https://placehold.co/300x400/000000/FFF?text=Cargando'
+						src='https://placehold.co/300x400/000000/FFF?text=...'
 					/>
 					<p className='peliculaId'>{pelicula.id}</p>
 				</div>

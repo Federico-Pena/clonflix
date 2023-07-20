@@ -5,7 +5,7 @@ import { Route, Routes } from 'react-router-dom'
 import Peliculas from './pages/Peliculas/Peliculas'
 import Series from './pages/Series/Series'
 import Buscar from './pages/Buscar/Buscar'
-import FullInfo from './components/FullInfo/FullInfo'
+import FullInfo from './pages/FullInfo/FullInfo'
 function App() {
 	return (
 		<>

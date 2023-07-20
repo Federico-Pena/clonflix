@@ -5,7 +5,7 @@ function Videos({ video }) {
 	useEffect(() => {
 		const { current } = liVideoRef
 		const opciones = {
-			rootMargin: '0px',
+			rootMargin: '150px',
 			threshold: 0,
 		}
 		const observer = new IntersectionObserver((entries) => {
@@ -26,9 +26,7 @@ function Videos({ video }) {
 	return (
 		<li key={video.key} ref={liVideoRef}>
 			{video.name}
-			<iframe
-				title={video.name}
-				src='https://placehold.co/1920x1080.mp4?text=Cargando'></iframe>
+			<iframe title={video.name}></iframe>
 		</li>
 	)
 }
