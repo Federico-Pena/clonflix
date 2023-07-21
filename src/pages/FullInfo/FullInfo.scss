@@ -17,6 +17,23 @@
 		height: 0rem;
 		width: 0rem;
 	}
+	.btnCompartir {
+		position: absolute;
+		right: 0.5rem;
+		top: 0.5rem;
+		border: none;
+		background-color: transparent;
+		transition: transform 0.3s linear;
+		cursor: pointer;
+		svg {
+			color: white;
+			width: 2rem;
+			height: 2rem;
+		}
+		&:hover {
+			transform: scale(1.1);
+		}
+	}
 	.btnCerrar {
 		position: absolute;
 		left: 0.5rem;

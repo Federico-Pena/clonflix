@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { apiconfig } from '../../config/apiConfig'
-import { IoArrowBack } from 'react-icons/io5'
+import { IoArrowBack, IoShareSocialOutline } from 'react-icons/io5'
 const apiKey = import.meta.env.VITE_TMDB_API_KEY
 
 import './FullInfo.scss'
@@ -48,7 +48,21 @@ function FullInfo() {
 		}
 		obtenerfullInfo()
 	}, [locationR])
-
+	const compartir = () => {
+		if ('share' in navigator) {
+			navigator
+				.share({
+					title: 'Mira Esta Recomendacion',
+					url: window.location.href,
+				})
+				.then((res) => {
+					console.log(res)
+				})
+				.catch((error) => {
+					console.log(error)
+				})
+		}
+	}
 	return (
 		<div className='divFullInfo' ref={divFullInfoRef}>
 			{loading ? (
@@ -58,6 +72,9 @@ function FullInfo() {
 					<Link to={`/${urlAnterior}`} className='btnCerrar'>
 						<IoArrowBack />
 					</Link>
+					<button onClick={compartir} className='btnCompartir'>
+						<IoShareSocialOutline />
+					</button>
 					{fullInfo && fullInfo.videos?.results.length ? (
 						<ul className='ulVideo'>
 							<li>
