@@ -10,7 +10,7 @@ function Inicio() {
 	const { datapProximamente, fetchDataPeli, loading } = usePelicula()
 
 	useEffect(() => {
-		fetchDataPeli(1, apiconfig.pProximamente)
+		fetchDataPeli(1, apiconfig.pelicula.proximamente)
 	}, [])
 
 	return (
@@ -22,7 +22,7 @@ function Inicio() {
 					{datapProximamente && (
 						<Hero
 							heroElement={datapProximamente[0]}
-							tipo={'apiconfig.pProximamente'}
+							tipo={'pelicula.proximamente'}
 						/>
 					)}
 					<MainInicio />

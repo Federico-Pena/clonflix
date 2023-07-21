@@ -7,10 +7,6 @@ function CardPelicula({ pelicula, tipo }) {
 	const refCardPelicula = useRef()
 	const { current } = refCardPelicula
 	useEffect(() => {
-		const opciones = {
-			rootMargin: '0px',
-			threshold: 0,
-		}
 		const observer = new IntersectionObserver((entries) => {
 			entries.forEach((entry) => {
 				if (entry.isIntersecting) {
@@ -20,10 +16,8 @@ function CardPelicula({ pelicula, tipo }) {
 					observer.unobserve(entry.target)
 				}
 			})
-		}, opciones)
-
+		})
 		refCardPelicula.current && observer.observe(refCardPelicula.current)
-
 		return () => {
 			current && observer.unobserve(current)
 		}
@@ -33,7 +27,7 @@ function CardPelicula({ pelicula, tipo }) {
 		pelicula &&
 		pelicula?.poster_path && (
 			<Link
-				to={`&${pelicula.id}?${tipo.split('.')[1]}`}
+				to={`$${pelicula.id}?${tipo ? tipo.split('.')[0] : 'serie'}`}
 				className='cardPelicula'
 				ref={refCardPelicula}>
 				<div className='divImgPelicula'>

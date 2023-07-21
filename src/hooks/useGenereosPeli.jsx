@@ -1,37 +1,8 @@
 import { useState } from 'react'
 import { apiconfig } from '../config/apiConfig'
+import { obtenerTipoGeneroPeli } from '../services/obtenerTipo'
 const apiKey = import.meta.env.VITE_TMDB_API_KEY
-
-const obtenerTipo = (tipo) => {
-	let url
-	if (tipo === apiconfig.generosP.accion) {
-		url = apiconfig.generosP.accion
-	} else if (tipo === apiconfig.generosP.animacion) {
-		url = apiconfig.generosP.animacion
-	} else if (tipo === apiconfig.generosP.aventura) {
-		url = apiconfig.generosP.aventura
-	} else if (tipo === apiconfig.generosP.comedia) {
-		url = apiconfig.generosP.comedia
-	} else if (tipo === apiconfig.generosP.familia) {
-		url = apiconfig.generosP.familia
-	} else if (tipo === apiconfig.generosP.misterio) {
-		url = apiconfig.generosP.misterio
-	} else if (tipo === apiconfig.generosS.accion) {
-		url = apiconfig.generosS.accion
-	} else if (tipo === apiconfig.generosS.animacion) {
-		url = apiconfig.generosS.animacion
-	} else if (tipo === apiconfig.generosS.comedia) {
-		url = apiconfig.generosS.comedia
-	} else if (tipo === apiconfig.generosS.familia) {
-		url = apiconfig.generosS.familia
-	} else if (tipo === apiconfig.generosS.misterio) {
-		url = apiconfig.generosS.misterio
-	} else if (tipo === apiconfig.buscarTodo) {
-		url = apiconfig.buscarTodo
-	}
-	return url
-}
-
+const genero = apiconfig.pelicula.generos
 function useGenereosPeli() {
 	const [actionPeli, setActionPeli] = useState([])
 	const [animatPeli, setAnimatPeli] = useState([])
@@ -39,12 +10,6 @@ function useGenereosPeli() {
 	const [comediaPeli, setComediaPeli] = useState([])
 	const [familiaPeli, setFamiliaPeli] = useState([])
 	const [misterioPeli, setMisterioPeli] = useState([])
-	const [accionSerie, setAccionSerie] = useState([])
-	const [animatSerie, setAnimatSerie] = useState([])
-	const [comediaSerie, setComediaSerie] = useState([])
-	const [familiaSerie, setFamiliaSerie] = useState([])
-	const [misterioSerie, setMisterioSerie] = useState([])
-
 	const [multiples, setMultiples] = useState([])
 	const [loading, setLoading] = useState(false)
 	/**
@@ -54,46 +19,32 @@ function useGenereosPeli() {
 	 * @param {String} query
 	 * @returns
 	 */
-	const fetchGeneros = async (pagina, tipo) => {
-		const urlStatic = `&api_key=${apiKey}&language=es-MX&page=${pagina}&sort_by=vote_count.desc`
-		const url = obtenerTipo(tipo)
+	const fetchGenerosPeli = async (pagina, tipo) => {
+		const url = obtenerTipoGeneroPeli(tipo)
+		const finUrl = `&api_key=${apiKey}&language=es-MX&sort_by=vote_count.desc&page=${pagina}`
 		try {
 			setLoading(true)
-			const response = await fetch(`${apiconfig.baseUrl}${url}${urlStatic}`)
+			const response = await fetch(`${apiconfig.baseUrl}${url}${finUrl}`)
 			const datares = await response.json()
-			if (url === apiconfig.generosP.accion) {
+			if (url === genero.accion) {
 				setActionPeli((prev) => prev.concat(datares.results))
 			}
-			if (url === apiconfig.generosP.animacion) {
+			if (url === genero.animacion) {
 				setAnimatPeli((prev) => prev.concat(datares.results))
 			}
-			if (url === apiconfig.generosP.aventura) {
+			if (url === genero.aventura) {
 				setAventPeli((prev) => prev.concat(datares.results))
 			}
-			if (url === apiconfig.generosP.comedia) {
+			if (url === genero.comedia) {
 				setComediaPeli((prev) => prev.concat(datares.results))
 			}
-			if (url === apiconfig.generosP.familia) {
+			if (url === genero.familia) {
 				setFamiliaPeli((prev) => prev.concat(datares.results))
 			}
-			if (url === apiconfig.generosP.misterio) {
+			if (url === genero.misterio) {
 				setMisterioPeli((prev) => prev.concat(datares.results))
 			}
-			if (url === apiconfig.generosS.accion) {
-				setAccionSerie((prev) => prev.concat(datares.results))
-			}
-			if (url === apiconfig.generosS.animacion) {
-				setAnimatSerie((prev) => prev.concat(datares.results))
-			}
-			if (url === apiconfig.generosS.comedia) {
-				setComediaSerie((prev) => prev.concat(datares.results))
-			}
-			if (url === apiconfig.generosS.familia) {
-				setFamiliaSerie((prev) => prev.concat(datares.results))
-			}
-			if (url === apiconfig.generosS.misterio) {
-				setMisterioSerie((prev) => prev.concat(datares.results))
-			}
+
 			if (url === apiconfig.buscarTodo) {
 				setMultiples((prev) => prev.concat(datares.results))
 			}
@@ -113,13 +64,8 @@ function useGenereosPeli() {
 		familiaPeli,
 		comediaPeli,
 		misterioPeli,
-		accionSerie,
-		animatSerie,
-		comediaSerie,
-		familiaSerie,
-		misterioSerie,
 		multiples,
-		fetchGeneros,
+		fetchGenerosPeli,
 	}
 }
 

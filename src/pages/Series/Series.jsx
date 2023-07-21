@@ -9,7 +9,7 @@ import useSerie from '../../hooks/useSerie'
 function Series() {
 	const { loading, datasPopular, fetchDataSerie } = useSerie()
 	useEffect(() => {
-		fetchDataSerie(1, apiconfig.sPopular)
+		fetchDataSerie(1, apiconfig.serie.popular)
 	}, [])
 
 	return (
@@ -19,7 +19,7 @@ function Series() {
 			) : (
 				<>
 					{datasPopular && (
-						<Hero tipo={'apiconfig.sPopular'} heroElement={datasPopular[0]} />
+						<Hero tipo={'serie.popular'} heroElement={datasPopular[0]} />
 					)}
 					<MainSeries />
 				</>

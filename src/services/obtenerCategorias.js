@@ -7,11 +7,10 @@ export const obtenerCategorias = async () => {
 			`${apiconfig.baseUrl}/genre/movie/list?language=es-MX&api_key=${apiKey}`
 		)
 		const dataS = await fetch(
-			`${apiconfig.baseUrl}/genre/movie/list?language=es-MX&api_key=${apiKey}`
+			`${apiconfig.baseUrl}/genre/tv/list?language=es-MX&api_key=${apiKey}`
 		)
 		const resultP = await dataP.json()
 		const resultS = await dataS.json()
-
 		return { genPel: resultP.genres, genSer: resultS.genres }
 	} catch (error) {
 		return error

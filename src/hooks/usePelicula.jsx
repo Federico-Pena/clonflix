@@ -1,27 +1,13 @@
 import { useState } from 'react'
 import { apiconfig } from '../config/apiConfig'
-const apiKey = import.meta.env.VITE_TMDB_API_KEY
+import { obtenerTipoPeli } from '../services/obtenerTipo'
+const pelicula = apiconfig.pelicula
 /**
  *
  * @param {String} tipo
  * @returns
  */
-const obtenerTipo = (tipo) => {
-	let url
-	if (tipo === apiconfig.pPolular) {
-		url = apiconfig.pPolular
-	} else if (tipo === apiconfig.pValorada) {
-		url = apiconfig.pValorada
-	} else if (tipo === apiconfig.pProximamente) {
-		url = apiconfig.pProximamente
-	} else if (tipo === apiconfig.tendenciasPelicula) {
-		url = apiconfig.tendenciasPelicula
-	} else if (tipo === apiconfig.tendenciasTodas) {
-		url = apiconfig.tendenciasTodas
-	}
 
-	return url
-}
 function usePelicula() {
 	const [datapPolular, setdatapPolular] = useState([])
 	const [datapValorada, setdatapValorada] = useState([])
@@ -36,26 +22,25 @@ function usePelicula() {
 	 * @returns
 	 */
 	const fetchDataPeli = async (pagina, tipo) => {
-		const urlStatic = `?api_key=${apiKey}&language=es-MX&page=${pagina}&sort_by=vote_count.desc`
-		const url = obtenerTipo(tipo)
+		const url = obtenerTipoPeli(tipo)
 		try {
 			setLoading(true)
-			const response = await fetch(`${apiconfig.baseUrl}${url}${urlStatic}`)
+			const response = await fetch(
+				`${apiconfig.baseUrl}${url}${apiconfig.finUrl}page=${pagina}`
+			)
 			const datares = await response.json()
-			if (url === apiconfig.pPolular) {
+			if (url === pelicula.polular) {
 				setdatapPolular((prev) => prev.concat(datares.results))
-			} else if (url === apiconfig.pValorada) {
+			} else if (url === pelicula.valorada) {
 				setdatapValorada((prev) => prev.concat(datares.results))
-			} else if (url === apiconfig.pProximamente) {
+			} else if (url === pelicula.proximamente) {
 				setdatapProximamente((prev) => prev.concat(datares.results))
 			} else if (url === apiconfig.tendenciasTodas) {
 				setTrendingTodas((prev) => prev.concat(datares.results))
-			} else if (url === apiconfig.tendenciasPelicula) {
+			} else if (url === pelicula.tendencias) {
 				setTrendingPeli((prev) => prev.concat(datares.results))
 			}
-			setTimeout(() => {
-				setLoading(false)
-			}, 300)
+			setLoading(false)
 		} catch (error) {
 			setLoading(false)
 			return new Error(error)

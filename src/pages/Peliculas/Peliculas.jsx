@@ -6,10 +6,10 @@ import Loading from '../../components/Loading/Loading'
 import MainPeliculas from '../../components/Main/MainPeliculas'
 import usePelicula from '../../hooks/usePelicula'
 function Peliculas() {
-	const { loading, datapPolular, fetchDataPeli } = usePelicula()
+	const { loading, datapProximamente, fetchDataPeli } = usePelicula()
 
 	useEffect(() => {
-		fetchDataPeli(1, apiconfig.pPolular)
+		fetchDataPeli(1, apiconfig.pelicula.proximamente)
 	}, [])
 
 	return (
@@ -18,8 +18,11 @@ function Peliculas() {
 				<Loading />
 			) : (
 				<>
-					{datapPolular && (
-						<Hero heroElement={datapPolular[0]} tipo={'apiconfig.pPolular'} />
+					{datapProximamente && (
+						<Hero
+							heroElement={datapProximamente[0]}
+							tipo={'pelicula.proximamente'}
+						/>
 					)}
 					<MainPeliculas />
 				</>

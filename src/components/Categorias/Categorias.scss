@@ -1,4 +1,15 @@
-.divCategorias {
+.divResultados {
+	z-index: 2;
+	position: relative;
+	.iconCerrarResultados {
+		position: absolute;
+		top: 3rem;
+		width: 3rem;
+		height: 3rem;
+	}
+}
+.divCategorias,
+.divResultados {
 	position: fixed;
 	overflow: auto;
 	top: 0;
@@ -8,10 +19,11 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-evenly;
-	background-color: #000000d2;
+	background-color: #000000;
 	transition: all 0.5s ease;
 	font-family: Netflix Sans, Helvetica Neue, Segoe UI, Roboto, Ubuntu,
 		sans-serif;
+
 	.iconCategorias {
 		width: 3rem;
 		height: 3rem;
@@ -32,14 +44,18 @@
 		flex-direction: column;
 		justify-content: space-evenly;
 		padding: 2rem 0;
-		li {
+		a:hover {
+			transform: scale(1.1);
+		}
+		li,
+		a {
 			text-align: center;
 			width: 100%;
 			cursor: pointer;
 			transition: transform 0.3s ease;
-			&:hover {
-				transform: scale(1.1);
-			}
+			color: white;
+			text-decoration: none;
+
 			strong {
 				text-decoration: underline;
 				font-size: 18px;

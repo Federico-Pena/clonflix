@@ -3,7 +3,7 @@ import Slider from '../Slider/Slider'
 import { apiconfig } from '../../config/apiConfig'
 import useSerie from '../../hooks/useSerie'
 import usePageSerie from '../../hooks/usePageSerie'
-import useGenereosPeli from '../../hooks/useGenereosPeli'
+import useGenerosSerie from '../../hooks/useGenerosSerie'
 
 function MainSeries() {
 	const { trendingS, fetchDataSerie } = useSerie()
@@ -13,8 +13,8 @@ function MainSeries() {
 		comediaSerie,
 		familiaSerie,
 		misterioSerie,
-		fetchGeneros,
-	} = useGenereosPeli()
+		fetchGenerosSerie,
+	} = useGenerosSerie()
 	const {
 		pageTendenciaS,
 		pageActionS,
@@ -29,25 +29,25 @@ function MainSeries() {
 		setPagComediaS,
 		setPagMisterioS,
 	} = usePageSerie()
-
+	const genero = apiconfig.serie.generos
 	const setPage = (e) => {
 		if (e.enPantalla === true) {
 			if (e.tipo === apiconfig.tendenciasSeries) {
 				setPagTendenciaS()
 			}
-			if (e.tipo === apiconfig.generosS.accion) {
+			if (e.tipo === genero.accion) {
 				setPagActionS()
 			}
-			if (e.tipo === apiconfig.generosS.animacion) {
+			if (e.tipo === genero.animacion) {
 				setPagAnimatS()
 			}
-			if (e.tipo === apiconfig.generosS.familia) {
+			if (e.tipo === genero.familia) {
 				setPagFamiliaS()
 			}
-			if (e.tipo === apiconfig.generosS.comedia) {
+			if (e.tipo === genero.comedia) {
 				setPagComediaS()
 			}
-			if (e.tipo === apiconfig.generosS.misterio) {
+			if (e.tipo === genero.misterio) {
 				setPagMisterioS()
 			}
 		}
@@ -55,22 +55,22 @@ function MainSeries() {
 
 	const obtenerSeriesYpeliculas = (tipo) => {
 		if (tipo === apiconfig.tendenciasSeries) {
-			fetchDataSerie(pageTendenciaS, apiconfig.tendenciasSeries)
+			fetchDataSerie(pageTendenciaS, apiconfig.serie.tendencias)
 		}
-		if (tipo === apiconfig.generosS.accion) {
-			fetchGeneros(pageActionS, apiconfig.generosS.accion)
+		if (tipo === genero.accion) {
+			fetchGenerosSerie(pageActionS, genero.accion)
 		}
-		if (tipo === apiconfig.generosS.animacion) {
-			fetchGeneros(pageAnimatS, apiconfig.generosS.animacion)
+		if (tipo === genero.animacion) {
+			fetchGenerosSerie(pageAnimatS, genero.animacion)
 		}
-		if (tipo === apiconfig.generosS.familia) {
-			fetchGeneros(pageFamiliaS, apiconfig.generosS.familia)
+		if (tipo === genero.familia) {
+			fetchGenerosSerie(pageFamiliaS, genero.familia)
 		}
-		if (tipo === apiconfig.generosS.comedia) {
-			fetchGeneros(pageComediaS, apiconfig.generosS.comedia)
+		if (tipo === genero.comedia) {
+			fetchGenerosSerie(pageComediaS, genero.comedia)
 		}
-		if (tipo === apiconfig.generosS.misterio) {
-			fetchGeneros(pageMisterioS, apiconfig.generosS.misterio)
+		if (tipo === genero.misterio) {
+			fetchGenerosSerie(pageMisterioS, genero.misterio)
 		}
 	}
 	return (
@@ -81,76 +81,52 @@ function MainSeries() {
 				obtenerSeriesYpeliculas={obtenerSeriesYpeliculas}
 				setPage={setPage}>
 				{trendingS.map((popular, i) => (
-					<CardPelicula
-						tipo={'apiconfig.tendenciasSeries'}
-						pelicula={popular}
-						key={`${popular.id} ${i}`}
-					/>
+					<CardPelicula pelicula={popular} key={`${popular.id} ${i}`} />
 				))}
 			</Slider>
 			<h2 className='h2Slider'>Comedia</h2>
 			<Slider
-				tipo={apiconfig.generosS.comedia}
+				tipo={genero.comedia}
 				obtenerSeriesYpeliculas={obtenerSeriesYpeliculas}
 				setPage={setPage}>
 				{comediaSerie?.map((popular, i) => (
-					<CardPelicula
-						tipo={'apiconfig.generosS.comedia'}
-						pelicula={popular}
-						key={`${popular.id} ${i}`}
-					/>
+					<CardPelicula pelicula={popular} key={`${popular.id} ${i}`} />
 				))}
 			</Slider>
 			<h2 className='h2Slider'>Accion</h2>
 			<Slider
-				tipo={apiconfig.generosS.accion}
+				tipo={genero.accion}
 				obtenerSeriesYpeliculas={obtenerSeriesYpeliculas}
 				setPage={setPage}>
 				{accionSerie?.map((popular, i) => (
-					<CardPelicula
-						tipo={'apiconfig.generosS.accion'}
-						pelicula={popular}
-						key={`${popular.id} ${i}`}
-					/>
+					<CardPelicula pelicula={popular} key={`${popular.id} ${i}`} />
 				))}
 			</Slider>
 			<h2 className='h2Slider'>Misterio</h2>
 			<Slider
-				tipo={apiconfig.generosS.misterio}
+				tipo={genero.misterio}
 				obtenerSeriesYpeliculas={obtenerSeriesYpeliculas}
 				setPage={setPage}>
 				{misterioSerie?.map((popular, i) => (
-					<CardPelicula
-						tipo={'apiconfig.generosS.misterio'}
-						pelicula={popular}
-						key={`${popular.id} ${i}`}
-					/>
+					<CardPelicula pelicula={popular} key={`${popular.id} ${i}`} />
 				))}
 			</Slider>
 			<h2 className='h2Slider'>Familiar</h2>
 			<Slider
-				tipo={apiconfig.generosS.familia}
+				tipo={genero.familia}
 				obtenerSeriesYpeliculas={obtenerSeriesYpeliculas}
 				setPage={setPage}>
 				{familiaSerie?.map((popular, i) => (
-					<CardPelicula
-						tipo={'apiconfig.generosS.familia'}
-						pelicula={popular}
-						key={`${popular.id} ${i}`}
-					/>
+					<CardPelicula pelicula={popular} key={`${popular.id} ${i}`} />
 				))}
 			</Slider>
 			<h2 className='h2Slider'>Animacion</h2>
 			<Slider
-				tipo={apiconfig.generosS.animacion}
+				tipo={genero.animacion}
 				obtenerSeriesYpeliculas={obtenerSeriesYpeliculas}
 				setPage={setPage}>
 				{animatSerie?.map((popular, i) => (
-					<CardPelicula
-						tipo={'apiconfig.generosS.animacion'}
-						pelicula={popular}
-						key={`${popular.id} ${i}`}
-					/>
+					<CardPelicula pelicula={popular} key={`${popular.id} ${i}`} />
 				))}
 			</Slider>
 		</>

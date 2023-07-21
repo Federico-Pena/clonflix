@@ -3,10 +3,13 @@ import { useEffect, useState } from 'react'
 import { AiFillCloseCircle } from 'react-icons/ai'
 import { obtenerCategorias } from '../../services/obtenerCategorias'
 import { apiconfig } from '../../config/apiConfig'
+import Slider from '../Slider/Slider'
+import CardPelicula from '../CardPelicula/CardPelicula'
+
 function Categorias({ clase, cerrarCategorias }) {
 	const [generosPeli, setGenerosPeli] = useState([])
 	const [generosSerie, setGenerosSerie] = useState([])
-
+	const [data, setData] = useState([])
 	useEffect(() => {
 		const fetchCategorias = async () => {
 			const data = await obtenerCategorias()
@@ -15,49 +18,90 @@ function Categorias({ clase, cerrarCategorias }) {
 		}
 		fetchCategorias()
 	}, [])
-	const buscarCategoria = async (e) => {
+	const buscarCategoriaPeli = async (e) => {
+		console.log(e)
 		const apiKey = import.meta.env.VITE_TMDB_API_KEY
 		try {
 			const data = await fetch(
-				`${apiconfig.baseUrl}/search/multi?query=${e}&language=es-MX&api_key=${apiKey}`
+				`${apiconfig.baseUrl}/discover/movie?with_genres=${e}&language=es-MX&api_key=${apiKey}`
 			)
 			const result = await data.json()
-			console.log(result)
+			setData(result.results)
 		} catch (error) {
 			return error
 		}
 	}
+	const buscarCategoriaSerie = async (e) => {
+		console.log(e)
+		const apiKey = import.meta.env.VITE_TMDB_API_KEY
+		try {
+			const data = await fetch(
+				`${apiconfig.baseUrl}/discover/tv?with_genres=${e}&language=es-MX&api_key=${apiKey}`
+			)
+			const result = await data.json()
+			setData(result.results)
+		} catch (error) {
+			return error
+		}
+	}
+	const cerrerResultados = () => {
+		setData([])
+	}
 	return (
-		<div className={clase ? clase : 'divCategorias'}>
-			<AiFillCloseCircle
-				className={'iconCategorias'}
-				onClick={cerrarCategorias}
-			/>
-			<ul className={`categoriasP`}>
-				<li>
-					<strong>Peliculas</strong>
-				</li>
-				{generosPeli?.map((genero) => {
-					return (
-						<li key={genero.id} onClick={() => buscarCategoria(genero.name)}>
-							{genero.name}
-						</li>
-					)
-				})}
-			</ul>
-			<ul className={clase ? clase : `categoriasS`}>
-				<li>
-					<strong>Series</strong>
-				</li>
-				{generosSerie?.map((genero) => {
-					return (
-						<li key={genero.id} onClick={() => buscarCategoria(genero.name)}>
-							{genero.name}
-						</li>
-					)
-				})}
-			</ul>
-		</div>
+		<>
+			{data.length ? (
+				<div className='divResultados'>
+					<AiFillCloseCircle
+						className={'iconCerrarResultados'}
+						onClick={cerrerResultados}
+					/>
+					<Slider>
+						{data.map((popular, i) => (
+							<CardPelicula
+								tipo={popular.title ? 'pelicula' : 'serie'}
+								pelicula={popular}
+								key={`${popular.id} ${i}`}
+							/>
+						))}
+					</Slider>
+				</div>
+			) : null}
+			<div className={clase ? clase : 'divCategorias'}>
+				<AiFillCloseCircle
+					className={'iconCategorias'}
+					onClick={cerrarCategorias}
+				/>
+
+				<ul className={`categoriasP`}>
+					<li>
+						<strong>Peliculas</strong>
+					</li>
+					{generosPeli?.map((genero) => {
+						return (
+							<li
+								key={genero.id}
+								onClick={() => buscarCategoriaPeli(genero.id)}>
+								{genero.name}
+							</li>
+						)
+					})}
+				</ul>
+				<ul className={clase ? clase : `categoriasS`}>
+					<li>
+						<strong>Series</strong>
+					</li>
+					{generosSerie?.map((genero) => {
+						return (
+							<li
+								key={genero.id}
+								onClick={() => buscarCategoriaSerie(genero.id)}>
+								{genero.name}
+							</li>
+						)
+					})}
+				</ul>
+			</div>
+		</>
 	)
 }
 

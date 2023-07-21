@@ -4,7 +4,7 @@ function Hero({ heroElement, tipo }) {
 	return (
 		heroElement?.backdrop_path && (
 			<Link
-				to={`&${heroElement.id}?${tipo.split('.')[1]}`}
+				to={`$${heroElement.id}?${tipo.split('.')[0]}`}
 				className='divHero'
 				style={{
 					backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 50%, rgba(0,0,0,0.7) 100%),url(${apiconfig.baseUrlImageOriginal}${heroElement?.backdrop_path})`,

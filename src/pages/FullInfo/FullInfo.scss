@@ -3,7 +3,6 @@
 	color: #000;
 	text-align: center;
 	padding-top: 2rem;
-	margin-top: 4rem;
 	height: 100vh;
 	width: 100%;
 	z-index: 9;
@@ -194,20 +193,8 @@
 	}
 }
 
-.fullInfoAnimation {
-	animation: outInfo 0.5s linear;
-}
-
 @keyframes InInfo {
 	from {
-		transform: translateX(200px);
 		opacity: 0;
-	}
-}
-@keyframes outInfo {
-	to {
-		opacity: 0;
-
-		transform: translateX(200px);
 	}
 }

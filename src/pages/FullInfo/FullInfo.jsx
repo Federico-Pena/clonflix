@@ -13,27 +13,23 @@ function FullInfo() {
 	const [fullInfo, setFullInfo] = useState([])
 	const [loading, setLoading] = useState(false)
 	const [urlAnterior, setUrlAnterior] = useState('')
+
 	const saberQueEs = (query) => {
-		if (
-			query === 'pProximamente' ||
-			query === 'pPolular' ||
-			query === 'pValorada' ||
-			query === 'tendenciasPelicula' ||
-			query === 'generosP' ||
-			query === 'true'
-		) {
+		if (query === 'pelicula') {
 			return 'pelicula'
 		}
 	}
 	useEffect(() => {
-		const id = locationR.pathname.split('&')[1]
-		const query = locationR.search.split('?')[1]
 		let url
+		const id = locationR.pathname.split('$')[1]
+		const query = locationR.search.split('?')[1]
+		console.log(query)
 		const obtenerfullInfo = async () => {
-			const UrlAnterior = locationR.pathname.split('&')[0].split('/')[1]
 			setLoading(true)
+			const UrlAnterior = locationR.pathname.split('$')[0].split('/')[1]
 			setUrlAnterior(UrlAnterior)
 			const busqueda = saberQueEs(query)
+			console.log(id)
 			if (busqueda === 'pelicula') {
 				url = `${apiconfig.baseUrl}/movie/${id}?append_to_response=cast%2Cvideos%2Ctype%2Ccreated_by&api_key=${apiKey}&language=es-MX`
 			} else {
@@ -67,7 +63,7 @@ function FullInfo() {
 							<li>
 								<iframe
 									title={fullInfo.videos?.results[0].name}
-									src={`https://www.youtube.com/embed/${fullInfo.videos.results[0]?.key}?mute=true`}
+									src={`https://www.youtube.com/embed/${fullInfo.videos.results[0]?.key}?mute=true&autoplay=1`}
 									allow='autoplay'></iframe>
 							</li>
 						</ul>

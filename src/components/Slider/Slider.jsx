@@ -9,7 +9,7 @@ function Slider({ children, setPage, obtenerSeriesYpeliculas, tipo, titulo }) {
 		const opciones = {
 			root: divSlider.current,
 			rootMargin: '0px ',
-			threshold: 0,
+			threshold: 1,
 		}
 		const observer = new IntersectionObserver((entries) => {
 			entries.forEach((entry) => {
