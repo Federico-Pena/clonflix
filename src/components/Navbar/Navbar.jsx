@@ -5,8 +5,12 @@ import Categorias from '../Categorias/Categorias'
 import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { IoArrowBack } from 'react-icons/io5'
+import { BiUserCircle } from 'react-icons/bi'
+import User from './User'
+
 function Navbar() {
 	const [classCategorias, setClassCategorias] = useState(false)
+	const [user, setUser] = useState(false)
 	const locationReact = useLocation()
 	const abrirCategorias = () => {
 		setClassCategorias(true)
@@ -15,8 +19,15 @@ function Navbar() {
 	const cerrarCategorias = () => {
 		setClassCategorias(false)
 	}
+	const abirUser = () => {
+		setUser(true)
+	}
+	const cerrarUser = () => {
+		setUser(false)
+	}
 	return (
 		<header>
+			{user && <User cerrarUser={cerrarUser} />}
 			<nav className='NavBar'>
 				<div className='divNavbar'>
 					<img
@@ -43,6 +54,9 @@ function Navbar() {
 								}
 							/>
 						</Link>
+						<Link className='liNavbar'>
+							<BiUserCircle className='userIcon' onClick={abirUser} />
+						</Link>
 					</ul>
 				</div>
 
@@ -67,7 +81,6 @@ function Navbar() {
 							</Link>
 						</>
 					) : null}
-
 					{locationReact.pathname === '/peliculas' ||
 					locationReact.pathname === '/' ? (
 						<>

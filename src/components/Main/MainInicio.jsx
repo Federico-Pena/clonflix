@@ -13,6 +13,7 @@ function MainInicio() {
 	const { pagePPList, pagePVList, setPagPPlist, setPagPVList } = usePagePeli()
 	const pelicula = apiconfig.pelicula
 	const serie = apiconfig.serie
+
 	const setPage = (e) => {
 		if (e.enPantalla === true) {
 			if (e.tipo === pelicula.polular) {

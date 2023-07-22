@@ -1,7 +1,7 @@
 import './Categorias.scss'
 import { useEffect, useState } from 'react'
 import { AiFillCloseCircle } from 'react-icons/ai'
-import { obtenerCategorias } from '../../services/obtenerCategorias'
+import { obtenerCategorias } from '../../helpers/obtenerCategorias'
 import { apiconfig } from '../../config/apiConfig'
 import Slider from '../Slider/Slider'
 import CardPelicula from '../CardPelicula/CardPelicula'
@@ -19,7 +19,6 @@ function Categorias({ clase, cerrarCategorias }) {
 		fetchCategorias()
 	}, [])
 	const buscarCategoriaPeli = async (e) => {
-		console.log(e)
 		const apiKey = import.meta.env.VITE_TMDB_API_KEY
 		try {
 			const data = await fetch(
@@ -32,7 +31,6 @@ function Categorias({ clase, cerrarCategorias }) {
 		}
 	}
 	const buscarCategoriaSerie = async (e) => {
-		console.log(e)
 		const apiKey = import.meta.env.VITE_TMDB_API_KEY
 		try {
 			const data = await fetch(
@@ -47,10 +45,12 @@ function Categorias({ clase, cerrarCategorias }) {
 	const cerrerResultados = () => {
 		setData([])
 	}
+
 	return (
 		<>
 			{data.length ? (
 				<div className='divResultados'>
+					<h1>Resultados</h1>
 					<AiFillCloseCircle
 						className={'iconCerrarResultados'}
 						onClick={cerrerResultados}

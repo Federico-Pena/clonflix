@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { apiconfig } from '../config/apiConfig'
-import { obtenerTipoGeneroSerie } from '../services/obtenerTipo'
+import { obtenerTipoGeneroSerie } from '../helpers/obtenerTipo'
 const apiKey = import.meta.env.VITE_TMDB_API_KEY
 const genero = apiconfig.serie.generos
 function useGenerosSerie() {

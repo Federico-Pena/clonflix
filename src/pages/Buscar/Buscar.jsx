@@ -6,6 +6,7 @@ import { apiconfig } from '../../config/apiConfig'
 import { Link } from 'react-router-dom'
 import usePelicula from '../../hooks/usePelicula'
 import Loading from '../../components/Loading/Loading'
+import MiniCard from '../../components/CardPelicula/MiniCard'
 const apiKey = import.meta.env.VITE_TMDB_API_KEY
 
 function Buscar() {
@@ -58,7 +59,7 @@ function Buscar() {
 					{resultados.length ? (
 						<div className='divSugerencias'>
 							<h1>
-								Resultados{' '}
+								Resultados
 								<IoCloseOutline
 									onClick={cerarResultados}
 									className='iconCerrar'
@@ -97,25 +98,10 @@ function Buscar() {
 							<h1>Lo Mas Buscado</h1>
 							{trendingTodas.slice(0, 20).map((tendencia, i) => {
 								return (
-									<Link
-										to={`$${tendencia.id}?${
-											tendencia.title ? 'pelicula' : 'serie'
-										}`}
+									<MiniCard
+										tendencia={tendencia}
 										key={`${tendencia.id} ${i}`}
-										className='cardSugerencia'>
-										<div className='divImg'>
-											<img
-												src={`${apiconfig.baseUrlImageW300}${tendencia?.backdrop_path}`}
-												alt={`Imagen de ${tendencia.title || tendencia.name}`}
-											/>
-										</div>
-										<div className='divP'>
-											<p>{tendencia.title || tendencia.name}</p>
-										</div>
-										<div className='divIcon'>
-											<GoPlay className='IconVer' />
-										</div>
-									</Link>
+									/>
 								)
 							})}
 						</div>

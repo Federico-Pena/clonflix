@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { apiconfig } from '../config/apiConfig'
-import { obtenerTipoPeli } from '../services/obtenerTipo'
+import { obtenerTipoPeli } from '../helpers/obtenerTipo'
 const pelicula = apiconfig.pelicula
 /**
  *
@@ -31,13 +31,17 @@ function usePelicula() {
 			const datares = await response.json()
 			if (url === pelicula.polular) {
 				setdatapPolular((prev) => prev.concat(datares.results))
-			} else if (url === pelicula.valorada) {
+			}
+			if (url === pelicula.valorada) {
 				setdatapValorada((prev) => prev.concat(datares.results))
-			} else if (url === pelicula.proximamente) {
+			}
+			if (url === pelicula.proximamente) {
 				setdatapProximamente((prev) => prev.concat(datares.results))
-			} else if (url === apiconfig.tendenciasTodas) {
+			}
+			if (url === apiconfig.tendenciasTodas) {
 				setTrendingTodas((prev) => prev.concat(datares.results))
-			} else if (url === pelicula.tendencias) {
+			}
+			if (url === pelicula.tendencias) {
 				setTrendingPeli((prev) => prev.concat(datares.results))
 			}
 			setLoading(false)

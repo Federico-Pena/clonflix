@@ -1,18 +1,25 @@
 import { useEffect, useRef, useState } from 'react'
 import { apiconfig } from '../../config/apiConfig'
-import { IoArrowBack, IoShareSocialOutline } from 'react-icons/io5'
+import {
+	IoArrowBack,
+	IoShareSocialOutline,
+	IoAddCircleOutline,
+} from 'react-icons/io5'
 const apiKey = import.meta.env.VITE_TMDB_API_KEY
 
 import './FullInfo.scss'
 import Videos from './Videos'
 import { Link, useLocation } from 'react-router-dom'
 import Loading from '../../components/Loading/Loading'
+import Modal from '../../components/Modal/Modal'
 function FullInfo() {
 	const locationR = useLocation()
 	const divFullInfoRef = useRef(null)
 	const [fullInfo, setFullInfo] = useState([])
 	const [loading, setLoading] = useState(false)
 	const [urlAnterior, setUrlAnterior] = useState('')
+	const [modal, setModal] = useState(false)
+	const [error, setError] = useState(false)
 
 	const saberQueEs = (query) => {
 		if (query === 'pelicula') {
@@ -23,13 +30,11 @@ function FullInfo() {
 		let url
 		const id = locationR.pathname.split('$')[1]
 		const query = locationR.search.split('?')[1]
-		console.log(query)
 		const obtenerfullInfo = async () => {
 			setLoading(true)
 			const UrlAnterior = locationR.pathname.split('$')[0].split('/')[1]
 			setUrlAnterior(UrlAnterior)
 			const busqueda = saberQueEs(query)
-			console.log(id)
 			if (busqueda === 'pelicula') {
 				url = `${apiconfig.baseUrl}/movie/${id}?append_to_response=cast%2Cvideos%2Ctype%2Ccreated_by&api_key=${apiKey}&language=es-MX`
 			} else {
@@ -48,23 +53,52 @@ function FullInfo() {
 		}
 		obtenerfullInfo()
 	}, [locationR])
-	const compartir = () => {
+	const compartir = async () => {
 		if ('share' in navigator) {
-			navigator
-				.share({
+			try {
+				await navigator.share({
 					title: 'Mira Esta Recomendacion',
 					url: window.location.href,
 				})
-				.then((res) => {
-					console.log(res)
-				})
-				.catch((error) => {
-					console.log(error)
-				})
+			} catch (error) {
+				console.log(error)
+			}
 		}
 	}
+	const agregar = () => {
+		const array = []
+		const DB = JSON.parse(localStorage.getItem('clonflix'))
+		if (!DB || !DB.length) {
+			array.push(fullInfo)
+			localStorage.setItem('clonflix', JSON.stringify(array))
+			setModal(true)
+			setTimeout(() => {
+				setModal(false)
+			}, 2000)
+		} else {
+			const coincidencia = DB.filter((item) => item.id === fullInfo.id)
+			if (!coincidencia.length) {
+				array.push(...DB)
+				array.push(fullInfo)
+				localStorage.setItem('clonflix', JSON.stringify(array))
+				setModal(true)
+				setTimeout(() => {
+					setModal(false)
+				}, 2000)
+			} else {
+				setModal(true)
+				setError(true)
+				setTimeout(() => {
+					setModal(false)
+				}, 2000)
+			}
+		}
+	}
+
 	return (
 		<div className='divFullInfo' ref={divFullInfoRef}>
+			{modal && error && <Modal titulo={'El Elemento Ya Esta Guardado'} />}
+			{modal && !error && <Modal titulo={'Elemento Guardado Con Exito'} />}
 			{loading ? (
 				<Loading />
 			) : (
@@ -72,6 +106,9 @@ function FullInfo() {
 					<Link to={`/${urlAnterior}`} className='btnCerrar'>
 						<IoArrowBack />
 					</Link>
+					<button onClick={agregar} className='btnAgregar'>
+						<IoAddCircleOutline />
+					</button>
 					<button onClick={compartir} className='btnCompartir'>
 						<IoShareSocialOutline />
 					</button>

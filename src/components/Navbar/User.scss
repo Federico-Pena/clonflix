@@ -1,0 +1,92 @@
+.userDiv {
+	position: fixed;
+	z-index: 2;
+	top: 0;
+	left: 0;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	padding-top: 3rem;
+	align-items: center;
+	gap: 0.5rem;
+	overflow: auto;
+	height: 100vh;
+	padding-bottom: 1rem;
+	background-color: #000;
+	&::-webkit-scrollbar {
+		width: 0;
+		height: 0;
+	}
+	.iconCerrar {
+		width: 3rem;
+		height: 3rem;
+		position: absolute;
+		left: 50%;
+		bottom: 0.5rem;
+		transform: translate(-50%);
+		transition: color 0.3s ease;
+		&:hover {
+			color: #b9b9b9d2;
+		}
+	}
+	h3 {
+		margin: 1rem 0;
+	}
+	.divMiniCard {
+		width: 100%;
+		display: flex;
+		max-width: 400px;
+
+		.cardSugerencia {
+			display: flex;
+			width: 100%;
+			max-width: 400px;
+			height: 4rem;
+			padding: 0rem 0.5rem;
+			color: white;
+			text-decoration: none;
+
+			.divImg {
+				height: 100%;
+				img {
+					width: 120px;
+					height: 100%;
+					border-radius: 0.2rem;
+				}
+			}
+			.divP {
+				width: 100%;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: flex-start;
+				padding-left: 0.5rem;
+			}
+			.divIcon {
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				.IconVer {
+					color: white;
+					height: 1.5rem;
+					transition: transform 0.3s ease;
+					width: 1.5rem;
+					&:hover {
+						transform: scale(1.1);
+					}
+				}
+			}
+		}
+	}
+	.iconBorrar {
+		color: white;
+		height: 1.5rem;
+		transition: transform 0.3s ease;
+		width: 1.5rem;
+		&:hover {
+			transform: scale(1.1);
+		}
+	}
+}

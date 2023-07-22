@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { apiconfig } from '../config/apiConfig'
-import { obtenerTipoSerie } from '../services/obtenerTipo'
+import { obtenerTipoSerie } from '../helpers/obtenerTipo'
 /**
  *
  * @param {String} tipo
@@ -29,11 +29,14 @@ function useSerie() {
 			const datares = await response.json()
 			if (url === apiconfig.serie.popular) {
 				setdatasPopular((prev) => prev.concat(datares.results))
-			} else if (url === apiconfig.serie.valorada) {
+			}
+			if (url === apiconfig.serie.valorada) {
 				setdatasValorada((prev) => prev.concat(datares.results))
-			} else if (url === apiconfig.serie.tendencias) {
+			}
+			if (url === apiconfig.serie.tendencias) {
 				setTrendingS((prev) => prev.concat(datares.results))
-			} else if (url === apiconfig.tendenciasTodas) {
+			}
+			if (url === apiconfig.tendenciasTodas) {
 				setTrendingTodas((prev) => prev.concat(datares.results))
 			}
 			setLoading(false)

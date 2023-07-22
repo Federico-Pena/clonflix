@@ -1,0 +1,22 @@
+.modalDiv {
+	position: fixed;
+	z-index: 9;
+	top: 2rem;
+	left: 0;
+	height: auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 1rem;
+	background-color: aliceblue;
+	border-radius: 0.5rem;
+	padding: 0.5rem;
+	animation: fadeIn 1s ease;
+}
+@keyframes fadeIn {
+	from {
+		transform: translate(-100%);
+		opacity: 0;
+	}
+}

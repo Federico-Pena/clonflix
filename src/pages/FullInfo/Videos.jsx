@@ -1,33 +1,21 @@
-import { useEffect, useRef } from 'react'
+import { useRef } from 'react'
+import ObserverUnobserve from '../../components/Observer/ObserverUnobserve'
 
 function Videos({ video }) {
-	const liVideoRef = useRef()
-	useEffect(() => {
-		const { current } = liVideoRef
-		const opciones = {
-			rootMargin: '150px',
-			threshold: 0,
+	const iframeRef = useRef(null)
+	function intersecting(e) {
+		const { current } = iframeRef
+		if (e.isIntersecting) {
+			current.src = `https://www.youtube.com/embed/${video.key}`
 		}
-		const observer = new IntersectionObserver((entries) => {
-			entries.forEach((entry) => {
-				if (entry.isIntersecting) {
-					entry.target.children[0].src = `https://www.youtube.com/embed/${video.key}`
-					observer.unobserve(entry.target)
-				}
-			})
-		}, opciones)
-
-		observer.observe(liVideoRef.current)
-
-		return () => {
-			current && observer.unobserve(current)
-		}
-	}, [video])
+	}
 	return (
-		<li key={video.key} ref={liVideoRef}>
-			{video.name}
-			<iframe title={video.name}></iframe>
-		</li>
+		<ObserverUnobserve intersecting={intersecting} rootMargin='150px'>
+			<li key={video.key}>
+				{video.name}
+				<iframe ref={iframeRef} title={video.name}></iframe>
+			</li>
+		</ObserverUnobserve>
 	)
 }
 

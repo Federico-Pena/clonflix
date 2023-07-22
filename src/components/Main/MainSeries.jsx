@@ -98,7 +98,7 @@ function MainSeries() {
 				tipo={genero.accion}
 				obtenerSeriesYpeliculas={obtenerSeriesYpeliculas}
 				setPage={setPage}>
-				{accionSerie?.map((popular, i) => (
+				{accionSerie.map((popular, i) => (
 					<CardPelicula pelicula={popular} key={`${popular.id} ${i}`} />
 				))}
 			</Slider>
