@@ -11,11 +11,11 @@ function useGenerosSerie() {
 	const [misterioSerie, setMisterioSerie] = useState([])
 	const [loading, setLoading] = useState(false)
 	const fetchGenerosSerie = async (pagina, tipo) => {
+		setLoading(true)
+
 		try {
-			setLoading(true)
 			const url = obtenerTipoGeneroSerie(tipo)
 			const finUrl = `&api_key=${apiKey}&language=es-MX&sort_by=vote_count.desc&page=${pagina}`
-
 			const response = await fetch(`${apiconfig.baseUrl}${url}${finUrl}`)
 			const datares = await response.json()
 			if (url === genero.accion) {
@@ -33,10 +33,12 @@ function useGenerosSerie() {
 			if (url === genero.misterio) {
 				setMisterioSerie((prev) => prev.concat(datares.results))
 			}
+			setLoading(false)
 		} catch (error) {
 			setLoading(false)
 			return new Error(error)
 		}
+		setLoading(false)
 	}
 
 	return {

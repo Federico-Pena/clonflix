@@ -9,6 +9,8 @@
 	min-height: 100vh;
 	z-index: 2;
 	background-color: #000000;
+	animation: mainIndex 0.8s ease-in-out;
+	transition: opacity 0.8s ease-in-out;
 	h1 {
 		min-height: 30vh;
 		display: flex;
@@ -18,8 +20,8 @@
 	}
 	.iconCerrarResultados {
 		position: absolute;
-		top: 3rem;
 		left: 50%;
+		bottom: 1rem;
 		transform: translate(-50%);
 		width: 3rem;
 		height: 3rem;

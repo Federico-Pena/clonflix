@@ -36,7 +36,7 @@ header {
 						cursor: pointer;
 						width: 1.5rem;
 						height: 1.5rem;
-						transition: all 1s ease-in-out;
+						transition: all 1s ease;
 					}
 				}
 				.liNavbar {
@@ -53,7 +53,7 @@ header {
 						color: rgb(243, 72, 72);
 						width: 1.5rem;
 						height: 1.5rem;
-						transition: all 1s ease-in-out;
+						transition: all 1s ease;
 						margin-right: 1rem;
 					}
 				}
@@ -64,35 +64,35 @@ header {
 			width: 100%;
 			position: relative;
 			display: flex;
-
+			justify-content: space-evenly;
 			.liLinks,
 			.liLinksCategorias {
-				flex: auto;
 				font-size: 16px;
-				width: 100%;
-				text-align: center;
 				color: white;
 				text-decoration: none;
-				transition: all 0.5s ease-in-out;
+				transition: all 1s ease;
+				animation: opacityLink 1s ease;
 				cursor: pointer;
+				&:hover {
+					text-decoration: underline;
+				}
 			}
 			.liLinksActive {
-				flex: auto;
 				font-size: 16px;
+				width: 90%;
+				margin: auto;
 				text-align: left;
-				padding-left: 4rem;
-				width: 100%;
 				color: white;
 				text-decoration: none;
-				transition: all 0.5s ease-in-out;
+				transition: all 0.5s ease;
+				animation: opacityLinkActive 1s ease;
 				cursor: pointer;
-				animation: opacityLink 1s ease-in-out;
 			}
 
 			.btnCerrar {
 				position: absolute;
 				left: 1rem;
-				top: 0;
+				top: 0.3rem;
 				cursor: pointer;
 				color: #fff;
 				z-index: 3;
@@ -111,10 +111,16 @@ header {
 	position: fixed;
 	top: -100%;
 }
+@keyframes opacityLinkActive {
+	from {
+		opacity: 0;
+		transform: translate(50px);
+	}
+}
 @keyframes opacityLink {
 	from {
-		opacity: 0.3;
-		transform: rotateX(-90deg);
+		opacity: 0;
+		transform: rotateX(90deg);
 	}
 }
 @media (min-width: 768px) {

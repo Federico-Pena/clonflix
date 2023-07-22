@@ -10,7 +10,6 @@ function MainPeliculas() {
 	const pelicula = apiconfig.pelicula
 	const genero = pelicula.generos
 	const {
-		loading,
 		animatPeli,
 		actionPeli,
 		aventPeli,

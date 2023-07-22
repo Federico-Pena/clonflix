@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { apiconfig } from '../../config/apiConfig'
+import { agregar } from '../../helpers/localStorage'
 import {
 	IoArrowBack,
 	IoShareSocialOutline,
@@ -26,6 +27,7 @@ function FullInfo() {
 			return 'pelicula'
 		}
 	}
+
 	useEffect(() => {
 		let url
 		const id = locationR.pathname.split('$')[1]
@@ -57,40 +59,11 @@ function FullInfo() {
 		if ('share' in navigator) {
 			try {
 				await navigator.share({
-					title: 'Mira Esta Recomendacion',
+					title: 'Recomendacion',
 					url: window.location.href,
 				})
 			} catch (error) {
 				console.log(error)
-			}
-		}
-	}
-	const agregar = () => {
-		const array = []
-		const DB = JSON.parse(localStorage.getItem('clonflix'))
-		if (!DB || !DB.length) {
-			array.push(fullInfo)
-			localStorage.setItem('clonflix', JSON.stringify(array))
-			setModal(true)
-			setTimeout(() => {
-				setModal(false)
-			}, 2000)
-		} else {
-			const coincidencia = DB.filter((item) => item.id === fullInfo.id)
-			if (!coincidencia.length) {
-				array.push(...DB)
-				array.push(fullInfo)
-				localStorage.setItem('clonflix', JSON.stringify(array))
-				setModal(true)
-				setTimeout(() => {
-					setModal(false)
-				}, 2000)
-			} else {
-				setModal(true)
-				setError(true)
-				setTimeout(() => {
-					setModal(false)
-				}, 2000)
 			}
 		}
 	}
@@ -99,28 +72,24 @@ function FullInfo() {
 		<div className='divFullInfo' ref={divFullInfoRef}>
 			{modal && error && <Modal titulo={'El Elemento Ya Esta Guardado'} />}
 			{modal && !error && <Modal titulo={'Elemento Guardado Con Exito'} />}
-			{loading ? (
+			{loading &&
+			(!fullInfo.backdrop_path || !fullInfo.videos.results.length) ? (
 				<Loading />
 			) : (
 				<>
 					<Link to={`/${urlAnterior}`} className='btnCerrar'>
 						<IoArrowBack />
 					</Link>
-					<button onClick={agregar} className='btnAgregar'>
-						<IoAddCircleOutline />
-					</button>
-					<button onClick={compartir} className='btnCompartir'>
-						<IoShareSocialOutline />
-					</button>
+
 					{fullInfo && fullInfo.videos?.results.length ? (
-						<ul className='ulVideo'>
-							<li>
+						<div className='divVideo'>
+							<div>
 								<iframe
 									title={fullInfo.videos?.results[0].name}
 									src={`https://www.youtube.com/embed/${fullInfo.videos.results[0]?.key}?mute=true&autoplay=1`}
 									allow='autoplay'></iframe>
-							</li>
-						</ul>
+							</div>
+						</div>
 					) : (
 						fullInfo &&
 						fullInfo.backdrop_path && (
@@ -135,6 +104,14 @@ function FullInfo() {
 					)}
 					{fullInfo && (
 						<div className='titulosFullInfo'>
+							<button
+								onClick={() => agregar(fullInfo, setModal, setError)}
+								className='btnAgregar'>
+								<IoAddCircleOutline /> Mi lista
+							</button>
+							<button onClick={compartir} className='btnCompartir'>
+								<IoShareSocialOutline /> Compartir
+							</button>
 							<h3>{fullInfo.title || fullInfo.name}</h3>
 							<h4>{fullInfo.tagline}</h4>
 							{fullInfo.release_date && (
@@ -172,9 +149,15 @@ function FullInfo() {
 						</ul>
 					)}
 
-					{fullInfo && fullInfo.overview && (
-						<p className='overview'>{fullInfo.overview}</p>
-					)}
+					{fullInfo &&
+						fullInfo.overview &&
+						fullInfo.overview.split('.').map((Seg) => {
+							return (
+								<p className='overview' key={Seg}>
+									{Seg}
+								</p>
+							)
+						})}
 
 					{fullInfo && fullInfo.production_companies && (
 						<ul className='productionFullInfo'>

@@ -30,6 +30,43 @@
 		-webkit-animation: nfLoader-spin 1.1s linear infinite;
 	}
 }
+.logoLoading {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: #000;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	transform: translate(0%);
+	z-index: 9;
+	animation: logoLoading 2.2s ease forwards;
+	img {
+		animation: logo 2s ease forwards;
+		transition: all 0.3s ease;
+	}
+}
+@keyframes logoLoading {
+	95% {
+		transform: translate(0%);
+	}
+	100% {
+		display: none;
+		transform: translate(100%);
+	}
+}
+@keyframes logo {
+	from {
+		opacity: 0;
+		transform: scale(0);
+	}
+	to {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
 @keyframes nfLoader-spin {
 	100% {
 		transform: rotate(360deg);

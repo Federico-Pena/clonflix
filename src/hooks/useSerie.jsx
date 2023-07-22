@@ -21,8 +21,8 @@ function useSerie() {
 	 */
 	const fetchDataSerie = async (pagina, tipo) => {
 		const url = obtenerTipoSerie(tipo)
+		setLoading(true)
 		try {
-			setLoading(true)
 			const response = await fetch(
 				`${apiconfig.baseUrl}${url}${apiconfig.finUrl}page=${pagina}`
 			)
@@ -39,11 +39,11 @@ function useSerie() {
 			if (url === apiconfig.tendenciasTodas) {
 				setTrendingTodas((prev) => prev.concat(datares.results))
 			}
-			setLoading(false)
 		} catch (error) {
 			setLoading(false)
 			return new Error(error)
 		}
+		setLoading(false)
 	}
 
 	return {

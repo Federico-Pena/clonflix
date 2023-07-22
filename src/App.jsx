@@ -6,9 +6,12 @@ import Peliculas from './pages/Peliculas/Peliculas'
 import Series from './pages/Series/Series'
 import Buscar from './pages/Buscar/Buscar'
 import FullInfo from './pages/FullInfo/FullInfo'
+import LogoLoading from './components/Loading/LogoLoading'
 function App() {
 	return (
 		<>
+			<LogoLoading />
+
 			<Navbar />
 			<Routes>
 				<Route path='/' element={<Inicio />} index />

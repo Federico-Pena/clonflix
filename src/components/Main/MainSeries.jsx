@@ -4,6 +4,7 @@ import { apiconfig } from '../../config/apiConfig'
 import useSerie from '../../hooks/useSerie'
 import usePageSerie from '../../hooks/usePageSerie'
 import useGenerosSerie from '../../hooks/useGenerosSerie'
+import Loading from '../Loading/Loading'
 
 function MainSeries() {
 	const { trendingS, fetchDataSerie } = useSerie()
