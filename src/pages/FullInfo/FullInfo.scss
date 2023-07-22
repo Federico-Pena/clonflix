@@ -7,6 +7,7 @@
 	width: 100%;
 	z-index: 5;
 	overflow: auto;
+	scroll-behavior: smooth;
 	background-color: #000;
 	animation: mainIndex 0.8s ease-in-out;
 	transition: opacity 0.8s ease-in-out;
@@ -106,8 +107,8 @@
 			letter-spacing: 1px;
 			margin: 0 auto;
 			svg {
-				width: 2rem;
-				height: 2rem;
+				width: 1.5rem;
+				height: 1.5rem;
 			}
 			&:hover {
 				color: #fff;
