@@ -26,7 +26,6 @@ function usePageSerie() {
 	const setPagAnimatS = () => {
 		setpageAnimatS((prev) => (prev < 499 ? prev + 1 : prev))
 	}
-
 	const setPagComediaS = () => {
 		setpageComediaS((prev) => (prev < 499 ? prev + 1 : prev))
 	}

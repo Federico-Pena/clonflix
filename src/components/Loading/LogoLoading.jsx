@@ -1,5 +1,3 @@
-import React from 'react'
-
 function LogoLoading() {
 	return (
 		<div className='logoLoading'>

@@ -3,6 +3,7 @@ import { apiconfig } from '../config/apiConfig'
 import { obtenerTipoGeneroSerie } from '../helpers/obtenerTipo'
 const apiKey = import.meta.env.VITE_TMDB_API_KEY
 const genero = apiconfig.serie.generos
+
 function useGenerosSerie() {
 	const [accionSerie, setAccionSerie] = useState([])
 	const [animatSerie, setAnimatSerie] = useState([])
@@ -10,9 +11,14 @@ function useGenerosSerie() {
 	const [familiaSerie, setFamiliaSerie] = useState([])
 	const [misterioSerie, setMisterioSerie] = useState([])
 	const [loading, setLoading] = useState(false)
+	/**
+	 *
+	 * @param {Number} pagina
+	 * @param {String} tipo
+	 * @returns
+	 */
 	const fetchGenerosSerie = async (pagina, tipo) => {
 		setLoading(true)
-
 		try {
 			const url = obtenerTipoGeneroSerie(tipo)
 			const finUrl = `&api_key=${apiKey}&language=es-MX&sort_by=vote_count.desc&page=${pagina}`

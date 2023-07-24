@@ -11,7 +11,6 @@ function useSerie() {
 	const [datasPopular, setdatasPopular] = useState([])
 	const [datasValorada, setdatasValorada] = useState([])
 	const [trendingS, setTrendingS] = useState([])
-	const [trendingTodas, setTrendingTodas] = useState([])
 	const [loading, setLoading] = useState(false)
 	/**
 	 *
@@ -36,9 +35,6 @@ function useSerie() {
 			if (url === apiconfig.serie.tendencias) {
 				setTrendingS((prev) => prev.concat(datares.results))
 			}
-			if (url === apiconfig.tendenciasTodas) {
-				setTrendingTodas((prev) => prev.concat(datares.results))
-			}
 		} catch (error) {
 			setLoading(false)
 			return new Error(error)
@@ -51,7 +47,6 @@ function useSerie() {
 		datasPopular,
 		datasValorada,
 		trendingS,
-		trendingTodas,
 		fetchDataSerie,
 	}
 }

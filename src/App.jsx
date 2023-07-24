@@ -14,14 +14,14 @@ function App() {
 
 			<Navbar />
 			<Routes>
-				<Route path='/' element={<Inicio />} index />
 				<Route path='/peliculas' element={<Peliculas />} />
 				<Route path='/series' element={<Series />} />
 				<Route path='/buscar' element={<Buscar />} />
-				<Route path='/:id' element={<FullInfo />} />
 				<Route path='/peliculas/:id' element={<FullInfo />} />
 				<Route path='/series/:id' element={<FullInfo />} />
 				<Route path='/buscar/:id' element={<FullInfo />} />
+				<Route path='/' element={<Inicio />} index />
+				<Route path='/:id' element={<FullInfo />} />
 			</Routes>
 		</>
 	)

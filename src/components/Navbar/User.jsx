@@ -6,7 +6,9 @@ function User({ cerrarUser }) {
 	const [guardadas, setGuardadas] = useState([])
 	useEffect(() => {
 		const DB = JSON.parse(localStorage.getItem('clonflix'))
-		setGuardadas(DB)
+		if (DB && DB.length) {
+			setGuardadas(DB)
+		}
 	}, [])
 	const eliminar = (e) => {
 		const DB = JSON.parse(localStorage.getItem('clonflix'))

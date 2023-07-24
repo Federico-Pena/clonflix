@@ -10,7 +10,6 @@ function usePagePeli() {
 	const [pageComediaP, setpageComediaP] = useState(1)
 	const [pageFamiliaP, setpageFamiliaP] = useState(1)
 	const [pageMisterioP, setpageMisterioP] = useState(1)
-
 	const [pageMulti, setpageMulti] = useState(1)
 
 	const setPagPPlist = () => {

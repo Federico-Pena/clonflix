@@ -21,7 +21,7 @@ function Inicio() {
 				<>
 					{datapProximamente && (
 						<Hero
-							heroElement={datapProximamente[0]}
+							heroElement={datapProximamente[2]}
 							tipo={'pelicula.proximamente'}
 						/>
 					)}

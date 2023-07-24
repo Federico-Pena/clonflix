@@ -11,7 +11,6 @@ function useGenereosPeli() {
 	const [familiaPeli, setFamiliaPeli] = useState([])
 	const [misterioPeli, setMisterioPeli] = useState([])
 	const [multiples, setMultiples] = useState([])
-	const [loading, setLoading] = useState(false)
 	/**
 	 *
 	 * @param {Number} pagina
@@ -23,7 +22,6 @@ function useGenereosPeli() {
 		const url = obtenerTipoGeneroPeli(tipo)
 		const finUrl = `&api_key=${apiKey}&language=es-MX&sort_by=vote_count.desc&page=${pagina}`
 		try {
-			setLoading(true)
 			const response = await fetch(`${apiconfig.baseUrl}${url}${finUrl}`)
 			const datares = await response.json()
 			if (url === genero.accion) {
@@ -48,16 +46,11 @@ function useGenereosPeli() {
 			if (url === apiconfig.buscarTodo) {
 				setMultiples((prev) => prev.concat(datares.results))
 			}
-			setTimeout(() => {
-				setLoading(false)
-			}, 300)
 		} catch (error) {
-			setLoading(false)
 			return new Error(error)
 		}
 	}
 	return {
-		loading,
 		actionPeli,
 		animatPeli,
 		aventPeli,

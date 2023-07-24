@@ -30,6 +30,7 @@
 	.divImgPelicula {
 		min-width: 100px;
 		max-width: 300px;
+
 		.imgPelicula {
 			object-fit: cover;
 			aspect-ratio: 9/16;
@@ -47,7 +48,7 @@
 		}
 		.divImgPelicula {
 			.imgPelicula {
-				aspect-ratio: 16/9;
+				aspect-ratio: 1/1;
 				width: 200px;
 				height: 400px;
 			}

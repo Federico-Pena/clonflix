@@ -20,12 +20,12 @@ function ObserverUnobserve({
 			entries.forEach((entry) => {
 				if (entry.isIntersecting) {
 					intersecting(entry)
-					observer.unobserve(current)
+					observer.unobserve(entry.target)
 				}
 			})
 		}, opciones)
 
-		observer.observe(divObserverRef.current)
+		observer.observe(current)
 
 		return () => {
 			current && observer.unobserve(current)

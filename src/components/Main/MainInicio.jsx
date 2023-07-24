@@ -31,17 +31,17 @@ function MainInicio() {
 		}
 	}
 
-	const obtenerSeriesYpeliculas = (tipo) => {
-		if (tipo === pelicula.polular) {
+	const obtenerSeriesYpeliculas = (tipo, intersecting) => {
+		if (tipo === pelicula.polular && intersecting) {
 			fetchDataPeli(pagePPList, pelicula.polular)
 		}
-		if (tipo === pelicula.valorada) {
+		if (tipo === pelicula.valorada && intersecting) {
 			fetchDataPeli(pagePVList, pelicula.valorada)
 		}
-		if (tipo === serie.popular) {
+		if (tipo === serie.popular && intersecting) {
 			fetchDataSerie(pageSPList, serie.popular)
 		}
-		if (tipo === serie.valorada) {
+		if (tipo === serie.valorada && intersecting) {
 			fetchDataSerie(pageSVList, serie.valorada)
 		}
 	}

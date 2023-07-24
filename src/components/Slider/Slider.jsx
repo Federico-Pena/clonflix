@@ -3,7 +3,6 @@ import './Slider.scss'
 import Observer from '../Observer/Observer'
 function Slider({ children, setPage, obtenerSeriesYpeliculas, tipo, titulo }) {
 	const divSlider = useRef()
-	const spanSlider = useRef()
 
 	const intersecting = (e) => {
 		if (e.isIntersecting) {
@@ -13,7 +12,7 @@ function Slider({ children, setPage, obtenerSeriesYpeliculas, tipo, titulo }) {
 					slider: divSlider.current,
 					tipo: tipo,
 				})
-			obtenerSeriesYpeliculas && obtenerSeriesYpeliculas(tipo)
+			obtenerSeriesYpeliculas && obtenerSeriesYpeliculas(tipo, e.isIntersecting)
 		}
 	}
 	return (
@@ -21,8 +20,8 @@ function Slider({ children, setPage, obtenerSeriesYpeliculas, tipo, titulo }) {
 			<h2 className='h2Slider'>{titulo}</h2>
 			<div className='sliderDiv' ref={divSlider}>
 				{children}
-				<Observer root={divSlider.current} intersecting={intersecting}>
-					<span className='divsliderDiv' ref={spanSlider}></span>
+				<Observer intersecting={intersecting}>
+					<span className='divsliderDiv'></span>
 				</Observer>
 			</div>
 		</>

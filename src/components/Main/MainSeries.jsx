@@ -4,7 +4,6 @@ import { apiconfig } from '../../config/apiConfig'
 import useSerie from '../../hooks/useSerie'
 import usePageSerie from '../../hooks/usePageSerie'
 import useGenerosSerie from '../../hooks/useGenerosSerie'
-import Loading from '../Loading/Loading'
 
 function MainSeries() {
 	const { trendingS, fetchDataSerie } = useSerie()
@@ -54,23 +53,23 @@ function MainSeries() {
 		}
 	}
 
-	const obtenerSeriesYpeliculas = (tipo) => {
-		if (tipo === apiconfig.tendenciasSeries) {
+	const obtenerSeriesYpeliculas = (tipo, intersecting) => {
+		if (tipo === apiconfig.tendenciasSeries && intersecting) {
 			fetchDataSerie(pageTendenciaS, apiconfig.serie.tendencias)
 		}
-		if (tipo === genero.accion) {
+		if (tipo === genero.accion && intersecting) {
 			fetchGenerosSerie(pageActionS, genero.accion)
 		}
-		if (tipo === genero.animacion) {
+		if (tipo === genero.animacion && intersecting) {
 			fetchGenerosSerie(pageAnimatS, genero.animacion)
 		}
-		if (tipo === genero.familia) {
+		if (tipo === genero.familia && intersecting) {
 			fetchGenerosSerie(pageFamiliaS, genero.familia)
 		}
-		if (tipo === genero.comedia) {
+		if (tipo === genero.comedia && intersecting) {
 			fetchGenerosSerie(pageComediaS, genero.comedia)
 		}
-		if (tipo === genero.misterio) {
+		if (tipo === genero.misterio && intersecting) {
 			fetchGenerosSerie(pageMisterioS, genero.misterio)
 		}
 	}

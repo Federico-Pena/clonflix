@@ -1,21 +1,15 @@
-import { useRef } from 'react'
-import ObserverUnobserve from '../../components/Observer/ObserverUnobserve'
+import Video from './Video'
 
-function Videos({ video }) {
-	const iframeRef = useRef(null)
-	function intersecting(e) {
-		const { current } = iframeRef
-		if (e.isIntersecting) {
-			current.src = `https://www.youtube.com/embed/${video.key}`
-		}
-	}
+function Videos({ fullInfo }) {
 	return (
-		<ObserverUnobserve intersecting={intersecting} rootMargin='150px'>
-			<li key={video.key}>
-				{video.name}
-				<iframe ref={iframeRef} title={video.name}></iframe>
-			</li>
-		</ObserverUnobserve>
+		fullInfo &&
+		fullInfo.videos?.results.length && (
+			<ul className='videosFullInfo'>
+				{fullInfo.videos.results?.splice(1, 5).map((video, i) => {
+					return video.key && <Video key={i} video={video} />
+				})}
+			</ul>
+		)
 	)
 }
 

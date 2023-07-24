@@ -1,0 +1,106 @@
+.divHero {
+	position: relative;
+	display: flex;
+	width: 100%;
+	height: 80vh;
+	font-family: Netflix Sans;
+	color: #fff;
+	text-decoration: none;
+	.imgHero {
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		background-position: center;
+		background-size: 100% 100%;
+		background-repeat: no-repeat;
+		font-family: Netflix Sans;
+		color: #fff;
+		text-decoration: none;
+	}
+	.titleHero {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+		gap: 0.5rem;
+		height: fit-content;
+		align-self: flex-end;
+		width: fit-content;
+		margin: 0 auto;
+		z-index: 2;
+		padding: 0 0.5rem;
+		h2 {
+			font-size: 18px;
+			letter-spacing: 1px;
+			text-shadow: 0px 0px 5px black, 0px 0px 5px black;
+		}
+		a {
+			text-decoration: none;
+			.Reproducir {
+				cursor: pointer;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				gap: 0.5rem;
+				width: 40%;
+				width: 200px;
+				border-radius: 0.2rem;
+				border: none;
+				font-size: 16px;
+				background-color: #f0f8ff;
+				font-weight: bold;
+				color: #000;
+				text-decoration: none;
+				padding: 0.3rem 0;
+				transition: all 0.5s ease;
+				font-family: Netflix Sans, Helvetica Neue, Segoe UI, Roboto, Ubuntu,
+					sans-serif;
+				letter-spacing: 1px;
+				svg {
+					width: 1.5rem;
+					height: 1.5rem;
+				}
+				&:hover {
+					color: #fff;
+					background-color: #afafaf;
+				}
+			}
+		}
+		.MiLista {
+			cursor: pointer;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			gap: 0.5rem;
+			width: 40%;
+			border: none;
+			font-size: 16px;
+			width: 200px;
+			border-radius: 0.2rem;
+			background-color: #838383bd;
+			color: #fff;
+			padding: 0.3rem 0;
+			transition: all 0.5s ease;
+			font-family: Netflix Sans, Helvetica Neue, Segoe UI, Roboto, Ubuntu,
+				sans-serif;
+			letter-spacing: 1px;
+			margin-bottom: 1rem;
+			svg {
+				width: 1.5rem;
+				height: 1.5rem;
+			}
+			&:hover {
+				background-color: #f0f8ff;
+				color: #000;
+			}
+		}
+	}
+}
+@media (max-width: 768px) {
+	.divHero {
+		.imgHero {
+			background-position: center;
+			background-size: 130% 100%;
+		}
+	}
+}

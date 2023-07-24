@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { apiconfig } from '../config/apiConfig'
 import { obtenerTipoPeli } from '../helpers/obtenerTipo'
 const pelicula = apiconfig.pelicula
@@ -14,21 +14,23 @@ function usePelicula() {
 	const [datapProximamente, setdatapProximamente] = useState([])
 	const [trendingTodas, setTrendingTodas] = useState([])
 	const [trendingPeli, setTrendingPeli] = useState([])
-	const [loading, setLoading] = useState(false)
 	/**
 	 *
 	 * @param {Number} pagina
 	 * @param {String} tipo
 	 * @returns
 	 */
+	useEffect(() => {
+		fetchDataPeli()
+	}, [])
 	const fetchDataPeli = async (pagina, tipo) => {
 		const url = obtenerTipoPeli(tipo)
 		try {
-			setLoading(true)
 			const response = await fetch(
 				`${apiconfig.baseUrl}${url}${apiconfig.finUrl}page=${pagina}`
 			)
 			const datares = await response.json()
+			console.log(datares)
 			if (url === pelicula.polular) {
 				setdatapPolular((prev) => prev.concat(datares.results))
 			}
@@ -44,15 +46,12 @@ function usePelicula() {
 			if (url === pelicula.tendencias) {
 				setTrendingPeli((prev) => prev.concat(datares.results))
 			}
-			setLoading(false)
 		} catch (error) {
-			setLoading(false)
 			return new Error(error)
 		}
 	}
 
 	return {
-		loading,
 		datapPolular,
 		datapValorada,
 		datapProximamente,

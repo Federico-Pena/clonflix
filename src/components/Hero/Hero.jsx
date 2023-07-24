@@ -5,7 +5,9 @@ import { useState } from 'react'
 import Modal from '../Modal/Modal'
 import { GoPlay } from 'react-icons/go'
 import { IoAddCircleOutline } from 'react-icons/io5'
-
+import './Hero.scss'
+import Button from '../Button/Button'
+import { irA } from '../../helpers/irA'
 function Hero({ heroElement, tipo }) {
 	const [modal, setModal] = useState(false)
 	const [error, setError] = useState(false)
@@ -18,22 +20,24 @@ function Hero({ heroElement, tipo }) {
 				<div className='divHero'>
 					<div className='titleHero'>
 						<h2>{heroElement.title || heroElement.name}</h2>
-						<Link
-							to={`$${heroElement.id}?${tipo.split('.')[0]}`}
-							className='Reproducir'>
-							<GoPlay />
-							Reproducir
+						<Link to={irA(heroElement.id, tipo)}>
+							<Button
+								text={'Reproducir'}
+								className={'Reproducir'}
+								icon={<GoPlay />}
+							/>
 						</Link>
-						<button
-							className='MiLista'
-							onClick={() => agregar(heroElement, setModal, setError)}>
-							<IoAddCircleOutline />
-							Mi Lista
-						</button>
+						<Button
+							className={'MiLista'}
+							onClicked={() => agregar(heroElement, setModal, setError)}
+							icon={<IoAddCircleOutline />}
+							text={'Mi Lista'}
+						/>
 					</div>
 					<Link
-						to={`$${heroElement.id}?${tipo.split('.')[0]}`}
-						className='imgdivHero'
+						to={irA(heroElement.id, tipo)}
+						className='imgHero'
+						title={`Portada de ${heroElement.title || heroElement.name}`}
 						style={{
 							backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 50%, rgba(0,0,0,0.7) 100%),url(${apiconfig.baseUrlImageOriginal}${heroElement?.backdrop_path})`,
 						}}></Link>

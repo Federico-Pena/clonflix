@@ -1,5 +1,4 @@
 import { useEffect, useRef } from 'react'
-
 function Observer({
 	intersecting,
 	children,
@@ -30,7 +29,11 @@ function Observer({
 			current && observer.unobserve(current)
 		}
 	}, [root, rootMargin, threshold, intersecting])
-	return <div ref={divObserverRef}>{children}</div>
+	return (
+		<div className='observer' ref={divObserverRef}>
+			{children}
+		</div>
+	)
 }
 
 export default Observer

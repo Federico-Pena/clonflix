@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom'
 import usePelicula from '../../hooks/usePelicula'
 import Loading from '../../components/Loading/Loading'
 import MiniCard from '../../components/CardPelicula/MiniCard'
+import { irA } from '../../helpers/irA'
 const apiKey = import.meta.env.VITE_TMDB_API_KEY
 
 function Buscar() {
@@ -69,9 +70,10 @@ function Buscar() {
 								return (
 									tendencia?.backdrop_path && (
 										<Link
-											to={`$${tendencia.id}?${
+											to={irA(
+												tendencia.id,
 												tendencia.title ? 'pelicula' : 'serie'
-											}`}
+											)}
 											key={`${tendencia.id} ${i}`}
 											className='cardSugerencia'>
 											<div className='divImg'>

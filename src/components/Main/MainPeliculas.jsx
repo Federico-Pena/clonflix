@@ -36,7 +36,7 @@ function MainPeliculas() {
 	} = usePagePeli()
 
 	const setPage = (e) => {
-		if (e.enPantalla === true) {
+		if (e.enPantalla) {
 			if (e.tipo === pelicula.tendencias) {
 				setPagTendenciaP()
 			} else if (e.tipo === genero.accion) {
@@ -55,20 +55,20 @@ function MainPeliculas() {
 		}
 	}
 
-	const obtenerSeriesYpeliculas = (tipo) => {
-		if (tipo === pelicula.tendencias) {
+	const obtenerSeriesYpeliculas = (tipo, intersecting) => {
+		if (tipo === pelicula.tendencias && intersecting) {
 			fetchDataPeli(pageTendenciaP, pelicula.tendencias)
-		} else if (tipo === genero.accion) {
+		} else if (tipo === genero.accion && intersecting) {
 			fetchGenerosPeli(pageActionP, genero.accion)
-		} else if (tipo === genero.animacion) {
+		} else if (tipo === genero.animacion && intersecting) {
 			fetchGenerosPeli(pageAnimatP, genero.animacion)
-		} else if (tipo === genero.aventura) {
+		} else if (tipo === genero.aventura && intersecting) {
 			fetchGenerosPeli(pageAventuraP, genero.aventura)
-		} else if (tipo === genero.comedia) {
+		} else if (tipo === genero.comedia && intersecting) {
 			fetchGenerosPeli(pageComediaP, genero.comedia)
-		} else if (tipo === genero.familia) {
+		} else if (tipo === genero.familia && intersecting) {
 			fetchGenerosPeli(pageFamiliaP, genero.familia)
-		} else if (tipo === genero.misterio) {
+		} else if (tipo === genero.misterio && intersecting) {
 			fetchGenerosPeli(pageMisterioP, genero.misterio)
 		}
 	}

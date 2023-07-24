@@ -2,12 +2,13 @@ import { Link } from 'react-router-dom'
 import { apiconfig } from '../../config/apiConfig'
 import { GoPlay } from 'react-icons/go'
 import { AiOutlineClose } from 'react-icons/ai'
+import { irA } from '../../helpers/irA'
 
 function MiniCard({ tendencia, eliminar }) {
 	return (
 		<div className='divMiniCard'>
 			<Link
-				to={`$${tendencia.id}?${tendencia.title ? 'pelicula' : 'serie'}`}
+				to={irA(tendencia.id, tendencia.title ? 'pelicula' : 'serie')}
 				className='cardSugerencia'>
 				<div className='divImg'>
 					<img

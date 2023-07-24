@@ -36,32 +36,43 @@ function Navbar() {
 						className='ImgNavbar'
 					/>
 					<ul className='ulNavbarIcons'>
-						<Link to={'/'} className='liNavbar'>
-							<GoHome
-								className={
-									locationReact.pathname === '/'
-										? 'liLinksActive'
-										: 'liHomeIcon'
-								}
-							/>
-						</Link>
-						<Link to={'/buscar'} className='liNavbar'>
-							<FiSearch
-								className={
-									locationReact.pathname === '/buscar'
-										? 'liLinksActive'
-										: 'liSearchIcon'
-								}
-							/>
-						</Link>
-						<Link className='liNavbar'>
-							<BiUserCircle className='userIcon' onClick={abirUser} />
-						</Link>
+						<li className='liNavbar'>
+							<Link to={'/'}>
+								<GoHome
+									title='Home'
+									className={
+										locationReact.pathname === '/' ? 'liLinksActive' : 'liIcon'
+									}
+								/>
+							</Link>
+						</li>
+						<li className='liNavbar'>
+							<Link to={'/buscar'}>
+								<FiSearch
+									title='Buscar'
+									className={
+										locationReact.pathname === '/buscar'
+											? 'liLinksActive'
+											: 'liIcon'
+									}
+								/>
+							</Link>
+						</li>
+						<li className='liNavbar'>
+							<Link>
+								<BiUserCircle
+									title='Mi Lista'
+									className='userIcon'
+									onClick={abirUser}
+								/>
+							</Link>
+						</li>
 					</ul>
 				</div>
 
 				<ul className='ulNavbarLinks'>
 					{locationReact.pathname === '/series' ||
+					locationReact.pathname === '/series/' ||
 					locationReact.pathname === '/' ? (
 						<>
 							{locationReact.pathname !== '/' && (
@@ -69,19 +80,20 @@ function Navbar() {
 									<IoArrowBack />
 								</Link>
 							)}
-							<Link
+							<li
 								className={
-									locationReact.pathname === '/series' &&
+									(locationReact.pathname === '/series' ||
+										locationReact.pathname === '/series/') &&
 									locationReact.pathname !== '/peliculas'
 										? 'liLinksActive'
 										: 'liLinks linkSerie'
-								}
-								to={'/series'}>
-								Series
-							</Link>
+								}>
+								<Link to={'/series'}>Series</Link>
+							</li>
 						</>
 					) : null}
 					{locationReact.pathname === '/peliculas' ||
+					locationReact.pathname === '/peliculas/' ||
 					locationReact.pathname === '/' ? (
 						<>
 							{locationReact.pathname !== '/' && (
@@ -89,16 +101,16 @@ function Navbar() {
 									<IoArrowBack />
 								</Link>
 							)}
-							<Link
+							<li
 								className={
-									locationReact.pathname === '/peliculas' &&
+									(locationReact.pathname === '/peliculas' ||
+										locationReact.pathname === '/peliculas/') &&
 									locationReact.pathname !== '/series'
 										? 'liLinksActive'
 										: 'liLinks linkPeli'
-								}
-								to={'/peliculas'}>
-								Peliculas
-							</Link>
+								}>
+								<Link to={'/peliculas'}>Peliculas</Link>
+							</li>
 						</>
 					) : null}
 					{locationReact.pathname !== '/' ? null : (
