@@ -1,5 +1,5 @@
-import { apiconfig } from '../../config/apiConfig'
-
+import { apiconfig } from '../../../config/apiConfig'
+import './Temporadas.scss'
 function Temporadas({ fullInfo }) {
 	return (
 		fullInfo &&
@@ -8,7 +8,9 @@ function Temporadas({ fullInfo }) {
 			return (
 				<ul key={season.id} className='seasonsFullInfo'>
 					<li>
-						<strong>{season.name}</strong>
+						{season.name.split('. ').map((par) => (
+							<strong key={par}>{par}</strong>
+						))}
 					</li>
 					<li>{season.air_date}</li>
 					{season.overview.split('. ').map((par) => (

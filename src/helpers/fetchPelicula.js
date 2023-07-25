@@ -6,9 +6,9 @@ export const fetchPelicula = async (url, pagina) => {
 			`${apiconfig.baseUrl}${url}${apiconfig.finUrl}page=${pagina}`
 		)
 		const data = await response.json()
-		return data || []
+		return data
 	} catch (error) {
-		console.error('Ocurrion un error al obtener las peliculas', error)
+		console.error('Ocurrion un error al obtener las Peliculas o Series', error)
 	}
 }
 
@@ -18,8 +18,8 @@ export const fetchGeneros = async (url, pagina) => {
 			`${apiconfig.baseUrl}${url}${apiconfig.finUrlGeneros}page=${pagina}`
 		)
 		const data = await response.json()
-		return data || []
+		return data
 	} catch (error) {
-		console.error('Ocurrion un error al obtener las peliculas', error)
+		console.error('Ocurrion un error al obtener Generos', error)
 	}
 }

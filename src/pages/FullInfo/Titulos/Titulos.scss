@@ -1,0 +1,51 @@
+.titulosFullInfo {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+	color: white;
+	padding: 0.5rem;
+	margin: 1rem 0;
+	h3 {
+		font-size: 22px;
+		width: 100%;
+		text-align: center;
+		margin: 1rem 0;
+	}
+	.btnAgregar,
+	.btnCompartir {
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.5rem;
+		width: 40%;
+		height: 2rem;
+		max-width: 300px;
+		border-radius: 0.2rem;
+		font-size: 16px;
+		border: none;
+		background-color: #e2ecf5;
+		font-weight: bold;
+		transition: all 0.5s ease;
+		font-family: Netflix Sans, Helvetica Neue, Segoe UI, Roboto, Ubuntu,
+			sans-serif;
+		letter-spacing: 1px;
+		margin: 0 auto;
+		svg {
+			width: 1.5rem;
+			height: 1.5rem;
+		}
+		&:hover {
+			color: #fff;
+			background-color: #b9babb81;
+		}
+	}
+	.btnCompartir {
+		background-color: #f0f8ff81;
+		color: #fff;
+		&:hover {
+			background-color: #ffffff;
+			color: #000;
+		}
+	}
+}

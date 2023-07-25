@@ -1,9 +1,9 @@
-import { apiconfig } from '../../config/apiConfig'
-
+import { apiconfig } from '../../../config/apiConfig'
+import './Companias.scss'
 function Companias({ fullInfo }) {
 	return (
 		fullInfo &&
-		fullInfo.production_companies && (
+		fullInfo.production_companies[0]?.logo_path && (
 			<ul className='productionFullInfo'>
 				{fullInfo.production_companies?.map((company) => {
 					return (

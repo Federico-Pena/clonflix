@@ -1,5 +1,5 @@
 import Video from './Video'
-
+import './Videos.scss'
 function Videos({ fullInfo }) {
 	return (
 		fullInfo &&

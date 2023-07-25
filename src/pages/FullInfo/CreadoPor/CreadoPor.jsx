@@ -1,5 +1,5 @@
-import { apiconfig } from '../../config/apiConfig'
-
+import { apiconfig } from '../../../config/apiConfig'
+import './CreadoPor.scss'
 function CreadoPor({ fullInfo }) {
 	return (
 		fullInfo &&
@@ -13,7 +13,9 @@ function CreadoPor({ fullInfo }) {
 						src={
 							apiconfig.baseUrlImageW92 + fullInfo.created_by[0].profile_path
 						}
-						alt={`Foto de perfil del creador de ${fullInfo.created_by[0].name}`}
+						alt={`Foto de perfil de ${fullInfo.created_by[0].name}, ${
+							fullInfo.title || fullInfo.name
+						}`}
 					/>
 				</li>
 			</ul>

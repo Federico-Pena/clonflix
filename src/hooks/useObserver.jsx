@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-function useObserver(observado) {
+export const useObserver = (observado) => {
 	const [visible, setVisible] = useState(false)
 	useEffect(() => {
 		const options = {
@@ -22,5 +22,3 @@ function useObserver(observado) {
 
 	return { visible }
 }
-
-export default useObserver

@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react'
 import { AiFillCloseCircle } from 'react-icons/ai'
 import { obtenerCategorias } from '../../helpers/obtenerCategorias'
 import { apiconfig } from '../../config/apiConfig'
-import CardPelicula from '../CardPelicula/CardPelicula'
 import MiniCard from '../CardPelicula/MiniCard'
 
 function Categorias({ clase, cerrarCategorias }) {
@@ -21,14 +20,12 @@ function Categorias({ clase, cerrarCategorias }) {
 	}, [])
 
 	const buscarCategoriaPeli = async (e) => {
-		console.log(e)
 		const apiKey = import.meta.env.VITE_TMDB_API_KEY
 		try {
 			const data = await fetch(
 				`${apiconfig.baseUrl}/discover/movie?with_genres=${e}&language=es-MX&api_key=${apiKey}`
 			)
 			const result = await data.json()
-			console.log(result)
 			setData(result.results)
 		} catch (error) {
 			return error
@@ -60,8 +57,8 @@ function Categorias({ clase, cerrarCategorias }) {
 						onClick={cerrerResultados}
 					/>
 					<div className='divLista'>
-						{data.map((popular, i) => (
-							<MiniCard tendencia={popular} key={`${popular.id} ${i}`} />
+						{data.map((genero) => (
+							<MiniCard tendencia={genero} key={genero.id} />
 						))}
 					</div>
 				</div>

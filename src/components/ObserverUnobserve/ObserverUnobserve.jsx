@@ -4,7 +4,7 @@ function ObserverUnobserve({
 	intersecting,
 	children,
 	root = null,
-	rootMargin = '0px',
+	rootMargin = '100px',
 	threshold = 0,
 }) {
 	const divObserverRef = useRef()

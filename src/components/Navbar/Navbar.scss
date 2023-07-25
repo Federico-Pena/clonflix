@@ -112,7 +112,8 @@ header {
 				text-decoration: none;
 				transition: all 0.5s ease;
 				animation: opacityLinkActive 1s ease forwards;
-				margin-left: 3rem;
+				opacity: 0;
+				transform: translate(150px);
 				cursor: pointer;
 				a {
 					font-size: 16px;
@@ -138,13 +139,9 @@ header {
 }
 
 @keyframes opacityLinkActive {
-	from {
-		opacity: 0;
-		transform: translate(50px);
-	}
 	to {
 		opacity: 1;
-		transform: translate(0);
+		transform: translate(50px);
 	}
 }
 @keyframes opacityLink {

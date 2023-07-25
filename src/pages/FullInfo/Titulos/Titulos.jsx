@@ -1,8 +1,8 @@
 import { IoAddCircleOutline, IoShareSocialOutline } from 'react-icons/io5'
-import Button from '../../components/Button/Button'
-import { agregar } from '../../helpers/localStorage'
-import { compartir } from '../../helpers/compartir'
-
+import Button from '../../../components/Button/Button'
+import { agregar } from '../../../helpers/localStorage'
+import { compartir } from '../../../helpers/compartir'
+import './Titulos.scss'
 function Titulos({ fullInfo, setModal, setError }) {
 	return (
 		fullInfo &&
@@ -20,9 +20,8 @@ function Titulos({ fullInfo, setModal, setError }) {
 					icon={<IoShareSocialOutline />}
 					text={'Compartir'}
 				/>
-
 				<h3>{fullInfo.title || fullInfo.name}</h3>
-				<h4>{fullInfo.tagline}</h4>
+				{fullInfo.tagline && <h4>{fullInfo.tagline}</h4>}
 				{fullInfo.release_date && (
 					<h4>
 						Estreno {new Date(fullInfo.release_date).toLocaleDateString()}

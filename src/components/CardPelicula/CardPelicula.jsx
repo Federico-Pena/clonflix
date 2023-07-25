@@ -8,7 +8,7 @@ import { useRef } from 'react'
 function CardPelicula({ pelicula }) {
 	const imgRef = useRef(null)
 	const intersecting = (e) => {
-		if (e) {
+		if (e && imgRef.current) {
 			imgRef.current.src = `${apiconfig.baseUrlImageW500}${
 				pelicula?.poster_path || pelicula?.backdrop_path
 			}`

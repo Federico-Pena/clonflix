@@ -1,3 +1,4 @@
+import './Sinopsis.scss'
 function Sinopsis({ fullInfo }) {
 	return (
 		fullInfo &&

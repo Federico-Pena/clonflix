@@ -1,0 +1,24 @@
+.productionFullInfo {
+	max-width: 900px;
+	width: 100%;
+	border-radius: 0.3rem;
+	margin: 2rem auto;
+	background-color: rgb(255, 255, 255);
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+	gap: 1rem;
+	padding: 1rem;
+	li {
+		flex: auto;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		img {
+			width: 100px;
+			height: auto;
+			object-fit: cover;
+		}
+	}
+}
