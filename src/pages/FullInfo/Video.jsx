@@ -1,10 +1,9 @@
 import { useRef } from 'react'
-import ObserverUnobserve from '../../components/Observer/ObserverUnobserve'
+import ObserverUnobserve from '../../components/ObserverUnobserve/ObserverUnobserve'
 
 function Video({ video }) {
 	const iframeRef = useRef(null)
 	const liVideoRef = useRef(null)
-
 	function intersecting(e) {
 		const { current } = iframeRef
 		if (e.isIntersecting) {
@@ -13,7 +12,7 @@ function Video({ video }) {
 		}
 	}
 	return (
-		<ObserverUnobserve intersecting={intersecting} rootMargin='150px'>
+		<ObserverUnobserve intersecting={intersecting}>
 			<li key={video.key} ref={liVideoRef}>
 				{video.name}
 				<iframe ref={iframeRef} title={video.name}></iframe>

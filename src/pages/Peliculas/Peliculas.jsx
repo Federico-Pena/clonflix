@@ -1,15 +1,26 @@
 import '../Inicio/Inicio.scss'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Hero from '../../components/Hero/Hero'
 import { apiconfig } from '../../config/apiConfig'
 import Loading from '../../components/Loading/Loading'
 import MainPeliculas from '../../components/Main/MainPeliculas'
-import usePelicula from '../../hooks/usePelicula'
+import { fetchPelicula } from '../../helpers/fetchPelicula'
 function Peliculas() {
-	const { loading, datapProximamente, fetchDataPeli } = usePelicula()
-
+	const [heroData, setHeroData] = useState([])
+	const [loading, setLoading] = useState(true)
 	useEffect(() => {
-		fetchDataPeli(1, apiconfig.pelicula.proximamente)
+		const getHero = async () => {
+			setLoading(true)
+			try {
+				const data = await fetchPelicula(apiconfig.pelicula.proximamente, 1)
+				setHeroData(data.results)
+				setLoading(false)
+			} catch (error) {
+				console.error('Ocurrio Un error AL obtener Datos Del hero', error)
+				setLoading(false)
+			}
+		}
+		getHero()
 	}, [])
 
 	return (
@@ -18,11 +29,8 @@ function Peliculas() {
 				<Loading />
 			) : (
 				<>
-					{datapProximamente && (
-						<Hero
-							heroElement={datapProximamente[1]}
-							tipo={'pelicula.proximamente'}
-						/>
+					{heroData && (
+						<Hero heroElement={heroData[1]} tipo={'pelicula.proximamente'} />
 					)}
 					<MainPeliculas />
 				</>

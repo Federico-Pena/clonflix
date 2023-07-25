@@ -4,20 +4,31 @@ import { IoCloseOutline, IoSearch } from 'react-icons/io5'
 import { GoPlay } from 'react-icons/go'
 import { apiconfig } from '../../config/apiConfig'
 import { Link } from 'react-router-dom'
-import usePelicula from '../../hooks/usePelicula'
 import Loading from '../../components/Loading/Loading'
 import MiniCard from '../../components/CardPelicula/MiniCard'
 import { irA } from '../../helpers/irA'
+import { fetchPelicula } from '../../helpers/fetchPelicula'
 const apiKey = import.meta.env.VITE_TMDB_API_KEY
 
 function Buscar() {
-	const { loading, trendingTodas, fetchDataPeli } = usePelicula()
 	const [inputValue, setInputValue] = useState('')
 	const [resultados, setResultados] = useState([])
-	const [cargando, setCargando] = useState(false)
+	const [loading, setLoading] = useState(false)
 	const finUrl = `&api_key=${apiKey}&language=es-MX&sort_by=vote_count.desc&page=${1}`
+	const [heroData, setHeroData] = useState([])
 	useEffect(() => {
-		fetchDataPeli(1, apiconfig.tendenciasTodas)
+		const getHero = async () => {
+			setLoading(true)
+			try {
+				const data = await fetchPelicula(apiconfig.pelicula.proximamente, 1)
+				setHeroData(data.results)
+				setLoading(false)
+			} catch (error) {
+				console.error('Ocurrio Un error AL obtener Datos Del hero', error)
+				setLoading(false)
+			}
+		}
+		getHero()
 	}, [])
 
 	const changeValue = (e) => {
@@ -26,15 +37,13 @@ function Buscar() {
 
 	const submitForm = async (e) => {
 		e.preventDefault()
-		setCargando(true)
+		setLoading(true)
 		const response = await fetch(
 			`${apiconfig.baseUrl}${apiconfig.buscarTodo}${inputValue}&${finUrl}`
 		)
 		const data = await response.json()
 		setResultados(data.results)
-		setTimeout(() => {
-			setCargando(false)
-		}, 500)
+		setLoading(false)
 	}
 	const cerarResultados = () => {
 		setResultados([])
@@ -42,7 +51,7 @@ function Buscar() {
 	}
 	return (
 		<div className='divPageBuscar'>
-			{loading || cargando ? (
+			{loading ? (
 				<Loading />
 			) : (
 				<>
@@ -95,10 +104,10 @@ function Buscar() {
 						</div>
 					) : null}
 
-					{trendingTodas && (
+					{heroData && (
 						<div className='divSugerencias'>
 							<h1>Lo Mas Buscado</h1>
-							{trendingTodas.slice(0, 20).map((tendencia, i) => {
+							{heroData.map((tendencia, i) => {
 								return (
 									<MiniCard
 										tendencia={tendencia}

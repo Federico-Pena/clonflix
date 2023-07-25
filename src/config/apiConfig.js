@@ -1,10 +1,9 @@
 const apiKey = import.meta.env.VITE_TMDB_API_KEY
-/**
- * Si Se agrega paginacion es despues de finUrl (page=${page})
- */
+
 export const apiconfig = {
 	baseUrl: 'https://api.themoviedb.org/3',
 	finUrl: `?api_key=${apiKey}&language=es-MX&sort_by=vote_count.desc&`,
+	finUrlGeneros: `&api_key=${apiKey}&language=es-MX&sort_by=vote_count.desc&`,
 	baseUrlImageOriginal: 'https://image.tmdb.org/t/p/original',
 	baseUrlImageW500: 'https://image.tmdb.org/t/p/w500',
 	baseUrlImageW300: 'https://image.tmdb.org/t/p/w300',

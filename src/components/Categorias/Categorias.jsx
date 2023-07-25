@@ -3,13 +3,14 @@ import { useEffect, useState } from 'react'
 import { AiFillCloseCircle } from 'react-icons/ai'
 import { obtenerCategorias } from '../../helpers/obtenerCategorias'
 import { apiconfig } from '../../config/apiConfig'
-import Slider from '../Slider/Slider'
 import CardPelicula from '../CardPelicula/CardPelicula'
+import MiniCard from '../CardPelicula/MiniCard'
 
 function Categorias({ clase, cerrarCategorias }) {
 	const [generosPeli, setGenerosPeli] = useState([])
 	const [generosSerie, setGenerosSerie] = useState([])
 	const [data, setData] = useState([])
+
 	useEffect(() => {
 		const fetchCategorias = async () => {
 			const data = await obtenerCategorias()
@@ -18,13 +19,16 @@ function Categorias({ clase, cerrarCategorias }) {
 		}
 		fetchCategorias()
 	}, [])
+
 	const buscarCategoriaPeli = async (e) => {
+		console.log(e)
 		const apiKey = import.meta.env.VITE_TMDB_API_KEY
 		try {
 			const data = await fetch(
 				`${apiconfig.baseUrl}/discover/movie?with_genres=${e}&language=es-MX&api_key=${apiKey}`
 			)
 			const result = await data.json()
+			console.log(result)
 			setData(result.results)
 		} catch (error) {
 			return error
@@ -55,15 +59,11 @@ function Categorias({ clase, cerrarCategorias }) {
 						className={'iconCerrarResultados'}
 						onClick={cerrerResultados}
 					/>
-					<Slider>
+					<div className='divLista'>
 						{data.map((popular, i) => (
-							<CardPelicula
-								tipo={popular.title ? 'pelicula' : 'serie'}
-								pelicula={popular}
-								key={`${popular.id} ${i}`}
-							/>
+							<MiniCard tendencia={popular} key={`${popular.id} ${i}`} />
 						))}
-					</Slider>
+					</div>
 				</div>
 			) : null}
 			<div className={clase ? clase : 'divCategorias'}>
@@ -86,7 +86,7 @@ function Categorias({ clase, cerrarCategorias }) {
 						)
 					})}
 				</ul>
-				<ul className={clase ? clase : `categoriasS`}>
+				<ul className={`categoriasS`}>
 					<li>
 						<strong>Series</strong>
 					</li>

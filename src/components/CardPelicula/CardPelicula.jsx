@@ -2,7 +2,7 @@ import { useRef } from 'react'
 import { apiconfig } from '../../config/apiConfig'
 import './CardPelicula.scss'
 import { Link } from 'react-router-dom'
-import ObserverUnobserve from '../Observer/ObserverUnobserve'
+import ObserverUnobserve from '../ObserverUnobserve/ObserverUnobserve'
 import { irA } from '../../helpers/irA'
 
 function CardPelicula({ pelicula, tipo }) {
@@ -23,7 +23,7 @@ function CardPelicula({ pelicula, tipo }) {
 			<ObserverUnobserve intersecting={intersecting}>
 				<Link
 					ref={divCard}
-					to={irA(pelicula.id, tipo ? tipo : 'serie')}
+					to={irA(pelicula.id, pelicula.title ? 'pelicula' : 'serie')}
 					className='cardPelicula'>
 					<div className='divImgPelicula'>
 						<img

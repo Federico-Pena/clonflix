@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import MiniCard from '../CardPelicula/MiniCard'
 import { IoCloseOutline } from 'react-icons/io5'
-import './User.scss'
-function User({ cerrarUser }) {
+import './MiLista.scss'
+function MiLista({ cerrarMiLista }) {
 	const [guardadas, setGuardadas] = useState([])
 	useEffect(() => {
 		const DB = JSON.parse(localStorage.getItem('clonflix'))
@@ -22,7 +22,7 @@ function User({ cerrarUser }) {
 	}
 	return (
 		<div className='userDiv'>
-			<IoCloseOutline onClick={cerrarUser} className='iconCerrar' />
+			<IoCloseOutline onClick={cerrarMiLista} className='iconCerrar' />
 			<h3>Guardadas</h3>
 			{guardadas.length ? (
 				guardadas.map((guardada, i) => {
@@ -41,4 +41,4 @@ function User({ cerrarUser }) {
 	)
 }
 
-export default User
+export default MiLista

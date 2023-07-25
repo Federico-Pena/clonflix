@@ -6,11 +6,11 @@ import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { IoArrowBack } from 'react-icons/io5'
 import { BiUserCircle } from 'react-icons/bi'
-import User from './User'
+import MiLista from './MiLista'
 
 function Navbar() {
 	const [classCategorias, setClassCategorias] = useState(false)
-	const [user, setUser] = useState(false)
+	const [miLista, setMiLista] = useState(false)
 	const locationReact = useLocation()
 	const abrirCategorias = () => {
 		setClassCategorias(true)
@@ -20,14 +20,14 @@ function Navbar() {
 		setClassCategorias(false)
 	}
 	const abirUser = () => {
-		setUser(true)
+		setMiLista(true)
 	}
-	const cerrarUser = () => {
-		setUser(false)
+	const cerrarMiLista = () => {
+		setMiLista(false)
 	}
 	return (
 		<header>
-			{user && <User cerrarUser={cerrarUser} />}
+			{miLista && <MiLista cerrarMiLista={cerrarMiLista} />}
 			<nav className='NavBar'>
 				<div className='divNavbar'>
 					<img

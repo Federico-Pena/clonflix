@@ -24,7 +24,6 @@ function FullInfo() {
 	const [urlAnterior, setUrlAnterior] = useState('')
 	const [modal, setModal] = useState(false)
 	const [error, setError] = useState(false)
-	const [errorFectch, setErrorFetch] = useState(false)
 
 	const saberQueEs = (query) => {
 		if (query === 'pelicula') {
@@ -69,7 +68,7 @@ function FullInfo() {
 				<Loading />
 			) : (
 				<>
-					<Link to={urlAnterior} className='btnCerrar'>
+					<Link to={urlAnterior} className='btnCerrar' title='Volver Atras'>
 						<IoArrowBack />
 					</Link>
 					<Hero fullInfo={fullInfo} />

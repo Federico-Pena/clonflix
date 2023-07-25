@@ -6,7 +6,7 @@ export const compartir = async () => {
 				url: window.location.href,
 			})
 		} catch (error) {
-			return new Error(error)
+			console.error('Share in navigator error ' + error)
 		}
 	}
 }
