@@ -1,45 +1,41 @@
-import { useRef } from 'react'
 import { apiconfig } from '../../config/apiConfig'
 import './CardPelicula.scss'
 import { Link } from 'react-router-dom'
-import ObserverUnobserve from '../ObserverUnobserve/ObserverUnobserve'
 import { irA } from '../../helpers/irA'
+import ObserverUnobserve from '../ObserverUnobserve/ObserverUnobserve'
+import { useRef } from 'react'
 
-function CardPelicula({ pelicula, tipo }) {
-	const imgCard = useRef()
-	const divCard = useRef()
-
+function CardPelicula({ pelicula }) {
+	const imgRef = useRef(null)
 	const intersecting = (e) => {
-		if (e.isIntersecting) {
-			imgCard.current.src = `${apiconfig.baseUrlImageW500}${
+		if (e) {
+			imgRef.current.src = `${apiconfig.baseUrlImageW500}${
 				pelicula?.poster_path || pelicula?.backdrop_path
 			}`
 		}
 	}
-
 	return (
 		pelicula &&
 		pelicula?.poster_path && (
-			<ObserverUnobserve intersecting={intersecting}>
-				<Link
-					ref={divCard}
-					to={irA(pelicula.id, pelicula.title ? 'pelicula' : 'serie')}
-					className='cardPelicula'>
-					<div className='divImgPelicula'>
+			<Link
+				to={irA(pelicula.id, pelicula.title ? 'pelicula' : 'serie')}
+				className='cardPelicula'>
+				<div className='divImgPelicula'>
+					<ObserverUnobserve intersecting={intersecting}>
 						<img
+							ref={imgRef}
 							className='imgPelicula'
-							ref={imgCard}
+							src='https://placehold.co/100/000000/FFF?text=...'
 							alt={`Portada de la pelicula ${pelicula.title || pelicula.name}`}
-							src='https://placehold.co/300x400/000000/FFF?text=...'
 						/>
+					</ObserverUnobserve>
 
-						<p className='peliculaId'>{pelicula.id}</p>
-					</div>
-					<div>
-						<p className='peliculaTitulo'>{pelicula.title || pelicula.name}</p>
-					</div>
-				</Link>
-			</ObserverUnobserve>
+					<p className='peliculaId'>{pelicula.id}</p>
+				</div>
+				<div>
+					<p className='peliculaTitulo'>{pelicula.title || pelicula.name}</p>
+				</div>
+			</Link>
 		)
 	)
 }

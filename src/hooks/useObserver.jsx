@@ -4,14 +4,12 @@ function useObserver(observado) {
 	const [visible, setVisible] = useState(false)
 	useEffect(() => {
 		const options = {
-			root: null,
-			rooMargin: '0',
-			treshold: 0,
+			threshold: 0,
 		}
 		const esVisible = (entries) => {
 			entries.forEach((entry) => {
 				if (entry.isIntersecting) {
-					setVisible(entry.isIntersecting)
+					setVisible(true)
 				} else {
 					setVisible(false)
 				}

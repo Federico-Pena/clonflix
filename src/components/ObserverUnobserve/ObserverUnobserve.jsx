@@ -19,8 +19,8 @@ function ObserverUnobserve({
 		const observer = new IntersectionObserver((entries) => {
 			entries.forEach((entry) => {
 				if (entry.isIntersecting) {
-					intersecting(entry)
-					observer.unobserve(current)
+					intersecting(entry.isIntersecting)
+					observer.unobserve(entry.target)
 				}
 			})
 		}, opciones)
