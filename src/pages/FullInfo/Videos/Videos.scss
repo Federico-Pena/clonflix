@@ -5,14 +5,13 @@
 		width: 100%;
 		min-height: 80vh;
 		font-size: 20px;
-		display: none;
+		display: flex;
 		flex-direction: column;
 		justify-content: center;
 		color: white;
 		align-items: center;
 		gap: 1rem;
 		transition: opacity 0.5s ease;
-		opacity: 0;
 		iframe {
 			border: none;
 			width: 100%;
@@ -20,9 +19,5 @@
 			max-width: 900px;
 			border-radius: 0.3rem;
 		}
-	}
-	.videoVisible {
-		display: flex;
-		opacity: 1;
 	}
 }

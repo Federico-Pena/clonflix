@@ -10,6 +10,7 @@ function Companias({ fullInfo }) {
 						company.logo_path && (
 							<li key={company.id}>
 								<img
+									title={`Logo de la compania ${company.name}`}
 									src={apiconfig.baseUrlImageW92 + company.logo_path}
 									alt={`Logo de la compania ${company.name}`}
 								/>

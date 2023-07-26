@@ -11,9 +11,10 @@ function Hero({ fullInfo }) {
 	) : (
 		fullInfo && fullInfo.backdrop_path && (
 			<img
+				title={`Portada de ${fullInfo.title || fullInfo.name}`}
 				className='FullInfoImg'
 				src={apiconfig.baseUrlImageOriginal + fullInfo.backdrop_path}
-				alt={`Portada de la fullInfo ${fullInfo.title || fullInfo.name}`}
+				alt={`Portada de ${fullInfo.title || fullInfo.name}`}
 			/>
 		)
 	)

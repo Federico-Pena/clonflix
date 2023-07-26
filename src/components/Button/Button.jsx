@@ -1,6 +1,9 @@
-function Button({ onClicked, text, className, icon }) {
+function Button({ onClicked, text, className, icon, title }) {
 	return (
-		<button className={className} onClick={onClicked && onClicked}>
+		<button
+			title={title}
+			className={className}
+			onClick={onClicked && onClicked}>
 			{icon && icon}
 			{text}
 		</button>

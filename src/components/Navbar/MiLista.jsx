@@ -22,7 +22,11 @@ function MiLista({ cerrarMiLista }) {
 	}
 	return (
 		<div className='userDiv'>
-			<IoCloseOutline onClick={cerrarMiLista} className='iconCerrar' />
+			<IoCloseOutline
+				title='Cerrar Guardadas'
+				onClick={cerrarMiLista}
+				className='iconCerrar'
+			/>
 			<h3>Guardadas</h3>
 			{guardadas.length ? (
 				guardadas.map((guardada, i) => {

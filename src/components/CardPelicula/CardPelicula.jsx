@@ -9,7 +9,7 @@ function CardPelicula({ pelicula }) {
 	const imgRef = useRef(null)
 	const intersecting = (e) => {
 		if (e && imgRef.current) {
-			imgRef.current.src = `${apiconfig.baseUrlImageW500}${
+			imgRef.current.src = `${apiconfig.baseUrlImageW300}${
 				pelicula?.poster_path || pelicula?.backdrop_path
 			}`
 		}
@@ -23,6 +23,9 @@ function CardPelicula({ pelicula }) {
 				<div className='divImgPelicula'>
 					<ObserverUnobserve intersecting={intersecting}>
 						<img
+							title={`Portada de la pelicula ${
+								pelicula.title || pelicula.name
+							}`}
 							ref={imgRef}
 							className='imgPelicula'
 							src='https://placehold.co/100/000000/FFF?text=...'

@@ -10,9 +10,7 @@ html {
 	background-color: #000;
 	color: #fff;
 	-webkit-font-smoothing: antialiased;
-	font-family: Netflix Sans, Helvetica Neue, Segoe UI, Roboto, Ubuntu,
-		sans-serif;
-	font-size: 16px;
+	font-family: Netflix Sans, Segoe UI, sans-serif;
 	&::-webkit-scrollbar {
 		height: 0rem;
 		width: 0rem;
@@ -25,5 +23,9 @@ html {
 }
 @font-face {
 	font-family: Netflix Sans;
-	src: url(../assets/netflix-sans-font/NetflixSans-Regular.woff2);
+	src: url('../assets/netflix-sans-font/NetflixSans-Regular.woff2')
+		format('woff2');
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
 }

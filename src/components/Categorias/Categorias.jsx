@@ -53,18 +53,23 @@ function Categorias({ clase, cerrarCategorias }) {
 				<div className='divResultados'>
 					<h1>Resultados</h1>
 					<AiFillCloseCircle
+						title='Cerrar Resultados'
 						className={'iconCerrarResultados'}
 						onClick={cerrerResultados}
 					/>
 					<div className='divLista'>
-						{data.map((genero) => (
-							<MiniCard tendencia={genero} key={genero.id} />
-						))}
+						{data.map(
+							(genero) =>
+								genero.backdrop_path && (
+									<MiniCard tendencia={genero} key={genero.id} />
+								)
+						)}
 					</div>
 				</div>
 			) : null}
 			<div className={clase ? clase : 'divCategorias'}>
 				<AiFillCloseCircle
+					title='Cerrar Categorias'
 					className={'iconCategorias'}
 					onClick={cerrarCategorias}
 				/>
@@ -76,6 +81,7 @@ function Categorias({ clase, cerrarCategorias }) {
 					{generosPeli?.map((genero) => {
 						return (
 							<li
+								title={`Pelicula de ${genero.name}`}
 								key={genero.id}
 								onClick={() => buscarCategoriaPeli(genero.id)}>
 								{genero.name}
@@ -90,6 +96,7 @@ function Categorias({ clase, cerrarCategorias }) {
 					{generosSerie?.map((genero) => {
 						return (
 							<li
+								title={`Serie de ${genero.name}`}
 								key={genero.id}
 								onClick={() => buscarCategoriaSerie(genero.id)}>
 								{genero.name}

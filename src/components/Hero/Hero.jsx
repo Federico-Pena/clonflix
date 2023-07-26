@@ -22,12 +22,14 @@ function Hero({ heroElement, tipo }) {
 						<h2>{heroElement.title || heroElement.name}</h2>
 						<Link to={irA(heroElement.id, tipo)}>
 							<Button
+								title={'Reproducir'}
 								text={'Reproducir'}
 								className={'Reproducir'}
 								icon={<GoPlay />}
 							/>
 						</Link>
 						<Button
+							title={'Mi Lista'}
 							className={'MiLista'}
 							onClicked={() => agregar(heroElement, setModal, setError)}
 							icon={<IoAddCircleOutline />}

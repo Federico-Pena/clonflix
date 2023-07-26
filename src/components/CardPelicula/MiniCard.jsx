@@ -12,6 +12,7 @@ function MiniCard({ tendencia, eliminar }) {
 				className='cardSugerencia'>
 				<div className='divImg'>
 					<img
+						title={`Imagen de ${tendencia.title || tendencia.name}`}
 						src={`${apiconfig.baseUrlImageW300}${tendencia?.backdrop_path}`}
 						alt={`Imagen de ${tendencia.title || tendencia.name}`}
 					/>
@@ -20,11 +21,16 @@ function MiniCard({ tendencia, eliminar }) {
 					<p>{tendencia.title || tendencia.name}</p>
 				</div>
 				<div className='divIcon'>
-					<GoPlay className='IconVer' />
+					<GoPlay className='IconVer' title='Reproducir' />
 				</div>
 			</Link>
 			<div className='iconBorrar'>
-				{eliminar && <AiOutlineClose onClick={() => eliminar(tendencia.id)} />}
+				{eliminar && (
+					<AiOutlineClose
+						title='Eliminar Guardado'
+						onClick={() => eliminar(tendencia.id)}
+					/>
+				)}
 			</div>
 		</div>
 	)

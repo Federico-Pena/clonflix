@@ -9,7 +9,6 @@ import { fetchPelicula } from '../../helpers/fetchPelicula'
 function Inicio() {
 	const [heroData, setHeroData] = useState([])
 	const [loading, setLoading] = useState(true)
-
 	useEffect(() => {
 		const getHero = async () => {
 			setLoading(true)

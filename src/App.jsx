@@ -11,7 +11,6 @@ function App() {
 	return (
 		<>
 			<LogoLoading />
-
 			<Navbar />
 			<Routes>
 				<Route path='/peliculas' element={<Peliculas />} />
@@ -20,8 +19,8 @@ function App() {
 				<Route path='/peliculas/:id' element={<FullInfo />} />
 				<Route path='/series/:id' element={<FullInfo />} />
 				<Route path='/buscar/:id' element={<FullInfo />} />
-				<Route path='/' element={<Inicio />} index />
 				<Route path='/:id' element={<FullInfo />} />
+				<Route path='/' element={<Inicio />} index />
 			</Routes>
 		</>
 	)

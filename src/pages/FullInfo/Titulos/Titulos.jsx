@@ -9,12 +9,14 @@ function Titulos({ fullInfo, setModal, setError }) {
 		(fullInfo.title || fullInfo.name) && (
 			<div className='titulosFullInfo'>
 				<Button
+					title={'Agregar a Mi Lista'}
 					className={'btnAgregar'}
 					onClicked={() => agregar(fullInfo, setModal, setError)}
 					icon={<IoAddCircleOutline />}
 					text={'Mi lista'}
 				/>
 				<Button
+					title={'Compartir'}
 					className={'btnCompartir'}
 					onClicked={compartir}
 					icon={<IoShareSocialOutline />}

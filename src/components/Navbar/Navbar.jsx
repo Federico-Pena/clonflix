@@ -31,6 +31,7 @@ function Navbar() {
 			<nav className='NavBar'>
 				<div className='divNavbar'>
 					<img
+						title='logo App ClonFLix'
 						src='./assets/logo.png'
 						alt='logo App ClonFLix'
 						className='ImgNavbar'
@@ -76,9 +77,11 @@ function Navbar() {
 					locationReact.pathname === '/' ? (
 						<>
 							{locationReact.pathname !== '/' && (
-								<Link to={'/'} className='btnCerrar'>
-									<IoArrowBack />
-								</Link>
+								<li>
+									<Link title='Volver Atras' to={'/'} className='btnCerrar'>
+										<IoArrowBack />
+									</Link>
+								</li>
 							)}
 							<li
 								className={
@@ -88,7 +91,9 @@ function Navbar() {
 										? 'liLinksActive'
 										: 'liLinks linkSerie'
 								}>
-								<Link to={'/series'}>Series</Link>
+								<Link title='Link a Series' to={'/series'}>
+									Series
+								</Link>
 							</li>
 						</>
 					) : null}
@@ -97,9 +102,11 @@ function Navbar() {
 					locationReact.pathname === '/' ? (
 						<>
 							{locationReact.pathname !== '/' && (
-								<Link to={'/'} className='btnCerrar'>
-									<IoArrowBack />
-								</Link>
+								<li>
+									<Link title='Volver Atras' to={'/'} className='btnCerrar'>
+										<IoArrowBack />
+									</Link>
+								</li>
 							)}
 							<li
 								className={
@@ -109,12 +116,17 @@ function Navbar() {
 										? 'liLinksActive'
 										: 'liLinks linkPeli'
 								}>
-								<Link to={'/peliculas'}>Peliculas</Link>
+								<Link title='Link a Peliculas' to={'/peliculas'}>
+									Peliculas
+								</Link>
 							</li>
 						</>
 					) : null}
 					{locationReact.pathname !== '/' ? null : (
-						<li className={'liLinksCategorias'} onClick={abrirCategorias}>
+						<li
+							title='Categorias'
+							className={'liLinksCategorias'}
+							onClick={abrirCategorias}>
 							Categorias
 						</li>
 					)}
