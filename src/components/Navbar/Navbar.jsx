@@ -32,7 +32,7 @@ function Navbar() {
 				<div className='divNavbar'>
 					<img
 						title='logo App ClonFLix'
-						src='./assets/logo.png'
+						src='/assets/logo.png'
 						alt='logo App ClonFLix'
 						className='ImgNavbar'
 					/>

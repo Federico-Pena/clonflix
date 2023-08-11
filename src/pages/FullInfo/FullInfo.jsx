@@ -9,7 +9,7 @@ import Loading from '../../components/Loading/Loading'
 import Modal from '../../components/Modal/Modal'
 import Hero from './Hero/Hero'
 import Generos from './Generos/Generos'
-import Titulos from './Titulos/Titulos'
+import Botones from './Botones/Botones'
 import Votos from './Votos/Votos'
 import Sinopsis from './Sinopsis/Sinopsis'
 import Companias from './Companias/Companias'
@@ -38,6 +38,7 @@ function FullInfo() {
 		const UrlAnterior = location.origin + locationR.pathname.split('id')[0]
 		const staticURL = `?append_to_response=cast%2Cvideos%2Ctype%2Ccreated_by&api_key=${apiKey}&language=es-MX`
 		const busqueda = saberQueEs(query)
+
 		const obtenerfullInfo = async () => {
 			setLoading(true)
 			setUrlAnterior(UrlAnterior)
@@ -72,18 +73,18 @@ function FullInfo() {
 						<IoArrowBack />
 					</Link>
 					<Hero fullInfo={fullInfo} />
-					<Titulos
+					<Votos fullInfo={fullInfo} />
+					<Botones
 						fullInfo={fullInfo}
 						setError={setError}
 						setModal={setModal}
 					/>
 					<Generos fullInfo={fullInfo} />
-					<Votos fullInfo={fullInfo} />
-					<Sinopsis fullInfo={fullInfo} />
-					<Companias fullInfo={fullInfo} />
-					<Videos fullInfo={fullInfo} />
 					<CreadoPor fullInfo={fullInfo} />
+					<Sinopsis fullInfo={fullInfo} />
+					<Videos fullInfo={fullInfo} />
 					<Temporadas fullInfo={fullInfo} />
+					<Companias fullInfo={fullInfo} />
 				</>
 			)}
 		</div>

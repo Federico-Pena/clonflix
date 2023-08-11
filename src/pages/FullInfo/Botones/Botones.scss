@@ -1,16 +1,13 @@
 .titulosFullInfo {
 	display: flex;
-	flex-direction: column;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
 	gap: 0.5rem;
 	color: white;
 	padding: 0.5rem;
-	margin: 1rem 0;
-	h3 {
-		font-size: 22px;
-		width: 100%;
-		text-align: center;
-		margin: 1rem 0;
-	}
+	max-width: 800px;
+	margin: auto;
 	.btnAgregar,
 	.btnCompartir {
 		cursor: pointer;
@@ -18,8 +15,8 @@
 		align-items: center;
 		justify-content: center;
 		gap: 0.5rem;
-		width: 40%;
 		height: 2rem;
+		width: 10rem;
 		max-width: 300px;
 		border-radius: 0.2rem;
 		font-size: 16px;

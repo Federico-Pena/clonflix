@@ -2,15 +2,23 @@
 	max-width: 900px;
 	width: 100%;
 	display: flex;
-	justify-content: space-between;
+	flex-wrap: wrap;
 	align-items: center;
-	padding: 0.5rem;
-	border-top: 1px solid #eeeeee4d;
+	gap: 0.5rem;
+	padding: 2rem 0.5rem 0.5rem 0.5rem;
 	color: white;
 	margin: 0.5rem auto;
-
-	li {
-		flex: auto;
-		text-align: center;
+	position: relative;
+	.titulo {
+		position: absolute;
+		top: 0;
+		left: 0.5rem;
+	}
+	.genero {
+		background-color: rgb(255, 255, 255);
+		color: #050505;
+		padding: 0.5rem;
+		border-radius: 1rem;
+		font-size: 12px;
 	}
 }

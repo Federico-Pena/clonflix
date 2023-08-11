@@ -6,7 +6,7 @@ function CreadoPor({ fullInfo }) {
 		fullInfo.created_by?.length &&
 		fullInfo.created_by[0].profile_path && (
 			<ul className='created_byFullInfo'>
-				<li>{fullInfo.created_by[0].name}</li>
+				<li>Creado por {fullInfo.created_by[0].name}</li>
 				<li>
 					<img
 						className='imgCreador'

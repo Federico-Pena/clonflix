@@ -16,7 +16,9 @@ function Temporadas({ fullInfo }) {
 					{season.overview.split('. ').map((par) => (
 						<li key={par}>{par}</li>
 					))}
-					{season.poster_path && (
+					{season.poster_path === null ? (
+						<li>Sin imagen</li>
+					) : (
 						<li>
 							<img
 								src={apiconfig.baseUrlImageW300 + season.poster_path}

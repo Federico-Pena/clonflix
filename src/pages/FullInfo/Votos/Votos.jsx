@@ -37,13 +37,13 @@ function Votos({ fullInfo }) {
 					</p>
 				</li>
 				<li>
-					<p>Promedio</p>
+					<p>Aprobación</p>
 					<p
 						className='promedio'
 						style={{
 							backgroundColor: colorVotos(fullInfo.vote_average?.toFixed(1)),
 						}}>
-						{fullInfo.vote_average?.toFixed(1)}
+						{`${fullInfo.vote_average?.toFixed(1)}/10`}
 					</p>
 				</li>
 			</ul>
